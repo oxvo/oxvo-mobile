@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { Text, View } from 'react-native';
-
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
-import { PRIVATE_ROUTES, ROOT_ROUTES } from '@oxvo-mobile/constants/routes';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { PRIVATE_ROUTES, PUBLIC_ROUTES, ROOT_ROUTES, TAB_ROUTES } from '@oxvo-mobile/constants/routes';
+import ProfileNavigator from '@oxvo-mobile/navigation/PrivateNavigators/ProfileNavigator';
 
 function Home() {
   return (
@@ -34,26 +35,76 @@ function Overview() {
     </View>
   );
 }
+function AddService() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>AddService Screen</Text>
+    </View>
+  );
+}
+function CreateEvent() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>CreateEvent Screen</Text>
+    </View>
+  );
+}
+function Auth() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Auth Screen</Text>
+    </View>
+  );
+}
 
+const PublicStack = createNativeStackNavigator();
 const PrivateStack = createNativeStackNavigator();
 const RootStack = createNativeStackNavigator();
+const BottomTab = createBottomTabNavigator();
+
+function BottomTabNavigator() {
+  return (
+    <BottomTab.Navigator>
+      <BottomTab.Screen name={TAB_ROUTES.HOME} component={Home} options={{}} />
+      <BottomTab.Screen name={TAB_ROUTES.CALENDAR} component={Events} />
+      <BottomTab.Screen name={TAB_ROUTES.NOTIFICATIONS} component={Notifications} />
+      <BottomTab.Screen name={TAB_ROUTES.OVERVIEW} component={Overview} />
+    </BottomTab.Navigator>
+  );
+}
+
+function PublicNavigator() {
+  return (
+    <PublicStack.Navigator screenOptions={{ headerShown: false, presentation: 'modal' }}>
+      <PublicStack.Screen name={PUBLIC_ROUTES.FORGOT_PASSWORD} component={Auth} />
+      <PublicStack.Screen name={PUBLIC_ROUTES.INVITE_CODE} component={Auth} />
+      <PublicStack.Screen name={PUBLIC_ROUTES.SIGN_IN} component={Auth} />
+      <PublicStack.Screen name={PUBLIC_ROUTES.SIGN_UP} component={Auth} />
+    </PublicStack.Navigator>
+  );
+}
 
 function PrivateNavigator() {
   return (
-    <PrivateStack.Navigator>
-      <PrivateStack.Screen name={PRIVATE_ROUTES.HOME} component={Home} />
-      <PrivateStack.Screen name={PRIVATE_ROUTES.EVENTS} component={Events} />
-      <PrivateStack.Screen name={PRIVATE_ROUTES.NOTIFICATIONS} component={Notifications} />
-      <PrivateStack.Screen name={PRIVATE_ROUTES.OVERVIEW} component={Overview} />
+    <PrivateStack.Navigator screenOptions={{ headerShown: false, presentation: 'modal' }}>
+      <PrivateStack.Screen name={ROOT_ROUTES.TAB_STACK} component={BottomTabNavigator} />
+      <PrivateStack.Screen name={PRIVATE_ROUTES.CREATE_EVENT} component={CreateEvent} />
+      <PrivateStack.Screen name={PRIVATE_ROUTES.ADD_SERVICE} component={AddService} />
+      <PrivateStack.Screen name={PRIVATE_ROUTES.PROFILE} component={ProfileNavigator} />
     </PrivateStack.Navigator>
   );
 }
 
 function RootNavigator() {
+  const isLogged = true; //TODO
   return (
     <NavigationContainer>
       <RootStack.Navigator screenOptions={{ headerShown: false, presentation: 'modal' }}>
-        <RootStack.Screen name={ROOT_ROUTES.PRIVATE_STACK} component={PrivateNavigator} />
+        {isLogged ? (
+          <RootStack.Screen name={ROOT_ROUTES.PRIVATE_STACK} component={PrivateNavigator} />
+        ) : (
+          <RootStack.Screen name={ROOT_ROUTES.PUBLIC_STACK} component={PublicNavigator} />
+        )}
       </RootStack.Navigator>
     </NavigationContainer>
   );
