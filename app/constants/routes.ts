@@ -1,5 +1,5 @@
-export const privateRoutes = {
-  DASHBOARD: "Dashboard",
+const PRIVATE_ROUTES = {
+  HOME: "Home",
   EVENTS: "Events",
   EVENT_DETAIL: "EventDetail",
   CREATE_EVENT: "CreateEvent",
@@ -12,16 +12,24 @@ export const privateRoutes = {
   ADD_SERVICE: "AddService",
 };
 
-export const publicRoutes = {
+const ROOT_ROUTES = {
+  PRIVATE_STACK: "PrivateStack",
+  PUBLIC_STACK: "PublicStack",
+  TAB_STACK: "TabStack",
+};
+
+const PUBLIC_ROUTES = {
   SIGN_IN: "SignIn",
   SIGN_UP: "SignUp",
   INVITE_CODE: "InviteCode",
   FORGOT_PASSWORD: "ForgotPassword",
 };
 
-export const tabRoutes = {
-  DASHBOARD: "Dashboard",
+const TAB_ROUTES = {
+  HOME: "Home",
   CALENDAR: "Calendar",
   NOTIFICATIONS: "Notifications",
   OVERVIEW: "Overview",
 };
+
+export { PRIVATE_ROUTES, ROOT_ROUTES, PUBLIC_ROUTES, TAB_ROUTES };
