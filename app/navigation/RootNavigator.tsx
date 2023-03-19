@@ -4,8 +4,14 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { PRIVATE_ROUTES, PUBLIC_ROUTES, ROOT_ROUTES, TAB_ROUTES } from '@oxvo-mobile/constants/routes';
+import {
+  BOTTOM_TAB_ROUTES,
+  PRIVATE_ROUTES,
+  PUBLIC_ROUTES,
+  ROOT_ROUTES,
+} from '@oxvo-mobile/constants/routes';
 import ProfileNavigator from '@oxvo-mobile/navigation/PrivateNavigators/ProfileNavigator';
+
 
 function Home() {
   return (
@@ -65,10 +71,13 @@ const BottomTab = createBottomTabNavigator();
 function BottomTabNavigator() {
   return (
     <BottomTab.Navigator>
-      <BottomTab.Screen name={TAB_ROUTES.HOME} component={Home} options={{}} />
-      <BottomTab.Screen name={TAB_ROUTES.CALENDAR} component={Events} />
-      <BottomTab.Screen name={TAB_ROUTES.NOTIFICATIONS} component={Notifications} />
-      <BottomTab.Screen name={TAB_ROUTES.OVERVIEW} component={Overview} />
+      <BottomTab.Screen name={BOTTOM_TAB_ROUTES.HOME} component={Home} options={{
+        tabBarLabel: ({ focused }) => <Text>Home</Text>,
+        headerShown: true,
+      }} />
+      <BottomTab.Screen name={BOTTOM_TAB_ROUTES.CALENDAR} component={Events} />
+      <BottomTab.Screen name={BOTTOM_TAB_ROUTES.NOTIFICATIONS} component={Notifications} />
+      <BottomTab.Screen name={BOTTOM_TAB_ROUTES.OVERVIEW} component={Overview} />
     </BottomTab.Navigator>
   );
 }
