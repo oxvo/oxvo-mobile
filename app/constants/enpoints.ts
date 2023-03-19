@@ -1,4 +1,4 @@
-enum EventsStatusType {
+enum EventsStatus {
   upcoming = 'upcoming',
   completed = 'completed',
   canceled = 'canceled',
@@ -22,7 +22,7 @@ const DASHBOARD_ENDPOINTS = {
 
 const EVENTS_ENDPOINTS = {
   MY_EVENTS: 'v1/events',
-  FILTER_EVENTS: (status: EventsStatusType) => `v1/events?status=${status}`, // upcoming | completed | canceled
+  FILTER_EVENTS: (status: EventsStatus) => `v1/events?status=${status}`, // upcoming | completed | canceled
   DETAIL: (eventId: string) => `v1/events/${eventId}`,
   CREATE_EVENT: 'v1/events',
   UPDATE_EVENT: 'v1/events',
