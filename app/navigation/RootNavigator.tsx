@@ -4,14 +4,14 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import {
-  BOTTOM_TAB_ROUTES,
-  PRIVATE_ROUTES,
-  PUBLIC_ROUTES,
-  ROOT_ROUTES,
-} from '@oxvo-mobile/constants/routes';
+import { BOTTOM_TAB_ROUTES, PRIVATE_ROUTES, PUBLIC_ROUTES, ROOT_ROUTES } from '@oxvo-mobile/constants/routes';
 import ProfileNavigator from '@oxvo-mobile/navigation/PrivateNavigators/ProfileNavigator';
-
+import {
+  BottomTabParamList,
+  PrivateStackParamList,
+  PublicStackParamList,
+  RootStackParamList,
+} from '@oxvo-mobile/navigation/types';
 
 function Home() {
   return (
@@ -63,18 +63,22 @@ function Auth() {
   );
 }
 
-const PublicStack = createNativeStackNavigator();
-const PrivateStack = createNativeStackNavigator();
-const RootStack = createNativeStackNavigator();
-const BottomTab = createBottomTabNavigator();
+const PublicStack = createNativeStackNavigator<PublicStackParamList>();
+const PrivateStack = createNativeStackNavigator<PrivateStackParamList>();
+const RootStack = createNativeStackNavigator<RootStackParamList>();
+const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
 function BottomTabNavigator() {
   return (
     <BottomTab.Navigator>
-      <BottomTab.Screen name={BOTTOM_TAB_ROUTES.HOME} component={Home} options={{
-        tabBarLabel: ({ focused }) => <Text>Home</Text>,
-        headerShown: true,
-      }} />
+      <BottomTab.Screen
+        name={BOTTOM_TAB_ROUTES.HOME}
+        component={Home}
+        options={{
+          tabBarLabel: ({ focused }) => <Text>Home</Text>,
+          headerShown: true,
+        }}
+      />
       <BottomTab.Screen name={BOTTOM_TAB_ROUTES.CALENDAR} component={Events} />
       <BottomTab.Screen name={BOTTOM_TAB_ROUTES.NOTIFICATIONS} component={Notifications} />
       <BottomTab.Screen name={BOTTOM_TAB_ROUTES.OVERVIEW} component={Overview} />
