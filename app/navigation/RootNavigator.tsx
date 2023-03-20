@@ -6,12 +6,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { BOTTOM_TAB_ROUTES, PRIVATE_ROUTES, PUBLIC_ROUTES, ROOT_ROUTES } from '@oxvo-mobile/constants/routes';
 import ProfileNavigator from '@oxvo-mobile/navigation/PrivateNavigators/ProfileNavigator';
-import {
-  BottomTabParamList,
-  PrivateStackParamList,
-  PublicStackParamList,
-  RootStackParamList,
-} from '@oxvo-mobile/navigation/types';
+import { BottomTabParamList, PrivateStackParamList, PublicStackParamList, RootStackParamList } from '@oxvo-mobile/navigation/types';
+
 
 function Home() {
   return (
@@ -68,7 +64,7 @@ const PrivateStack = createNativeStackNavigator<PrivateStackParamList>();
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
-function BottomTabNavigator() {
+const BottomTabNavigator = (): React.ReactElement => {
   return (
     <BottomTab.Navigator>
       <BottomTab.Screen
@@ -84,7 +80,7 @@ function BottomTabNavigator() {
       <BottomTab.Screen name={BOTTOM_TAB_ROUTES.OVERVIEW} component={Overview} />
     </BottomTab.Navigator>
   );
-}
+};
 
 function PublicNavigator() {
   return (
