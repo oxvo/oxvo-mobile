@@ -6,10 +6,11 @@ import PrivateNavigator from '@oxvo-mobile/navigation/PrivateNavigator';
 import PublicNavigator from '@oxvo-mobile/navigation/PublicNavigator';
 import { RootStackParamList } from '@oxvo-mobile/navigation/types';
 
+
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 const RootNavigator = (): React.ReactElement => {
-  const isLogged = true; //TODO
+  const isLogged = false; //TODO
   return (
     <NavigationContainer>
       <RootStack.Navigator screenOptions={{ headerShown: false, presentation: 'modal' }}>

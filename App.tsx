@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import * as React from 'react';
 import RootNavigator from '@oxvo-mobile/navigation/RootNavigator';
 import { StatusBar } from 'expo-status-bar';

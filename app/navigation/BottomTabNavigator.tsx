@@ -3,6 +3,7 @@ import { Text, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BOTTOM_TAB_ROUTES } from '@oxvo-mobile/constants/routes';
 import { BottomTabParamList } from '@oxvo-mobile/navigation/types';
+import OverviewScreen from '@oxvo-mobile/screens/PrivateScreens/Overview/Overview';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -40,7 +41,7 @@ function Overview() {
 
 const BottomTabNavigator = (): React.ReactElement => {
   return (
-    <BottomTab.Navigator>
+    <BottomTab.Navigator initialRouteName={BOTTOM_TAB_ROUTES.OVERVIEW}>
       <BottomTab.Screen
         name={BOTTOM_TAB_ROUTES.HOME}
         component={Home}
@@ -51,7 +52,7 @@ const BottomTabNavigator = (): React.ReactElement => {
       />
       <BottomTab.Screen name={BOTTOM_TAB_ROUTES.CALENDAR} component={Events} />
       <BottomTab.Screen name={BOTTOM_TAB_ROUTES.NOTIFICATIONS} component={Notifications} />
-      <BottomTab.Screen name={BOTTOM_TAB_ROUTES.OVERVIEW} component={Overview} />
+      <BottomTab.Screen name={BOTTOM_TAB_ROUTES.OVERVIEW} component={OverviewScreen} />
     </BottomTab.Navigator>
   );
 };

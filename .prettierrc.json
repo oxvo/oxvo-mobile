@@ -11,6 +11,7 @@
   "tabWidth": 2,
   "trailingComma": "es5",
   "importOrder": [
+    "react-native-gesture-handler",
     "^(react|react-native|react-native-paper)$",
     "^@react-navigation/(.*)$",
     "<THIRD_PARTY_MODULES>",

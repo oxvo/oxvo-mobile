@@ -3,6 +3,8 @@ import { Text, View } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { PUBLIC_ROUTES } from '@oxvo-mobile/constants/routes';
 import { PublicStackParamList } from '@oxvo-mobile/navigation/types';
+import SignInScreen from '@oxvo-mobile/screens/PublicScreens/Auth/SignIn/SignIn';
+import SignUpScreen from '@oxvo-mobile/screens/PublicScreens/Auth/SignUp/SignUp';
 
 const PublicStack = createNativeStackNavigator<PublicStackParamList>();
 
@@ -16,11 +18,14 @@ function Auth() {
 
 const PublicNavigator = (): React.ReactElement => {
   return (
-    <PublicStack.Navigator screenOptions={{ headerShown: false, presentation: 'modal' }}>
+    <PublicStack.Navigator
+      initialRouteName={PUBLIC_ROUTES.SIGN_UP}
+      screenOptions={{ headerShown: false, presentation: 'modal' }}
+    >
       <PublicStack.Screen name={PUBLIC_ROUTES.FORGOT_PASSWORD} component={Auth} />
       <PublicStack.Screen name={PUBLIC_ROUTES.INVITE_CODE} component={Auth} />
-      <PublicStack.Screen name={PUBLIC_ROUTES.SIGN_IN} component={Auth} />
-      <PublicStack.Screen name={PUBLIC_ROUTES.SIGN_UP} component={Auth} />
+      <PublicStack.Screen name={PUBLIC_ROUTES.SIGN_IN} component={SignInScreen} />
+      <PublicStack.Screen name={PUBLIC_ROUTES.SIGN_UP} component={SignUpScreen} />
     </PublicStack.Navigator>
   );
 };
