@@ -108,7 +108,7 @@ const TabView = <T extends Route>({ routes = [], views = [], initialRoute }: Pro
                 route?.onPress?.();
               }}
             >
-              <Text tag="h3" color={color}>
+              <Text color={color}>
                 {route.title}
               </Text>
               {isActiveRoute ? <RouteButtonBorder style={{ backgroundColor: color }} /> : null}
