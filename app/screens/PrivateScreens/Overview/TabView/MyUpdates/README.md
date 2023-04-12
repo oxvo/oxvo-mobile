@@ -1,4 +1,4 @@
-- Members:
+- Clients:
     - My Packages
 - Staff:
     - My Services

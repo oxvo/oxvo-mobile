@@ -1,12 +1,13 @@
 import React from 'react';
 import TabView from '@oxvo-mobile/components/TabView/TabView';
-// import MyMembersScreen from './TabView/MyNetwork/MyMembers/MyMembers';
+// import MyClientsScreen from './TabView/MyNetwork/MyMembers/MyMembers';
 import MyStaffsScreen from './TabView/MyNetwork/MyStaffs/MyStaffs';
 import MyPackagesScreen from './TabView/MyUpdates/MyPackages/MyPackages';
 
+
 // import MyServices from './TabView/MyUpdatesMyServices/MyServices';
 
-type UserType = 'member' | 'staff';
+type UserType = 'clients' | 'staff';
 
 const OverviewScreen = () => {
   const tabViewProps = {

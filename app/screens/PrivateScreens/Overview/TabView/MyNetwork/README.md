@@ -1,4 +1,4 @@
-- Members:
+- Clients:
     - My Staffs
 - Staff:
-    - My Members
+    - My Clients

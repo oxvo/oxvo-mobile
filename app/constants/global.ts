@@ -1,6 +1,10 @@
 enum USER_TYPES {
   STAFF = 'STAFF',
-  MEMBER = 'MEMBER',
+  CLIENT = 'CLIENT',
 }
 
-export { USER_TYPES };
+enum STORAGE_KEYS {
+  TOKEN = 'token',
+}
+
+export { USER_TYPES, STORAGE_KEYS };

@@ -46,8 +46,18 @@ const BottomTabNavigator = (): React.ReactElement => {
         name={BOTTOM_TAB_ROUTES.HOME}
         component={Home}
         options={{
-          tabBarLabel: ({ focused }) => <Text>Home</Text>,
+          tabBarLabel: ({ focused }) => <Text>Hrome</Text>,
           headerShown: true,
+          tabBarBadge: "",
+          tabBarBadgeStyle: {
+                         
+            minWidth: 14,
+            maxHeight: 14,
+            borderRadius: 7,
+            fontSize: 10,
+            lineHeight: 13,
+            alignSelf: undefined,
+          }
         }}
       />
       <BottomTab.Screen name={BOTTOM_TAB_ROUTES.CALENDAR} component={Events} />

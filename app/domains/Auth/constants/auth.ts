@@ -1,0 +1,6 @@
+enum PASSWORD_SETTINGS {
+  MIN_LENGTH = 6,
+  MAX_LENGTH = 32,
+}
+
+export { PASSWORD_SETTINGS };

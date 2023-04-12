@@ -3,7 +3,7 @@ module.exports = {
   "@oxvo-mobile/components": "./app/components",
   "@oxvo-mobile/config": "./app/config",
   "@oxvo-mobile/constants": "./app/constants",
-  "@oxvo-mobile/features": "./app/features",
+  "@oxvo-mobile/domains": "./app/domains",
   "@oxvo-mobile/constants": "./app/constants",
   "@oxvo-mobile/hooks": "./app/hooks",
   "@oxvo-mobile/libs": "./app/libs",

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Text } from 'react-native-ui-lib';
 
-const MyPackagesScreen = () => {
+
+const MyPackagesScreen: React.FC = () => {
   return <Text>My Packages</Text>;
 };
 

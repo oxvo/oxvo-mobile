@@ -1,6 +1,6 @@
 HEADER VARIANTS:
 
-MEMBERS:
+CLIENTS:
 
 - Home
     - Profile | Company Logo | Add Event
@@ -30,7 +30,7 @@ STAFF:
 - Overview
     - My Services (It's TabViews, not a screen.)
         - Profile | Company Logo | Add Service
-    - My Members (It's TabViews, not a screen.)
+    - My Clients (It's TabViews, not a screen.)
         - Profile | Company Logo | null
 
 - Profile:
