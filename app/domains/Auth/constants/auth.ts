@@ -1,5 +1,5 @@
 enum PASSWORD_SETTINGS {
-  MIN_LENGTH = 6,
+  MIN_LENGTH = 0,
   MAX_LENGTH = 32,
 }
 

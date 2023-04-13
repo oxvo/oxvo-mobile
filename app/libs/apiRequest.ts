@@ -1,4 +1,4 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import authStore from '@oxvo-mobile/store/authStore';
 import axios, { AxiosError, AxiosRequestConfig, AxiosRequestHeaders } from 'axios';
 
 interface ApiResponse<T> {
@@ -13,10 +13,12 @@ const apiRequest = async <T>(config: AxiosRequestConfig): Promise<T> => {
     timeout: 5000,
   });
 
+  console.log('authStore.getState().token -->', authStore.getState().token);
+
   // Add request interceptor
   axiosInstance.interceptors.request.use(
     async (config) => {
-      const token = await AsyncStorage.getItem('token'); //TODO get token key from config
+      const token = authStore.getState().token;
       if (token) {
         config.headers = {
           ...config.headers,
@@ -44,16 +46,16 @@ const apiRequest = async <T>(config: AxiosRequestConfig): Promise<T> => {
         // The request was made and the server responded with a status code
         // that falls out of the range of 2xx
         console.log(error.response.data);
-        console.log(error.response.status);
-        console.log(error.response.headers);
+        // console.log(error.response.status);
+        // console.log(error.response.headers);
       } else if (error.request) {
         // The request was made but no response was received
-        console.log(error.request);
+        // console.log(error.request);
       } else {
         // Something happened in setting up the request that triggered an Error
-        console.log('Error', error.message);
+        // console.log('Error', error.message);
       }
-      console.log(error.config);
+      //   console.log(error.config);
       return Promise.reject(error);
     }
   );

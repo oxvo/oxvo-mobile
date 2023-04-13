@@ -32,6 +32,6 @@ function MyComponent(props: MyComponentProps) {
   // ...
 }
 
-
+<StackNavigationProp<RootStackParamList>>();
   const navigation = useNavigation<PublicStackParamList>();
   const route = useRoute<PublicStackScreenProps<'SIGN_IN'>>();

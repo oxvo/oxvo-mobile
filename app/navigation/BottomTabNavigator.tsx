@@ -41,7 +41,7 @@ function Overview() {
 
 const BottomTabNavigator = (): React.ReactElement => {
   return (
-    <BottomTab.Navigator initialRouteName={BOTTOM_TAB_ROUTES.OVERVIEW}>
+    <BottomTab.Navigator initialRouteName={BOTTOM_TAB_ROUTES.HOME}>
       <BottomTab.Screen
         name={BOTTOM_TAB_ROUTES.HOME}
         component={Home}

@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { PASSWORD_SETTINGS } from '@oxvo-mobile/domains/Auth/constants/auth';
+import useSignIn from '@oxvo-mobile/domains/Auth/queries/useSignIn';
 import { Controller, useForm } from 'react-hook-form';
 import { Button, Checkbox, Text, TextField, View } from 'react-native-ui-lib';
 import * as z from 'zod';
 
-// Define validation schema with Zod
-const schema = z.object({
-  email: z.string().email('Invalid email format').min(6, 'Email too short'),
-  password: z.string().min(8, 'Password must be at least 8 characters'),
+const formSchema = z.object({
+  email: z.string().email('Invalid email format'),
+  password: z
+    .string()
+    .min(PASSWORD_SETTINGS.MIN_LENGTH, 'Password must be at least 8 characters')
+    .max(PASSWORD_SETTINGS.MAX_LENGTH, 'Password must be at max 32 characters'),
 });
 
-type FormData = z.infer<typeof schema>;
+type FormData = z.infer<typeof formSchema>;
 
 const SignInScreen = () => {
   const [rememberMe, setRememberMe] = useState(false);
@@ -18,11 +22,12 @@ const SignInScreen = () => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>({ resolver: zodResolver(schema) });
+  } = useForm<FormData>({ resolver: zodResolver(formSchema) });
+  const signInMutation = useSignIn();
 
-  const handleSignIn = (data: FormData) => {
-    // handle sign in logic
+  const handleSignIn = async (data: FormData) => {
     console.log(data);
+    await signInMutation.mutateAsync(data);
   };
 
   const handleForgotPassword = () => {
@@ -55,7 +60,7 @@ const SignInScreen = () => {
               autoCapitalize="none"
               floatingPlaceholder
               placeholder="E-mail"
-              value={field.value}
+              value={field.value || 'mert-staff-04@oxvo.app'}
               onChangeText={field.onChange}
               validateOnChange={true}
               enableErrors
@@ -66,7 +71,7 @@ const SignInScreen = () => {
         <Controller
           control={control}
           name="password"
-          defaultValue=""
+          defaultValue="1"
           render={({ field }) => (
             <TextField
               textContentType="password"
@@ -104,6 +109,7 @@ const SignInScreen = () => {
         backgroundColor="green"
         borderRadius={10}
         paddingV-15
+        disabled={signInMutation.isLoading}
         onPress={handleSubmit(handleSignIn)}
         marginB-20
       />

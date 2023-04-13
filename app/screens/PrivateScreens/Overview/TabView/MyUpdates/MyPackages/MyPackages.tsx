@@ -1,9 +1,14 @@
-import React from 'react';
-import { Text } from 'react-native-ui-lib';
-
+import * as React from 'react';
+import useLogout from '@oxvo-mobile/domains/Auth/hooks/useLogout';
+import { Button, Text } from 'react-native-ui-lib';
 
 const MyPackagesScreen: React.FC = () => {
-  return <Text>My Packages</Text>;
+  const logout = useLogout();
+  return (
+    <Button onPress={logout}>
+      <Text style={{ color: 'white' }}>Logout</Text>
+    </Button>
+  );
 };
 
 export default MyPackagesScreen;
