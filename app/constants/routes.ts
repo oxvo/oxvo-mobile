@@ -1,4 +1,4 @@
-enum PRIVATE_ROUTES {
+const enum PRIVATE_ROUTES {
   HOME = 'Home',
   EVENTS = 'Events',
   EVENT_DETAIL = 'EventDetail',
@@ -12,20 +12,20 @@ enum PRIVATE_ROUTES {
   ADD_SERVICE = 'AddService',
 }
 
-enum ROOT_ROUTES {
+const enum ROOT_ROUTES {
   PRIVATE_STACK = 'PrivateStack',
   PUBLIC_STACK = 'PublicStack',
   TAB_STACK = 'TabStack',
 }
 
-enum PUBLIC_ROUTES {
+const enum PUBLIC_ROUTES {
   SIGN_IN = 'SignIn',
   SIGN_UP = 'SignUp',
   INVITE_CODE = 'InviteCode',
   FORGOT_PASSWORD = 'ForgotPassword',
 }
 
-enum BOTTOM_TAB_ROUTES {
+const enum BOTTOM_TAB_ROUTES {
   HOME = 'HomeBottomTab',
   CALENDAR = 'CalendarBottomTab',
   NOTIFICATIONS = 'NotificationsBottomTab',

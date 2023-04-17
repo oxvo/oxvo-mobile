@@ -1,4 +1,4 @@
-enum USER_ROLES {
+const enum USER_ROLES {
   STAFF = 'STAFF',
   CLIENT = 'CLIENT',
 }
@@ -17,7 +17,7 @@ enum COMPANY_SERVICE_TYPE {
   MEETING = 'MEETING',
 }
 
-enum STORAGE_KEYS { //TODO move Auth keys to Auth/constants/global.ts
+const enum STORAGE_KEYS { //TODO move Auth keys to Auth/constants/global.ts
   TOKEN = 'auth-token',
   CODE = 'invite-code',
 }

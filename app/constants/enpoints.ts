@@ -1,4 +1,4 @@
-enum EventsStatus {
+const enum EventsStatus {
   upcoming = 'upcoming',
   completed = 'completed',
   canceled = 'canceled',

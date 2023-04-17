@@ -3,6 +3,7 @@ import HOME_ENDPOINTS from '@oxvo-mobile/domains/Home/constants/endpoints';
 import apiRequest from '@oxvo-mobile/libs/apiRequest';
 import { z } from 'zod';
 
+
 const UserSchema = z.object({
   id: z.number(),
   photoUrl: z.string().nullable(),

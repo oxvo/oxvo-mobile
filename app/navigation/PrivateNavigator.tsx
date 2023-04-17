@@ -8,6 +8,7 @@ import BottomTabNavigator from '@oxvo-mobile/navigation/BottomTabNavigator';
 import ProfileNavigator from '@oxvo-mobile/navigation/ProfileNavigator';
 import { PrivateStackParamList } from '@oxvo-mobile/navigation/types';
 
+
 const PrivateStack = createNativeStackNavigator<PrivateStackParamList>();
 
 function AddService() {
@@ -27,7 +28,7 @@ function CreateEvent() {
 }
 
 const PrivateNavigator = (): React.ReactElement => {
-  const { isLoading, data } = useMe();
+  const { isLoading } = useMe();
 
   if (isLoading) {
     return <ActivityIndicator />;
