@@ -1,4 +1,4 @@
-import { USER_TYPES } from '@oxvo-mobile/constants/global';
+import { USER_ROLES } from '@oxvo-mobile/constants/global';
 import ME_ENDPOINTS from '@oxvo-mobile/domains/Me/constants/endpoints';
 import apiRequest from '@oxvo-mobile/libs/apiRequest';
 import { z } from 'zod';
@@ -21,7 +21,7 @@ const MeResponseSchema = z.object({
   currentCompanyId: z.number(),
   firstName: z.string(),
   lastName: z.string(),
-  role: z.nativeEnum(USER_TYPES),
+  role: z.nativeEnum(USER_ROLES),
   email: z.string(),
   emailVerifiedAt: z.string().nullable(),
   phone: z.string().nullable(),

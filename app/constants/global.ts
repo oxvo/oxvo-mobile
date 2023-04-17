@@ -1,6 +1,20 @@
-enum USER_TYPES {
+enum USER_ROLES {
   STAFF = 'STAFF',
   CLIENT = 'CLIENT',
+}
+
+enum REPLY_STATUS {
+  JOIN = 'JOIN',
+  AWAITING = 'AWAITING',
+  CANCELED = 'CANCELED',
+  COMPLETED = 'COMPLETED',
+  STAFF_NOT_ATTEND = 'STAFF_NOT_ATTEND',
+  CLIENT_NOT_ATTEND = 'CLIENT_NOT_ATTEND',
+}
+
+enum COMPANY_SERVICE_TYPE {
+  WORKOUT = 'WORKOUT',
+  MEETING = 'MEETING',
 }
 
 enum STORAGE_KEYS { //TODO move Auth keys to Auth/constants/global.ts
@@ -8,4 +22,4 @@ enum STORAGE_KEYS { //TODO move Auth keys to Auth/constants/global.ts
   CODE = 'invite-code',
 }
 
-export { USER_TYPES, STORAGE_KEYS };
+export { USER_ROLES, STORAGE_KEYS, COMPANY_SERVICE_TYPE, REPLY_STATUS };

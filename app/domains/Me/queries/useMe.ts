@@ -8,7 +8,6 @@ import { MeResponse } from '@oxvo-mobile/domains/Me/services/fetchMe';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
-const SELECTED_QUERY_KEY = ME_QUERY_KEYS.GET_ME;
 
 async function saveSelectedQueryToStorage(data: object) {
   try {
@@ -21,7 +20,7 @@ async function saveSelectedQueryToStorage(data: object) {
 
 const useMe = () => {
   const queryClient = useQueryClient();
-  const queryFetchMe = useQuery<MeResponse>([SELECTED_QUERY_KEY], async () => {
+  const queryFetchMe = useQuery<MeResponse>([ME_QUERY_KEYS.FETCH_ME], async () => {
     const meData = await fetchMe();
 
     return meData;
@@ -33,7 +32,7 @@ const useMe = () => {
         const savedData = await AsyncStorage.getItem(SELECTED_QUERY_STORAGE_KEY);
         if (savedData) {
           const parsedData = JSON.parse(savedData);
-          queryClient.setQueryData<MeResponse>([SELECTED_QUERY_KEY], parsedData);
+          queryClient.setQueryData<MeResponse>([ME_QUERY_KEYS.FETCH_ME], parsedData);
         }
       } catch (error) {
         console.error('Error hydrating query from storage:', error);

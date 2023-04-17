@@ -9,10 +9,6 @@ const CALENDAR_ENDPOINTS = {
     `v1/calendar?start_time=${startTime}&staffId=${staffId}`,
 };
 
-const HOME_ENDPOINTS = {
-  FETCH_DASHBOARD: 'v1/home',
-};
-
 const EVENTS_ENDPOINTS = {
   MY_EVENTS: 'v1/events',
   FILTER_EVENTS: (status: EventsStatus) => `v1/events?status=${status}`, // upcoming | completed | canceled

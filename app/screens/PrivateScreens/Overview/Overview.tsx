@@ -1,13 +1,12 @@
 import React from 'react';
 import TabView from '@oxvo-mobile/components/TabView/TabView';
-import { USER_TYPES } from '@oxvo-mobile/constants/global';
+import { USER_ROLES } from '@oxvo-mobile/constants/global';
 import useMe from '@oxvo-mobile/domains/Me/queries/useMe';
 import { MeResponse } from '@oxvo-mobile/domains/Me/services/fetchMe';
 import MyClients from './TabView/MyNetwork/MyClients/MyClients';
 import MyStaffs from './TabView/MyNetwork/MyStaffs/MyStaffs';
 import MyPackages from './TabView/MyUpdates/MyPackages/MyPackages';
 import MyServices from './TabView/MyUpdates/MyServices/MyServices';
-
 
 type TabViewItem = {
   key: string;
@@ -21,7 +20,7 @@ type TabViewProps = {
 };
 
 type BuildTabViewPropsByUserTypeParams = {
-  userType: USER_TYPES;
+  userType: USER_ROLES;
 };
 
 const OverviewScreen = () => {
@@ -63,12 +62,12 @@ const OverviewScreen = () => {
     const STAFF_VIEWS: JSX.Element[] = [<MyServices />, <MyClients />];
 
     switch (userType) {
-      case USER_TYPES.CLIENT:
+      case USER_ROLES.CLIENT:
         return {
           routes: CLIENT_ROUTES,
           views: CLIENT_VIEWS,
         };
-      case USER_TYPES.STAFF:
+      case USER_ROLES.STAFF:
         return {
           routes: STAFF_ROUTES,
           views: STAFF_VIEWS,
@@ -77,7 +76,7 @@ const OverviewScreen = () => {
   };
 
   const tabViewProps = buildTabViewPropsByUserType({
-    userType: (data as MeResponse).role as USER_TYPES,
+    userType: (data as MeResponse).role as USER_ROLES,
   });
 
   return <TabView {...tabViewProps} />;
