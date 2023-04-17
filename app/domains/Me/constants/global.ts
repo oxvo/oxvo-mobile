@@ -1,0 +1,7 @@
+const enum ME_QUERY_KEYS {
+  GET_ME = 'GET_ME',
+}
+
+const SELECTED_QUERY_STORAGE_KEY = `asyncStorage:${ME_QUERY_KEYS.GET_ME}`;
+
+export { ME_QUERY_KEYS, SELECTED_QUERY_STORAGE_KEY };

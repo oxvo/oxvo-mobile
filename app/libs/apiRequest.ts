@@ -1,6 +1,7 @@
 import authStore from '@oxvo-mobile/store/authStore';
 import axios, { AxiosError, AxiosRequestConfig, AxiosRequestHeaders } from 'axios';
 
+
 interface ApiResponse<T> {
   data: T;
 }
@@ -45,7 +46,7 @@ const apiRequest = async <T>(config: AxiosRequestConfig): Promise<T> => {
       if (error.response) {
         // The request was made and the server responded with a status code
         // that falls out of the range of 2xx
-        console.log(error.response.data);
+        // console.log('AxiosError', error.response.data);
         // console.log(error.response.status);
         // console.log(error.response.headers);
       } else if (error.request) {

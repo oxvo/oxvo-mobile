@@ -1,19 +1,31 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { PASSWORD_SETTINGS } from '@oxvo-mobile/domains/Auth/constants/auth';
+import useSignIn from '@oxvo-mobile/domains/Auth/queries/useSignIn';
+import useSignUp from '@oxvo-mobile/domains/Auth/queries/useSignUp';
+import { InviteCodeResponse } from '@oxvo-mobile/domains/Auth/services/inviteCode';
+import { PublicStackNavigationProp } from '@oxvo-mobile/navigation/types';
+import authStore from '@oxvo-mobile/store/authStore';
 import { Controller, useForm } from 'react-hook-form';
 import { Button, Text, TextField, View } from 'react-native-ui-lib';
 import * as z from 'zod';
 
 const schema = z
   .object({
-    name: z.string().min(2, 'Name must be at least 2 characters'),
+    firstName: z.string().min(2, 'First Name must be at least 2 characters'),
+    lastName: z.string().min(2, 'Last Name must be at least 2 characters'),
     email: z.string().email('Invalid email format').min(6, 'Email too short'),
-    password: z.string().min(8, 'Password must be at least 8 characters'),
-    confirmPassword: z.string().min(8, 'Password must be at least 8 characters'),
+    password: z
+      .string()
+      .min(PASSWORD_SETTINGS.MIN_LENGTH, 'Password must be at least 8 characters'),
+    passwordConfirmation: z
+      .string()
+      .min(PASSWORD_SETTINGS.MIN_LENGTH, 'Password must be at least 8 characters'),
   })
-  .refine((data) => data.password === data.confirmPassword, {
+  .refine((data) => data.password === data.passwordConfirmation, {
     message: 'Passwords do not match',
-    path: ['confirmPassword'],
+    path: ['passwordConfirmation'],
   });
 
 type FormData = z.infer<typeof schema>;
@@ -24,44 +36,75 @@ const SignUpScreen = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({ resolver: zodResolver(schema) });
-
-  const handleSignUp = (data: FormData) => {
+  const companySettings = authStore((state) => state.companySettings);
+  const { navigate, goBack } = useNavigation<PublicStackNavigationProp>();
+  const { mutateAsync, isLoading } = useSignUp();
+  const handleSignUp = async (data: FormData) => {
     // handle sign up logic
-    console.log(data);
+    const newData = { ...data, code: (companySettings as InviteCodeResponse).code };
+
+    await mutateAsync(newData);
+
+    console.log(newData);
   };
 
   return (
     <View flex paddingH-30 paddingV-50 bg-white>
       <View center marginB-30>
         {/* Logo component here */}
-        <Text marginB-10 text40BO green20>
-          Company Logo
+        <Text marginB-10 text40BO green20 color={companySettings?.mainColor}>
+          Company Logo {(companySettings as InviteCodeResponse).name}
         </Text>
       </View>
       <Text marginB-30 text40BO green20>
         Sign Up
       </Text>
+      <Button
+        label="Back"
+        backgroundColor="gray"
+        color="black"
+        borderRadius={10}
+        paddingV-10
+        onPress={goBack}
+        left
+      />
       <View marginB-20>
         <Controller
           control={control}
-          name="name"
-          defaultValue=""
+          name="firstName"
+          defaultValue="Mert"
           render={({ field }) => (
             <TextField
               floatingPlaceholder
-              placeholder="Name"
+              placeholder="First Name"
               value={field.value}
               onChangeText={field.onChange}
               validateOnChange={true}
               enableErrors
-              validationMessage={errors.name?.message}
+              validationMessage={errors.firstName?.message}
+            />
+          )}
+        />
+        <Controller
+          control={control}
+          name="lastName"
+          defaultValue="Koseoglu"
+          render={({ field }) => (
+            <TextField
+              floatingPlaceholder
+              placeholder="Last Name"
+              value={field.value}
+              onChangeText={field.onChange}
+              validateOnChange={true}
+              enableErrors
+              validationMessage={errors.lastName?.message}
             />
           )}
         />
         <Controller
           control={control}
           name="email"
-          defaultValue=""
+          defaultValue="mert-signup-test-01@oxvo.app"
           render={({ field }) => (
             <TextField
               textContentType="emailAddress"
@@ -79,7 +122,7 @@ const SignUpScreen = () => {
         <Controller
           control={control}
           name="password"
-          defaultValue=""
+          defaultValue="123456"
           render={({ field }) => (
             <TextField
               textContentType="password"
@@ -97,8 +140,8 @@ const SignUpScreen = () => {
         />
         <Controller
           control={control}
-          name="confirmPassword"
-          defaultValue=""
+          name="passwordConfirmation"
+          defaultValue="123456"
           render={({ field }) => (
             <TextField
               textContentType="password"
@@ -108,7 +151,7 @@ const SignUpScreen = () => {
               value={field.value}
               onChangeText={field.onChange}
               secureTextEntry
-              validationMessage={errors.confirmPassword?.message}
+              validationMessage={errors.passwordConfirmation?.message}
               enableErrors
               containerStyle={{ marginBottom: 15 }}
             />
@@ -117,6 +160,7 @@ const SignUpScreen = () => {
       </View>
       <Button
         label="Sign Up"
+        disabled={isLoading}
         backgroundColor="green"
         borderRadius={10}
         paddingV-15

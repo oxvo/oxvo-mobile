@@ -1,4 +1,5 @@
 import { STORAGE_KEYS } from '@oxvo-mobile/constants/global';
+import { InviteCodeResponse } from '@oxvo-mobile/domains/Auth/services/inviteCode';
 import * as SecureStore from 'expo-secure-store';
 import { create } from 'zustand';
 import { PersistStorage, StorageValue, persist } from 'zustand/middleware';
@@ -7,11 +8,15 @@ type PersistState = {
   token: string | null;
 };
 
-type AuthState = {};
+type AuthState = {
+  companySettings: InviteCodeResponse | null;
+};
 
 type AuthActions = {
   setToken: (token: string | null) => void;
   removeToken: () => void;
+  setCompanySettings: (companySettings: InviteCodeResponse) => void;
+  resetCompanySettings: () => void;
 };
 
 type Auth = AuthState & AuthActions & PersistState;
@@ -42,7 +47,7 @@ const createJSONStorage = (storage: typeof SecureStore): PersistStorage<PersistS
   },
 });
 
-const jsonStorage = createJSONStorage(SecureStore);
+const storage = createJSONStorage(SecureStore);
 
 const authStore = create<Auth>()(
   persist(
@@ -50,11 +55,14 @@ const authStore = create<Auth>()(
       token: null,
       setToken: (token) => set({ token }),
       removeToken: () => set({ token: null }),
+      setCompanySettings: (companySettings) => set({ companySettings }),
+      resetCompanySettings: () => set({ companySettings: null }),
+      companySettings: null,
     }),
     {
       name: STORAGE_KEYS.TOKEN,
-      storage: jsonStorage,
-      partialize: (state) => ({ token: state.token }),
+      storage,
+      partialize: (state) => ({ token: state.token, companySettings: state.companySettings }),
     }
   )
 );

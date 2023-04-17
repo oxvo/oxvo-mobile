@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import ActivityIndicator from '@oxvo-mobile/components/ActivityIndicator/ActivityIndicator';
 import { PRIVATE_ROUTES, ROOT_ROUTES } from '@oxvo-mobile/constants/routes';
+import useMe from '@oxvo-mobile/domains/Me/queries/useMe';
 import BottomTabNavigator from '@oxvo-mobile/navigation/BottomTabNavigator';
 import ProfileNavigator from '@oxvo-mobile/navigation/ProfileNavigator';
 import { PrivateStackParamList } from '@oxvo-mobile/navigation/types';
@@ -25,6 +27,12 @@ function CreateEvent() {
 }
 
 const PrivateNavigator = (): React.ReactElement => {
+  const { isLoading, data } = useMe();
+
+  if (isLoading) {
+    return <ActivityIndicator />;
+  }
+
   return (
     <PrivateStack.Navigator screenOptions={{ headerShown: false, presentation: 'modal' }}>
       <PrivateStack.Screen name={ROOT_ROUTES.TAB_STACK} component={BottomTabNavigator} />

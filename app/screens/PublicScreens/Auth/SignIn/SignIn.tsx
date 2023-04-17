@@ -53,14 +53,14 @@ const SignInScreen = () => {
         <Controller
           control={control}
           name="email"
-          defaultValue=""
+          defaultValue="staff-01@oxvo.app"
           render={({ field }) => (
             <TextField
               textContentType="emailAddress"
               autoCapitalize="none"
               floatingPlaceholder
               placeholder="E-mail"
-              value={field.value || 'mert-staff-04@oxvo.app'}
+              value={field.value}
               onChangeText={field.onChange}
               validateOnChange={true}
               enableErrors
@@ -71,7 +71,7 @@ const SignInScreen = () => {
         <Controller
           control={control}
           name="password"
-          defaultValue="1"
+          defaultValue="replace-me"
           render={({ field }) => (
             <TextField
               textContentType="password"

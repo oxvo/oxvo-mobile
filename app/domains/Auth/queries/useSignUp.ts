@@ -1,15 +1,23 @@
-import { STORAGE_KEYS } from '@oxvo-mobile/constants/global';
 import { SignUpPayload } from '@oxvo-mobile/domains/Auth/services/signUp';
 import signUp from '@oxvo-mobile/domains/Auth/services/signUp';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import authStore from '@oxvo-mobile/store/authStore';
 import { useMutation } from '@tanstack/react-query';
 
 const useSignUp = () => {
-  return useMutation(async (payload: SignUpPayload) => {
-    const { accessToken } = await signUp(payload);
+  const setToken = authStore((state) => state.setToken);
 
-    await AsyncStorage.setItem(STORAGE_KEYS.TOKEN, accessToken);
-  });
+  return useMutation(
+    async (payload: SignUpPayload) => {
+      const { accessToken } = await signUp(payload);
+
+      return accessToken;
+    },
+    {
+      onSuccess: (data) => {
+        setToken(data);
+      },
+    }
+  );
 };
 
 export default useSignUp;
