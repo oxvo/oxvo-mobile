@@ -1,5 +1,6 @@
-import { STORAGE_KEYS } from '@oxvo-mobile/constants/global';
+import { AUTH_STORAGE_KEYS } from '@oxvo-mobile/domains/Auth/constants/auth';
 import { InviteCodeResponse } from '@oxvo-mobile/domains/Auth/services/inviteCode';
+
 import * as SecureStore from 'expo-secure-store';
 import { create } from 'zustand';
 import { PersistStorage, StorageValue, persist } from 'zustand/middleware';
@@ -10,6 +11,7 @@ type PersistState = {
 
 type AuthState = {
   companySettings: InviteCodeResponse | null;
+  isLogoutProcessing: boolean;
 };
 
 type AuthActions = {
@@ -17,6 +19,7 @@ type AuthActions = {
   removeToken: () => void;
   setCompanySettings: (companySettings: InviteCodeResponse) => void;
   resetCompanySettings: () => void;
+  setIsLogoutProcessing: (isLogoutProcessing: boolean) => void;
 };
 
 type Auth = AuthState & AuthActions & PersistState;
@@ -25,7 +28,7 @@ const createJSONStorage = (storage: typeof SecureStore): PersistStorage<PersistS
   getItem: async (key: string): Promise<StorageValue<PersistState> | null> => {
     try {
       const item = await storage.getItemAsync(key);
-      return item ? JSON.parse(item) : null;
+      return item ? (JSON.parse(item) as StorageValue<PersistState>) : null;
     } catch (error) {
       console.log('getItem error:', error);
       return null;
@@ -58,9 +61,11 @@ const authStore = create<Auth>()(
       setCompanySettings: (companySettings) => set({ companySettings }),
       resetCompanySettings: () => set({ companySettings: null }),
       companySettings: null,
+      isLogoutProcessing: false,
+      setIsLogoutProcessing: (isLogoutProcessing) => set({ isLogoutProcessing }),
     }),
     {
-      name: STORAGE_KEYS.TOKEN,
+      name: AUTH_STORAGE_KEYS.TOKEN,
       storage,
       partialize: (state) => ({ token: state.token, companySettings: state.companySettings }),
     }

@@ -1,33 +1,31 @@
 import 'react-native-gesture-handler';
+
 import React, { useCallback, useEffect, useState } from 'react';
+
 import queryClient from '@oxvo-mobile/libs/queryClient';
 import RootNavigator from '@oxvo-mobile/navigation/RootNavigator';
-import authStore from '@oxvo-mobile/store/authStore';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import { Poppins_400Regular, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
 import { QueryClientProvider } from '@tanstack/react-query';
+import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
-import { GestureHandlerRootView } from './App.styled';
 
+import { GestureHandlerRootView } from './App.styled';
 
 SplashScreen.preventAutoHideAsync();
 
 const App = () => {
   const [appIsReady, setAppIsReady] = useState(false);
-  // authStore.subscribe((state) => console.log('App JS, Subscribe: ', state));
-
-  useEffect(() => {
-    // authStore.subscribe((state) => console.log('App JS, Subscribe: ', state));
-    // console.log('app.js -> authStore.getState().token -->', authStore.getState());
-  });
 
   useEffect(() => {
     async function prepare() {
       try {
-        const z = await AsyncStorage.getItem('asyncStorage:GET_ME');
-        console.log('------------AsyncStorage--------------', z);
+        await Font.loadAsync({ Poppins_400Regular, Poppins_600SemiBold });
+
+        // eslint-disable-next-line no-promise-executor-return
         await new Promise((resolve) => setTimeout(resolve, 0));
       } catch (e) {
         console.warn('An error occurred while preparing the app:', e);
@@ -39,9 +37,11 @@ const App = () => {
     prepare();
   }, []);
 
-  const onLayoutRootView = useCallback(async () => {
+  const onLayoutRootView = useCallback(() => {
     if (appIsReady) {
-      await SplashScreen.hideAsync();
+      SplashScreen.hideAsync().catch((error) => {
+        console.error('An error occurred:', error);
+      });
     }
   }, [appIsReady]);
 
@@ -52,7 +52,9 @@ const App = () => {
   return (
     <GestureHandlerRootView onLayout={onLayoutRootView}>
       <SafeAreaProvider>
+        {/* eslint-disable react/style-prop-object */}
         <StatusBar style="auto" />
+        {/* eslint-enable react/style-prop-object */}
         <QueryClientProvider client={queryClient}>
           <RootNavigator />
           <Toast />
@@ -61,4 +63,5 @@ const App = () => {
     </GestureHandlerRootView>
   );
 };
+
 export default App;

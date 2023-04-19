@@ -1,17 +1,14 @@
 import { useEffect } from 'react';
-import {
-  ME_QUERY_KEYS,
-  SELECTED_QUERY_STORAGE_KEY,
-} from '@oxvo-mobile/domains/Me/constants/global';
-import fetchMe from '@oxvo-mobile/domains/Me/services/fetchMe';
-import { MeResponse } from '@oxvo-mobile/domains/Me/services/fetchMe';
+
+import { ME_QUERY_KEYS, ME_STORAGE_KEYS } from '@oxvo-mobile/domains/Me/constants/global';
+import fetchMe, { MeResponse } from '@oxvo-mobile/domains/Me/services/fetchMe';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
-
 async function saveSelectedQueryToStorage(data: object) {
   try {
-    const key = SELECTED_QUERY_STORAGE_KEY;
+    const key = ME_STORAGE_KEYS.FETCH_ME;
     await AsyncStorage.setItem(key, JSON.stringify(data));
   } catch (error) {
     console.error('Error saving selected query:', error);
@@ -20,18 +17,21 @@ async function saveSelectedQueryToStorage(data: object) {
 
 const useMe = () => {
   const queryClient = useQueryClient();
-  const queryFetchMe = useQuery<MeResponse>([ME_QUERY_KEYS.FETCH_ME], async () => {
-    const meData = await fetchMe();
+  const queryFetchMe = useQuery<MeResponse>({
+    queryKey: [ME_QUERY_KEYS.FETCH_ME],
+    queryFn: async () => {
+      const meData = await fetchMe();
 
-    return meData;
+      return meData;
+    },
   });
 
   useEffect(() => {
     async function hydrateQueryFromStorage() {
       try {
-        const savedData = await AsyncStorage.getItem(SELECTED_QUERY_STORAGE_KEY);
+        const savedData = await AsyncStorage.getItem(ME_STORAGE_KEYS.FETCH_ME);
         if (savedData) {
-          const parsedData = JSON.parse(savedData);
+          const parsedData = JSON.parse(savedData) as MeResponse;
           queryClient.setQueryData<MeResponse>([ME_QUERY_KEYS.FETCH_ME], parsedData);
         }
       } catch (error) {

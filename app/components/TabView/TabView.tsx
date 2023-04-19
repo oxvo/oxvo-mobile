@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { ScrollView } from 'react-native';
+
 import Animated, {
   scrollTo,
   useAnimatedRef,
@@ -7,6 +8,7 @@ import Animated, {
   useSharedValue,
 } from 'react-native-reanimated';
 import { Text } from 'react-native-ui-lib';
+
 import {
   Container,
   RouteButton,
@@ -35,13 +37,12 @@ type Props<T extends Route> = {
 const TabView = <T extends Route>({ routes = [], views = [], initialRoute }: Props<T>) => {
   const scrollViewRef = useRef<ScrollView>(null);
   const visibleRoutes = routes.filter((r) => !r.hide);
-
   const visibleViews = views.filter((_, index) => !routes[index].hide);
 
   const currentRoute = initialRoute || visibleRoutes?.[0] || null;
   const currentIndex = visibleRoutes.map((r) => r.key).indexOf(currentRoute?.key);
   const [activeRoute, setActiveRoute] = useState(currentRoute);
-  const scrollRef = useAnimatedRef();
+  const scrollRef = useAnimatedRef<Animated.ScrollView>();
   const scroll = useSharedValue(0);
 
   useDerivedValue(() => {
@@ -92,8 +93,8 @@ const TabView = <T extends Route>({ routes = [], views = [], initialRoute }: Pro
       <TitlesContainer
         ref={scrollViewRef}
         bounces={false}
-        horizontal={true}
-        pagingEnabled={true}
+        horizontal
+        pagingEnabled
         showsHorizontalScrollIndicator={false}
         scrollEventThrottle={TABS_SCROLL_EVENT_THROTTLE}
       >
@@ -108,27 +109,30 @@ const TabView = <T extends Route>({ routes = [], views = [], initialRoute }: Pro
                 route?.onPress?.();
               }}
             >
-              <Text color={color}>
-                {route.title}
-              </Text>
+              <Text color={color}>{route.title}</Text>
               {isActiveRoute ? <RouteButtonBorder style={{ backgroundColor: color }} /> : null}
             </RouteButton>
           );
         })}
       </TitlesContainer>
       <Animated.ScrollView
-        ref={scrollRef as any}
+        ref={scrollRef}
         scrollEnabled={false}
         horizontal
         showsHorizontalScrollIndicator={false}
         testID="tabview-views-container"
       >
         {visibleViews.map((view, index) => {
+          // eslint-disable-next-line react/no-array-index-key
           return <ViewContainer key={index}>{view}</ViewContainer>;
         })}
       </Animated.ScrollView>
     </Container>
   ) : null;
+};
+
+TabView.defaultProps = {
+  initialRoute: null,
 };
 
 export default TabView;

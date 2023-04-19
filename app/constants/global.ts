@@ -1,9 +1,9 @@
-const enum USER_ROLES {
+enum UserRoles {
   STAFF = 'STAFF',
   CLIENT = 'CLIENT',
 }
 
-enum REPLY_STATUS {
+enum ReplyStatus {
   JOIN = 'JOIN',
   AWAITING = 'AWAITING',
   CANCELED = 'CANCELED',
@@ -12,14 +12,9 @@ enum REPLY_STATUS {
   CLIENT_NOT_ATTEND = 'CLIENT_NOT_ATTEND',
 }
 
-enum COMPANY_SERVICE_TYPE {
+enum CompanyServiceType {
   WORKOUT = 'WORKOUT',
   MEETING = 'MEETING',
 }
 
-const enum STORAGE_KEYS { //TODO move Auth keys to Auth/constants/global.ts
-  TOKEN = 'auth-token',
-  CODE = 'invite-code',
-}
-
-export { USER_ROLES, STORAGE_KEYS, COMPANY_SERVICE_TYPE, REPLY_STATUS };
+export { UserRoles, ReplyStatus, CompanyServiceType };

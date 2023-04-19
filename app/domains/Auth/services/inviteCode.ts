@@ -1,6 +1,7 @@
 import { INVITE_CODE_SETTINGS } from '@oxvo-mobile/domains/Auth/constants/auth';
-import AUTH_ENDPOINTS from '@oxvo-mobile/domains/Auth/constants/endpoints';
+import AuthEdpoints from '@oxvo-mobile/domains/Auth/constants/endpoints';
 import apiRequest from '@oxvo-mobile/libs/apiRequest';
+
 import { z } from 'zod';
 
 const InviteCodePayloadSchema = z
@@ -25,7 +26,7 @@ const inviteCode = async (payload: InviteCodePayload): Promise<InviteCodeRespons
 
   const response = await apiRequest<InviteCodeResponse>({
     method: 'GET',
-    url: AUTH_ENDPOINTS.INVITE_CODE,
+    url: AuthEdpoints.INVITE_CODE,
     params: {
       code: validPayload,
     },

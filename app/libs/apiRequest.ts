@@ -1,6 +1,6 @@
 import authStore from '@oxvo-mobile/store/authStore';
-import axios, { AxiosError, AxiosRequestConfig, AxiosRequestHeaders } from 'axios';
 
+import axios, { AxiosError, AxiosRequestConfig, AxiosRequestHeaders } from 'axios';
 
 interface ApiResponse<T> {
   data: T;
@@ -8,7 +8,7 @@ interface ApiResponse<T> {
 
 const apiBaseUrl = 'https://staging-api.oxvo.app';
 
-const apiRequest = async <T>(config: AxiosRequestConfig): Promise<T> => {
+const apiRequest = async <T>(axiosConfig: AxiosRequestConfig): Promise<T> => {
   const axiosInstance = axios.create({
     baseURL: apiBaseUrl,
     timeout: 5000,
@@ -18,29 +18,30 @@ const apiRequest = async <T>(config: AxiosRequestConfig): Promise<T> => {
 
   // Add request interceptor
   axiosInstance.interceptors.request.use(
-    async (config) => {
-      const token = authStore.getState().token;
+    (config) => {
+      const { token } = authStore.getState();
       if (token) {
-        config.headers = {
+        const newConfig = { ...config };
+        newConfig.headers = {
           ...config.headers,
           Authorization: `Bearer ${token}`,
         } as AxiosRequestHeaders;
+
+        return newConfig;
       }
 
       return config;
     },
-    (error) => {
+    (error) =>
       // Do something with request error
-      return Promise.reject(error);
-    }
+      Promise.reject(error)
   );
 
   // Add response interceptor
   axiosInstance.interceptors.response.use(
-    (response) => {
+    (response) =>
       // Do something with response data
-      return response;
-    },
+      response,
     (error: AxiosError) => {
       // Do something with response error
       if (error.response) {
@@ -61,7 +62,7 @@ const apiRequest = async <T>(config: AxiosRequestConfig): Promise<T> => {
     }
   );
 
-  const response = await axiosInstance.request<ApiResponse<T>>(config);
+  const response = await axiosInstance.request<ApiResponse<T>>(axiosConfig);
 
   return response.data.data;
 };

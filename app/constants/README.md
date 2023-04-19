@@ -1,1 +1,0 @@
-That contains files should be move into which relates directory and seperate to be more isolation like `/features/Auth/constants/...`

@@ -1,7 +1,9 @@
-const enum ME_QUERY_KEYS {
-  FETCH_ME = 'FETCH_ME',
-}
+const ME_QUERY_KEYS = {
+  FETCH_ME: 'FETCH_ME',
+};
 
-const SELECTED_QUERY_STORAGE_KEY: string = `asyncStorage:${ME_QUERY_KEYS.FETCH_ME}`;
+const ME_STORAGE_KEYS = {
+  FETCH_ME: `asyncStorage:${ME_QUERY_KEYS.FETCH_ME}`,
+};
 
-export { ME_QUERY_KEYS, SELECTED_QUERY_STORAGE_KEY };
+export { ME_QUERY_KEYS, ME_STORAGE_KEYS };

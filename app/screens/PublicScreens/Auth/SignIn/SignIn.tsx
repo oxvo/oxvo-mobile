@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { zodResolver } from '@hookform/resolvers/zod';
+
 import { PASSWORD_SETTINGS } from '@oxvo-mobile/domains/Auth/constants/auth';
 import useSignIn from '@oxvo-mobile/domains/Auth/queries/useSignIn';
+
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
 import { Button, Checkbox, Text, TextField, View } from 'react-native-ui-lib';
 import * as z from 'zod';
@@ -62,7 +64,7 @@ const SignInScreen = () => {
               placeholder="E-mail"
               value={field.value}
               onChangeText={field.onChange}
-              validateOnChange={true}
+              validateOnChange
               enableErrors
               validationMessage={errors.email?.message}
             />

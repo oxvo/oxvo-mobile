@@ -1,9 +1,12 @@
 import React, { useCallback } from 'react';
-import { useFocusEffect } from '@react-navigation/native';
-import { zodResolver } from '@hookform/resolvers/zod';
+
 import { INVITE_CODE_SETTINGS } from '@oxvo-mobile/domains/Auth/constants/auth';
 import useInviteCode from '@oxvo-mobile/domains/Auth/queries/useInviteCode';
 import authStore from '@oxvo-mobile/store/authStore';
+
+import { useFocusEffect } from '@react-navigation/native';
+
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
 import { Button, Text, TextField, View } from 'react-native-ui-lib';
 import * as z from 'zod';
@@ -31,9 +34,8 @@ const InviteCodeScreen = () => {
 
   useFocusEffect(
     useCallback(() => {
-      alert('Screen was focused -- RESET companySettings');
       resetCompanySettings();
-    }, [])
+    }, [resetCompanySettings])
   );
 
   const handleInviteCodeSubmit = async (data: FormData) => {
@@ -63,7 +65,7 @@ const InviteCodeScreen = () => {
               placeholder="Invite Code"
               value={field.value}
               onChangeText={field.onChange}
-              validateOnChange={true}
+              validateOnChange
               enableErrors
               validationMessage={errors?.inviteCode?.message}
             />

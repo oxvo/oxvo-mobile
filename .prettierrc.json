@@ -13,10 +13,11 @@
   "importOrder": [
     "react-native-gesture-handler",
     "^(react|react-native|react-native-paper)$",
+    "^@oxvo-mobile/(.*)$",
     "^@react-navigation/(.*)$",
     "<THIRD_PARTY_MODULES>",
     "^[./]"
   ],
-  "importOrderSeparation": false,
+  "importOrderSeparation": true,
   "importOrderSortSpecifiers": true
 }

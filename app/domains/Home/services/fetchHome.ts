@@ -1,8 +1,8 @@
-import { COMPANY_SERVICE_TYPE, REPLY_STATUS } from '@oxvo-mobile/constants/global';
+import { CompanyServiceType, ReplyStatus } from '@oxvo-mobile/constants/global';
 import HOME_ENDPOINTS from '@oxvo-mobile/domains/Home/constants/endpoints';
 import apiRequest from '@oxvo-mobile/libs/apiRequest';
-import { z } from 'zod';
 
+import { z } from 'zod';
 
 const UserSchema = z.object({
   id: z.number(),
@@ -18,7 +18,7 @@ const ClientSchema = UserSchema.extend({});
 const CompanyServiceSchema = z.object({
   id: z.number(),
   name: z.string(),
-  type: z.nativeEnum(COMPANY_SERVICE_TYPE),
+  type: z.nativeEnum(CompanyServiceType),
   description: z.string(),
 });
 
@@ -38,8 +38,8 @@ const SessionSchema = z.object({
   companyService: CompanyServiceSchema,
   note: z.string().nullable(),
   isActive: z.boolean(),
-  staffReply: z.nativeEnum(REPLY_STATUS),
-  clientReply: z.nativeEnum(REPLY_STATUS),
+  staffReply: z.nativeEnum(ReplyStatus),
+  clientReply: z.nativeEnum(ReplyStatus),
   updatedAt: z.string(),
   createdAt: z.string(),
 });
@@ -58,8 +58,8 @@ const PackageSchema = z.object({
 });
 
 const HomeResponseSchema = z.object({
-  sessions: z.array(SessionSchema).nonempty(),
-  packages: z.array(PackageSchema).optional(),
+  sessions: z.array(SessionSchema).nullable(),
+  packages: z.array(PackageSchema).optional().nullable(),
 });
 
 const HomePayloadSchema = z.object({});

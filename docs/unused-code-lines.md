@@ -1,0 +1,1 @@
+authStore.subscribe((state) => console.log('App JS, Subscribe: ', state));

@@ -1,6 +1,10 @@
-import { MutationCache, QueryCache, QueryClient, QueryKey } from '@tanstack/react-query';
-import toast from 'react-native-toast-message';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+import { MutationCache, QueryCache, QueryClient } from '@tanstack/react-query';
+import toast from 'react-native-toast-message';
 
 const showError = (error: any) => {
   toast.show({

@@ -1,12 +1,14 @@
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
-import { zodResolver } from '@hookform/resolvers/zod';
+
 import { PASSWORD_SETTINGS } from '@oxvo-mobile/domains/Auth/constants/auth';
-import useSignIn from '@oxvo-mobile/domains/Auth/queries/useSignIn';
 import useSignUp from '@oxvo-mobile/domains/Auth/queries/useSignUp';
 import { InviteCodeResponse } from '@oxvo-mobile/domains/Auth/services/inviteCode';
 import { PublicStackNavigationProp } from '@oxvo-mobile/navigation/types';
 import authStore from '@oxvo-mobile/store/authStore';
+
+import { useNavigation } from '@react-navigation/native';
+
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
 import { Button, Text, TextField, View } from 'react-native-ui-lib';
 import * as z from 'zod';
@@ -37,15 +39,13 @@ const SignUpScreen = () => {
     formState: { errors },
   } = useForm<FormData>({ resolver: zodResolver(schema) });
   const companySettings = authStore((state) => state.companySettings);
-  const { navigate, goBack } = useNavigation<PublicStackNavigationProp>();
+  const { goBack } = useNavigation<PublicStackNavigationProp>();
   const { mutateAsync, isLoading } = useSignUp();
   const handleSignUp = async (data: FormData) => {
     // handle sign up logic
     const newData = { ...data, code: (companySettings as InviteCodeResponse).code };
 
     await mutateAsync(newData);
-
-    console.log(newData);
   };
 
   return (
@@ -79,7 +79,7 @@ const SignUpScreen = () => {
               placeholder="First Name"
               value={field.value}
               onChangeText={field.onChange}
-              validateOnChange={true}
+              validateOnChange
               enableErrors
               validationMessage={errors.firstName?.message}
             />
@@ -95,7 +95,7 @@ const SignUpScreen = () => {
               placeholder="Last Name"
               value={field.value}
               onChangeText={field.onChange}
-              validateOnChange={true}
+              validateOnChange
               enableErrors
               validationMessage={errors.lastName?.message}
             />
@@ -113,7 +113,7 @@ const SignUpScreen = () => {
               placeholder="E-mail"
               value={field.value}
               onChangeText={field.onChange}
-              validateOnChange={true}
+              validateOnChange
               enableErrors
               validationMessage={errors.email?.message}
             />

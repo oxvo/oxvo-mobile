@@ -1,35 +1,35 @@
-const enum PRIVATE_ROUTES {
-  HOME = 'Home',
-  EVENTS = 'Events',
-  EVENT_DETAIL = 'EventDetail',
-  CREATE_EVENT = 'CreateEvent',
-  PROFILE = 'Profile',
-  ACCOUNT_SETTINGS = 'AccountSettings',
-  CHANGE_PASSWORD = 'ChangePassword',
-  CALENDAR = 'Calendar',
-  NOTIFICATIONS = 'Notifications',
-  OVERVIEW = 'Overview',
-  ADD_SERVICE = 'AddService',
-}
+const PRIVATE_ROUTES = {
+  HOME: 'HOME',
+  EVENTS: 'EVENTS',
+  EVENT_DETAIL: 'EVENT_DETAIL',
+  CREATE_EVENT: 'CREATE_EVENT',
+  PROFILE: 'PROFILE',
+  ACCOUNT_SETTINGS: 'ACCOUNT_SETTINGS',
+  CHANGE_PASSWORD: 'CHANGE_PASSWORD',
+  CALENDAR: 'CALENDAR',
+  NOTIFICATIONS: 'NOTIFICATIONS',
+  OVERVIEW: 'OVERVIEW',
+  ADD_SERVICE: 'ADD_SERVICE',
+} as const;
 
-const enum ROOT_ROUTES {
-  PRIVATE_STACK = 'PrivateStack',
-  PUBLIC_STACK = 'PublicStack',
-  TAB_STACK = 'TabStack',
-}
+const ROOT_ROUTES = {
+  PRIVATE_STACK: 'PRIVATE_STACK',
+  PUBLIC_STACK: 'PUBLIC_STACK',
+  TAB_STACK: 'TAB_STACK',
+} as const;
 
-const enum PUBLIC_ROUTES {
-  SIGN_IN = 'SignIn',
-  SIGN_UP = 'SignUp',
-  INVITE_CODE = 'InviteCode',
-  FORGOT_PASSWORD = 'ForgotPassword',
-}
+const PUBLIC_ROUTES = {
+  SIGN_IN: 'SIGN_IN',
+  SIGN_UP: 'SIGN_UP',
+  INVITE_CODE: 'INVITE_CODE',
+  FORGOT_PASSWORD: 'FORGOT_PASSWORD',
+} as const;
 
-const enum BOTTOM_TAB_ROUTES {
-  HOME = 'HomeBottomTab',
-  CALENDAR = 'CalendarBottomTab',
-  NOTIFICATIONS = 'NotificationsBottomTab',
-  OVERVIEW = 'OverviewBottomTab',
-}
+const BOTTOM_TAB_ROUTES = {
+  HOME: 'HOME_BOTTOM_TAB',
+  CALENDAR: 'CALENDAR_BOTTOM_TAB',
+  NOTIFICATIONS: 'NOTIFICATIONS_BOTTOM_TAB',
+  OVERVIEW: 'OVERVIEW_BOTTOM_TAB',
+} as const;
 
 export { PRIVATE_ROUTES, ROOT_ROUTES, PUBLIC_ROUTES, BOTTOM_TAB_ROUTES };

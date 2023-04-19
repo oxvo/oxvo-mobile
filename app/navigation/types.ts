@@ -1,11 +1,12 @@
-import { CompositeNavigationProp, NavigationProp, RouteProp } from '@react-navigation/native';
-import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
 import {
   BOTTOM_TAB_ROUTES,
   PRIVATE_ROUTES,
   PUBLIC_ROUTES,
   ROOT_ROUTES,
 } from '@oxvo-mobile/constants/routes';
+
+import { CompositeNavigationProp, NavigationProp, RouteProp } from '@react-navigation/native';
+import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
 
 export type PublicStackParamList = {
   [PUBLIC_ROUTES.FORGOT_PASSWORD]: undefined;
