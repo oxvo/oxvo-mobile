@@ -7,10 +7,10 @@ import { PersistStorage, StorageValue, persist } from 'zustand/middleware';
 
 type PersistState = {
   token: string | null;
+  companySettings: InviteCodeResponse | null;
 };
 
 type AuthState = {
-  companySettings: InviteCodeResponse | null;
   isLogoutProcessing: boolean;
 };
 
@@ -65,7 +65,7 @@ const authStore = create<Auth>()(
       setIsLogoutProcessing: (isLogoutProcessing) => set({ isLogoutProcessing }),
     }),
     {
-      name: AUTH_STORAGE_KEYS.TOKEN,
+      name: AUTH_STORAGE_KEYS.CORE,
       storage,
       partialize: (state) => ({ token: state.token, companySettings: state.companySettings }),
     }

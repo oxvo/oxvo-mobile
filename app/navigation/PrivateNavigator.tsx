@@ -25,8 +25,12 @@ const CreateEvent = () => (
 );
 
 const PrivateNavigator = (): React.ReactElement => {
-  const { isLoading, data } = useMe();
-  console.log(data);
+  const { isLoading = true, data } = useMe();
+  console.log(
+    'isLoading isLoading -------------0------------------------------->',
+    isLoading,
+    data
+  );
   if (isLoading) {
     return <ActivityIndicator />;
   }

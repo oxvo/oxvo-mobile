@@ -3,13 +3,15 @@ import { Text, View } from 'react-native';
 
 import { PUBLIC_ROUTES } from '@oxvo-mobile/constants/routes';
 import useLogout from '@oxvo-mobile/domains/Auth/hooks/useLogout';
+import useAuthStore from '@oxvo-mobile/domains/Auth/store/useAuthStore';
 import { PublicStackParamList } from '@oxvo-mobile/navigation/types';
 import InviteCodeScreen from '@oxvo-mobile/screens/PublicScreens/Auth/InviteCode/InviteCode';
 import SignInScreen from '@oxvo-mobile/screens/PublicScreens/Auth/SignIn/SignIn';
 import SignUpScreen from '@oxvo-mobile/screens/PublicScreens/Auth/SignUp/SignUp';
-import authStore from '@oxvo-mobile/store/authStore';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import { useQueryClient } from '@tanstack/react-query';
 
 const PublicStack = createNativeStackNavigator<PublicStackParamList>();
 
@@ -20,10 +22,20 @@ const Auth = () => (
 );
 
 const PublicNavigator = (): React.ReactElement | null => {
-  const hasInviteCode = authStore((state) => !!state.companySettings?.code);
+  const hasInviteCode = useAuthStore((state) => !!state.companySettings?.code);
   const { isLogoutProcessing } = useLogout();
+  const queryClient = useQueryClient();
+
+  const purgeReactQueryCache = async () => {
+    await queryClient.cancelQueries();
+    queryClient.removeQueries();
+    await queryClient.invalidateQueries();
+    await queryClient.resetQueries();
+  };
 
   if (isLogoutProcessing) {
+    purgeReactQueryCache();
+
     return null;
   }
 

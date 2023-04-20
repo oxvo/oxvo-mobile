@@ -18,9 +18,7 @@ export type PublicStackParamList = {
 export type RootStackParamList = {
   [ROOT_ROUTES.PRIVATE_STACK]: undefined;
   [ROOT_ROUTES.PUBLIC_STACK]: undefined;
-  [PRIVATE_ROUTES.CREATE_EVENT]: undefined;
-  [PRIVATE_ROUTES.ADD_SERVICE]: undefined;
-  [PRIVATE_ROUTES.PROFILE]: undefined;
+  [ROOT_ROUTES.TAB_STACK]: undefined;
 };
 
 export type BottomTabParamList = {
@@ -58,6 +56,11 @@ export type BottomTabNavigationProp = CompositeNavigationProp<
 export type PrivateStackNavigationProp = CompositeNavigationProp<
   NativeStackNavigationProp<PrivateStackParamList>,
   BottomTabNavigationProp
+>;
+
+export type RootStackNavigationProp = CompositeNavigationProp<
+  NativeStackNavigationProp<RootStackParamList>,
+  NavigationProp<Record<string, object | undefined>>
 >;
 
 export type PublicStackRouteProp<T extends keyof PublicStackParamList> = RouteProp<

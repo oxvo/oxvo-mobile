@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 
 import { INVITE_CODE_SETTINGS } from '@oxvo-mobile/domains/Auth/constants/auth';
 import useInviteCode from '@oxvo-mobile/domains/Auth/queries/useInviteCode';
-import authStore from '@oxvo-mobile/store/authStore';
+import useAuthStore from '@oxvo-mobile/domains/Auth/store/useAuthStore';
 
 import { useFocusEffect } from '@react-navigation/native';
 
@@ -27,8 +27,7 @@ const InviteCodeScreen = () => {
     formState: { errors },
   } = useForm<FormData>({ resolver: zodResolver(inviteCodeSchema) });
 
-  const resetCompanySettings = authStore((state) => state.resetCompanySettings);
-  const companySettings = authStore((state) => state.companySettings);
+  const { resetCompanySettings, companySettings } = useAuthStore((state) => state);
 
   const { mutateAsync, isLoading } = useInviteCode();
 

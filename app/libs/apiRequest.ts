@@ -1,4 +1,4 @@
-import authStore from '@oxvo-mobile/store/authStore';
+import useAuthStore from '@oxvo-mobile/domains/Auth/store/useAuthStore';
 
 import axios, { AxiosError, AxiosRequestConfig, AxiosRequestHeaders } from 'axios';
 
@@ -14,12 +14,12 @@ const apiRequest = async <T>(axiosConfig: AxiosRequestConfig): Promise<T> => {
     timeout: 5000,
   });
 
-  console.log('authStore.getState().token -->', authStore.getState().token);
+  console.log('authStore.getState().token -->', useAuthStore.getState().token);
 
   // Add request interceptor
   axiosInstance.interceptors.request.use(
     (config) => {
-      const { token } = authStore.getState();
+      const { token } = useAuthStore.getState();
       if (token) {
         const newConfig = { ...config };
         newConfig.headers = {

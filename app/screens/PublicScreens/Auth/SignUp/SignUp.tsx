@@ -3,8 +3,8 @@ import React from 'react';
 import { PASSWORD_SETTINGS } from '@oxvo-mobile/domains/Auth/constants/auth';
 import useSignUp from '@oxvo-mobile/domains/Auth/queries/useSignUp';
 import { InviteCodeResponse } from '@oxvo-mobile/domains/Auth/services/inviteCode';
+import useAuthStore from '@oxvo-mobile/domains/Auth/store/useAuthStore';
 import { PublicStackNavigationProp } from '@oxvo-mobile/navigation/types';
-import authStore from '@oxvo-mobile/store/authStore';
 
 import { useNavigation } from '@react-navigation/native';
 
@@ -38,7 +38,7 @@ const SignUpScreen = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({ resolver: zodResolver(schema) });
-  const companySettings = authStore((state) => state.companySettings);
+  const companySettings = useAuthStore((state) => state.companySettings);
   const { goBack } = useNavigation<PublicStackNavigationProp>();
   const { mutateAsync, isLoading } = useSignUp();
   const handleSignUp = async (data: FormData) => {

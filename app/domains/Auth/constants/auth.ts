@@ -9,7 +9,7 @@ const INVITE_CODE_SETTINGS = {
 };
 
 const AUTH_STORAGE_KEYS = {
-  TOKEN: 'auth-token',
+  CORE: 'auth-token-and-company-settings',
 };
 
 export { PASSWORD_SETTINGS, AUTH_STORAGE_KEYS, INVITE_CODE_SETTINGS };

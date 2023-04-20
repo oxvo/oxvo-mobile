@@ -40,7 +40,7 @@ const fecthMe = async (): Promise<MeResponse> => {
     method: 'GET',
     url: ME_ENDPOINTS.FETCH_ME,
   });
-
+  await new Promise((resolve) => setTimeout(resolve, 2000));
   return MeResponseSchema.parse(response);
 };
 

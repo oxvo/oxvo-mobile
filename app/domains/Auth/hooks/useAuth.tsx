@@ -1,7 +1,7 @@
-import authStore from '@oxvo-mobile/store/authStore';
+import useAuthStore from '@oxvo-mobile/domains/Auth/store/useAuthStore';
 
 const useAuth = () => {
-  const isAuthenticated = authStore((state) => !!state.token);
+  const isAuthenticated = useAuthStore((state) => !!state.token);
 
   return { isAuthenticated };
 };

@@ -1,10 +1,10 @@
 import signUp, { SignUpPayload } from '@oxvo-mobile/domains/Auth/services/signUp';
-import authStore from '@oxvo-mobile/store/authStore';
+import useAuthStore from '@oxvo-mobile/domains/Auth/store/useAuthStore';
 
 import { useMutation } from '@tanstack/react-query';
 
 const useSignUp = () => {
-  const setToken = authStore((state) => state.setToken);
+  const setToken = useAuthStore((state) => state.setToken);
 
   return useMutation({
     mutationFn: async (payload: SignUpPayload) => {
