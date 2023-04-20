@@ -1,10 +1,14 @@
 import React from 'react';
 
+import { PRIVATE_ROUTES } from '@oxvo-mobile/constants/routes';
 import useLogout from '@oxvo-mobile/domains/Auth/hooks/useLogout';
 import useAuthStore from '@oxvo-mobile/domains/Auth/store/useAuthStore';
 import useHome from '@oxvo-mobile/domains/Home/queries/useHome';
 import useCurrentUserRole from '@oxvo-mobile/domains/Me/hooks/useCurrentUserRole';
 import useMe from '@oxvo-mobile/domains/Me/queries/useMe';
+import { PrivateStackNavigationProp } from '@oxvo-mobile/navigation/types';
+
+import { useNavigation } from '@react-navigation/native';
 
 import { Button, Text, View } from 'react-native-ui-lib';
 
@@ -16,6 +20,8 @@ const HomeScreen = () => {
     purgeCompanySettingsInStorage: true,
   });
 
+  const { navigate } = useNavigation<PrivateStackNavigationProp>();
+
   const { companySettings, isLogoutProcessing } = useAuthStore((state) => state);
 
   const currentUserRole = useCurrentUserRole();
@@ -24,6 +30,10 @@ const HomeScreen = () => {
   if (isLoadingMe) return <Text>Me Data is Loading...</Text>;
   if (isLoading) return <Text>Home Data is Loading...</Text>;
   if (isError) return <Text>Home Data has Error</Text>;
+
+  const navigateToProfileScreen = () => {
+    navigate(PRIVATE_ROUTES.PROFILE);
+  };
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -49,6 +59,9 @@ const HomeScreen = () => {
         Home Data: Sessions Length: {homeData?.sessions?.length}, Packages Length:{' '}
         {homeData?.packages?.length || 0}
       </Text>
+      <Button onPress={navigateToProfileScreen}>
+        <Text style={{ color: 'white' }}>navigateToProfileScreen</Text>
+      </Button>
     </View>
   );
 };

@@ -16,7 +16,7 @@ const RootNavigator = (): React.ReactElement => {
   console.log('isAuthenticated ----------->', isAuthenticated);
   return (
     <NavigationContainer>
-      <RootStack.Navigator screenOptions={{ headerShown: false, presentation: 'modal' }}>
+      <RootStack.Navigator screenOptions={{ headerShown: false }}>
         {isAuthenticated ? (
           <RootStack.Screen
             options={{ animation: 'none' }}

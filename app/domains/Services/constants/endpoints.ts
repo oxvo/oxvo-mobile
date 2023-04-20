@@ -1,16 +1,15 @@
-const SERVICE_ENDPOINTS = {
-  MY_PACKAGES: 'v1/services/my-packages',
+const SERVICES_ENDPOINTS = {
   ALL_SERVICES: 'v1/services',
   MY_SERVICES: 'v1/services/my-services',
 };
 
-const buildServiceEnpoints = {
+const buildServicesEnpoints = {
   addService: (serviceId: number) => `v1/services/my-services/${serviceId}`,
 };
 
-const ServiceEndpoints = {
-  ...SERVICE_ENDPOINTS,
-  ...buildServiceEnpoints,
+const ServicesEndpoints = {
+  ...SERVICES_ENDPOINTS,
+  ...buildServicesEnpoints,
 };
 
-export default ServiceEndpoints;
+export default ServicesEndpoints;

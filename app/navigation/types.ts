@@ -34,6 +34,7 @@ export type PrivateStackParamList = {
   [PRIVATE_ROUTES.EVENT_DETAIL]: { eventId: string };
   [PRIVATE_ROUTES.CREATE_EVENT]: undefined;
   [PRIVATE_ROUTES.PROFILE]: undefined;
+  [PRIVATE_ROUTES.PROFILE_HOME]: undefined;
   [PRIVATE_ROUTES.ACCOUNT_SETTINGS]: undefined;
   [PRIVATE_ROUTES.CHANGE_PASSWORD]: undefined;
   [PRIVATE_ROUTES.CALENDAR]: undefined;

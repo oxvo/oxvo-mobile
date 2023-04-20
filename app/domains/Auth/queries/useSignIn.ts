@@ -4,16 +4,16 @@ import useAuthStore from '@oxvo-mobile/domains/Auth/store/useAuthStore';
 import { useMutation } from '@tanstack/react-query';
 
 const useSignIn = () => {
-  const setToken = useAuthStore((state) => state.setToken);
+  const setTokens = useAuthStore((state) => state.setTokens);
 
   return useMutation({
     mutationFn: async ({ email, password }: SignInPayload) => {
-      const { accessToken } = await signIn({ email, password });
+      const { accessToken, refreshToken } = await signIn({ email, password });
 
-      return accessToken;
+      return { accessToken, refreshToken };
     },
     onSuccess: (data) => {
-      setToken(data);
+      setTokens(data);
     },
   });
 };

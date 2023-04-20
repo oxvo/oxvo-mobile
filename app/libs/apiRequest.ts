@@ -2,6 +2,12 @@ import useAuthStore from '@oxvo-mobile/domains/Auth/store/useAuthStore';
 
 import axios, { AxiosError, AxiosRequestConfig, AxiosRequestHeaders } from 'axios';
 
+// eslint-disable-next-line @typescript-eslint/require-await
+async function refreshToken() {
+  // ...
+  console.log('called refresh token');
+}
+
 interface ApiResponse<T> {
   data: T;
 }
@@ -14,17 +20,15 @@ const apiRequest = async <T>(axiosConfig: AxiosRequestConfig): Promise<T> => {
     timeout: 5000,
   });
 
-  console.log('authStore.getState().token -->', useAuthStore.getState().token);
-
   // Add request interceptor
   axiosInstance.interceptors.request.use(
     (config) => {
-      const { token } = useAuthStore.getState();
-      if (token) {
+      const { accessToken } = useAuthStore.getState();
+      if (accessToken) {
         const newConfig = { ...config };
         newConfig.headers = {
           ...config.headers,
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${accessToken}`,
         } as AxiosRequestHeaders;
 
         return newConfig;
@@ -42,22 +46,27 @@ const apiRequest = async <T>(axiosConfig: AxiosRequestConfig): Promise<T> => {
     (response) =>
       // Do something with response data
       response,
-    (error: AxiosError) => {
-      // Do something with response error
-      if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
-        // console.log('AxiosError', error.response.data);
-        // console.log(error.response.status);
-        // console.log(error.response.headers);
-      } else if (error.request) {
-        // The request was made but no response was received
-        // console.log(error.request);
-      } else {
-        // Something happened in setting up the request that triggered an Error
-        // console.log('Error', error.message);
+    async (error: AxiosError | any) => {
+      const originalRequest = error.config;
+
+      if (error.response?.status === 401 && !originalRequest?._retry) {
+        // TODO: The api should return a 401 when the refresh token is expired or invalid access token
+        originalRequest._retry = true;
+
+        try {
+          await refreshToken();
+          const { accessToken } = useAuthStore.getState();
+
+          if (accessToken && originalRequest) {
+            originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+          }
+
+          return await axiosInstance(originalRequest);
+        } catch (refreshError) {
+          return Promise.reject(error);
+        }
       }
-      //   console.log(error.config);
+
       return Promise.reject(error);
     }
   );

@@ -8,7 +8,7 @@ type UseLogoutProps = {
 };
 
 const useLogout = ({ purgeCompanySettingsInStorage = false }: UseLogoutProps = {}) => {
-  const { isLogoutProcessing, setIsLogoutProcessing, removeToken, resetCompanySettings } =
+  const { isLogoutProcessing, setIsLogoutProcessing, removeTokens, resetCompanySettings } =
     useAuthStore((state) => state);
 
   const onLogout = async () => {
@@ -19,7 +19,7 @@ const useLogout = ({ purgeCompanySettingsInStorage = false }: UseLogoutProps = {
 
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      removeToken();
+      removeTokens();
 
       if (purgeCompanySettingsInStorage) {
         resetCompanySettings();

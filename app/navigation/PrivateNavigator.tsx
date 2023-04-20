@@ -25,18 +25,14 @@ const CreateEvent = () => (
 );
 
 const PrivateNavigator = (): React.ReactElement => {
-  const { isLoading = true, data } = useMe();
-  console.log(
-    'isLoading isLoading -------------0------------------------------->',
-    isLoading,
-    data
-  );
+  const { isLoading } = useMe();
+
   if (isLoading) {
     return <ActivityIndicator />;
   }
 
   return (
-    <PrivateStack.Navigator screenOptions={{ headerShown: false, presentation: 'modal' }}>
+    <PrivateStack.Navigator screenOptions={{ headerShown: false }}>
       <PrivateStack.Screen name={ROOT_ROUTES.TAB_STACK} component={BottomTabNavigator} />
       <PrivateStack.Screen name={PRIVATE_ROUTES.CREATE_EVENT} component={CreateEvent} />
       <PrivateStack.Screen name={PRIVATE_ROUTES.ADD_SERVICE} component={AddService} />
