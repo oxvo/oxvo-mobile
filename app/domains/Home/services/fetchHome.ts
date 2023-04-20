@@ -1,4 +1,4 @@
-import { CompanyServiceType, ReplyStatus } from '@oxvo-mobile/constants/global';
+import { CompanyServiceType, SessionStatusType } from '@oxvo-mobile/constants/oxvo';
 import HOME_ENDPOINTS from '@oxvo-mobile/domains/Home/constants/endpoints';
 import apiRequest from '@oxvo-mobile/libs/apiRequest';
 
@@ -38,8 +38,8 @@ const SessionSchema = z.object({
   companyService: CompanyServiceSchema,
   note: z.string().nullable(),
   isActive: z.boolean(),
-  staffReply: z.nativeEnum(ReplyStatus),
-  clientReply: z.nativeEnum(ReplyStatus),
+  staffReply: z.nativeEnum(SessionStatusType),
+  clientReply: z.nativeEnum(SessionStatusType),
   updatedAt: z.string(),
   createdAt: z.string(),
 });

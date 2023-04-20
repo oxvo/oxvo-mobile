@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { UserRoles } from '@oxvo-mobile/constants/global';
+import { UserRoles } from '@oxvo-mobile/constants/oxvo';
 
 import MyClients from './MyNetwork/MyClients/MyClients';
 import MyStaffs from './MyNetwork/MyStaffs/MyStaffs';

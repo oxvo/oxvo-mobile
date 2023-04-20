@@ -1,7 +1,7 @@
 import React from 'react';
 
 import TabView from '@oxvo-mobile/components/TabView/TabView';
-import { UserRoles } from '@oxvo-mobile/constants/global';
+import { UserRoles } from '@oxvo-mobile/constants/oxvo';
 import useMe from '@oxvo-mobile/domains/Me/queries/useMe';
 import { MeResponse } from '@oxvo-mobile/domains/Me/services/fetchMe';
 
