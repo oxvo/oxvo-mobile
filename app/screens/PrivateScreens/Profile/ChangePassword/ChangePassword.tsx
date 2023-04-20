@@ -40,7 +40,7 @@ const ChangePasswordScreen = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({ resolver: zodResolver(formSchema) });
-  const { mutateAsync } = useChangePassword();
+  const { mutateAsync, isLoading } = useChangePassword();
   const handleChangePassword = async (data: FormData) => {
     // Handle change password logic here
     await mutateAsync(data);
@@ -100,6 +100,7 @@ const ChangePasswordScreen = () => {
       </View>
       <Button
         label="Change Password"
+        disable={isLoading}
         backgroundColor="green"
         borderRadius={10}
         paddingV-15
