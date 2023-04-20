@@ -11,20 +11,17 @@ const AddServiceResponseSchema = z.object({
   updatedAt: z.string(),
 });
 
-const AddServicePayloadSchema = z.object({
-  serviceId: z.number(),
-});
+const AddServicePayloadSchema = z.number();
 
 export type AddServicePayload = z.infer<typeof AddServicePayloadSchema>;
 export type AddServiceResponse = z.infer<typeof AddServiceResponseSchema>;
 
-const addService = async (payload: AddServicePayload): Promise<AddServiceResponse> => {
-  const validatedPayload = AddServicePayloadSchema.parse(payload);
+const addService = async (serviceId: AddServicePayload): Promise<AddServiceResponse> => {
+  const validatedPayload = AddServicePayloadSchema.parse(serviceId);
 
   const response = await apiRequest<AddServiceResponse>({
     method: 'POST',
-    url: ServicesEndpoints.ADD_SERVICE,
-    data: validatedPayload,
+    url: ServicesEndpoints.addService(validatedPayload),
   });
 
   return AddServiceResponseSchema.parse(response);

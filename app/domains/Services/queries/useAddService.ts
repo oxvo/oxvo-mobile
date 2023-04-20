@@ -7,10 +7,10 @@ import { useMutation } from '@tanstack/react-query';
 
 const useAddService = () => {
   return useMutation({
-    mutationFn: async (payload: AddServicePayload) => {
-      const data: AddServiceResponse = await addService(payload);
+    mutationFn: async (serviceId: AddServicePayload) => {
+      const addServiceData: AddServiceResponse = await addService(serviceId);
 
-      return data;
+      return addServiceData;
     },
     onSuccess: (data) => {
       console.log(data);
