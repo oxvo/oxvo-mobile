@@ -4,7 +4,7 @@ enum UserRoles {
   OWNER = 'OWNER',
   ADMIN = 'ADMIN',
 }
-
+// TODO: we might think need move this to the session domain
 enum SessionStatusType {
   JOIN = 'JOIN',
   AWAITING = 'AWAITING',
