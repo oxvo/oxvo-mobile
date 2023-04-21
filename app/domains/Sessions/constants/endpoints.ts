@@ -28,14 +28,10 @@ const sessionEndpointFunctions = {
      * PATCH /v1/sessions/:sessionId/update-reply?updateReply=sessionReply
      */
 
-    const url = new URL(SESSION_ENDPOINTS.UPDATE_SESSION_REPLY);
-    url.pathname = `/${sessionId}`;
-    url.pathname = '/update-reply';
+    const path = `${SESSION_ENDPOINTS.UPDATE_SESSION_REPLY}/${sessionId}/update-reply`;
+    const queryParams = new URLSearchParams({ updateReply: sessionReply }).toString();
 
-    const params = new URLSearchParams({ updateReply: sessionReply });
-    url.search = params.toString();
-
-    return url.toString();
+    return `${path}?${queryParams}`;
   },
   updateSession: (sessionId: string) => `${SESSION_ENDPOINTS.UPDATE_SESSION}/${sessionId}`,
   filterableSessions: (status?: FilteredSessionStatusType) => {
@@ -45,14 +41,14 @@ const sessionEndpointFunctions = {
      * GET /v1/sessions?status=FilteredSessionStatusType
      */
 
-    const url = new URL(SESSION_ENDPOINTS.FILTERABLE_SESSIONS);
+    const path = SESSION_ENDPOINTS.FILTERABLE_SESSIONS;
 
     if (status) {
-      const params = new URLSearchParams({ status });
-      url.search = params.toString();
+      const queryParams = new URLSearchParams({ status }).toString();
+      return `${path}?${queryParams}`;
     }
 
-    return url.toString();
+    return path;
   },
   sessionDetail: (sessionId: string) => `${SESSION_ENDPOINTS.SESSION_DETAIL}/${sessionId}`,
 };
