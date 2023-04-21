@@ -3,6 +3,7 @@ import { View } from 'react-native';
 
 import { BOTTOM_TAB_ROUTES } from '@oxvo-mobile/constants/routes';
 import { BottomTabParamList } from '@oxvo-mobile/navigation/types';
+import Calendar from '@oxvo-mobile/screens/PrivateScreens/Calendar/Calendar';
 import HomeScreen from '@oxvo-mobile/screens/PrivateScreens/Home/Home';
 import OverviewScreen from '@oxvo-mobile/screens/PrivateScreens/Overview/Overview';
 
@@ -12,11 +13,12 @@ import { Text } from 'react-native-ui-lib';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
-const Events = () => (
-  <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-    <Text>Events Screen</Text>
-  </View>
-);
+//Calendar Screeni girdiği için Events Componentini yorum satırına aldım...
+// const Events = () => (
+//   <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+//     <Text>Events Screen</Text>
+//   </View>
+// );
 
 const Notifications = () => (
   <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -43,7 +45,7 @@ const BottomTabNavigator = (): React.ReactElement => (
         },
       }}
     />
-    <BottomTab.Screen name={BOTTOM_TAB_ROUTES.CALENDAR} component={Events} />
+    <BottomTab.Screen name={BOTTOM_TAB_ROUTES.CALENDAR} component={Calendar} />
     <BottomTab.Screen name={BOTTOM_TAB_ROUTES.NOTIFICATIONS} component={Notifications} />
     <BottomTab.Screen name={BOTTOM_TAB_ROUTES.OVERVIEW} component={OverviewScreen} />
   </BottomTab.Navigator>
