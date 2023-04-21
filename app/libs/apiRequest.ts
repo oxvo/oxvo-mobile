@@ -1,12 +1,7 @@
+// import refreshTokenService from '@oxvo-mobile/domains/Auth/services/refreshToken';
 import useAuthStore from '@oxvo-mobile/domains/Auth/store/useAuthStore';
 
 import axios, { AxiosError, AxiosRequestConfig, AxiosRequestHeaders } from 'axios';
-
-// eslint-disable-next-line @typescript-eslint/require-await
-async function refreshToken() {
-  // ...
-  console.log('called refresh token');
-}
 
 interface ApiResponse<T> {
   data: T;
@@ -47,25 +42,39 @@ const apiRequest = async <T>(axiosConfig: AxiosRequestConfig): Promise<T> => {
       // Do something with response data
       response,
     async (error: AxiosError | any) => {
-      const originalRequest = error.config;
+      const { onLogout } = useAuthStore.getState();
 
-      if (error.response?.status === 401 && !originalRequest?._retry) {
-        // TODO: The api should return a 401 when the refresh token is expired or invalid access token
-        originalRequest._retry = true;
-
-        try {
-          await refreshToken();
-          const { accessToken } = useAuthStore.getState();
-
-          if (accessToken && originalRequest) {
-            originalRequest.headers.Authorization = `Bearer ${accessToken}`;
-          }
-
-          return await axiosInstance(originalRequest);
-        } catch (refreshError) {
-          return Promise.reject(error);
-        }
+      if (error.response?.status === 401) {
+        onLogout();
       }
+      /** 
+        const originalRequest = error.config;
+        
+        if (error.response?.status === 401 && !originalRequest._retry) {
+        
+          originalRequest._retry = true;
+
+          try {
+            const { refreshToken, setTokens } = useAuthStore.getState();
+
+            if (refreshToken) {
+              const response = await refreshTokenService({ refreshToken });
+
+              setTokens(response);
+
+              if (response.accessToken && originalRequest) {
+                originalRequest.headers.Authorization = `Bearer ${response.accessToken}`;
+              }
+
+              return await axiosInstance(originalRequest);
+            }
+
+            return await Promise.reject(error);
+          } catch (refreshError) {
+            return Promise.reject(error);
+          } 
+        }
+      */
 
       return Promise.reject(error);
     }

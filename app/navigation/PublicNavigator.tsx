@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Text, View } from 'react-native';
 
 import { PUBLIC_ROUTES } from '@oxvo-mobile/constants/routes';
-import useLogout from '@oxvo-mobile/domains/Auth/hooks/useLogout';
 import useAuthStore from '@oxvo-mobile/domains/Auth/store/useAuthStore';
 import { PublicStackParamList } from '@oxvo-mobile/navigation/types';
 import InviteCodeScreen from '@oxvo-mobile/screens/PublicScreens/Auth/InviteCode/InviteCode';
@@ -23,7 +22,7 @@ const Auth = () => (
 
 const PublicNavigator = (): React.ReactElement | null => {
   const hasInviteCode = useAuthStore((state) => !!state.companySettings?.code);
-  const { isLogoutProcessing } = useLogout();
+  const { isLogoutProcessing } = useAuthStore((state) => state);
   const queryClient = useQueryClient();
 
   const purgeReactQueryCache = async () => {
