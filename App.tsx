@@ -1,5 +1,7 @@
 import 'react-native-gesture-handler';
 
+import * as Sentry from '@sentry/react-native';
+
 import React, { useCallback, useEffect, useState } from 'react';
 
 import queryClient from '@oxvo-mobile/libs/queryClient';
@@ -15,12 +17,20 @@ import Toast from 'react-native-toast-message';
 
 import { GestureHandlerRootView } from './App.styled';
 
+const sentryDSN = process.env.SENTRY_DSN;
+
 SplashScreen.preventAutoHideAsync();
 
 const App = () => {
   const [appIsReady, setAppIsReady] = useState(false);
 
   useEffect(() => {
+    Sentry.init({ 
+      // dsn will replace env file
+      dsn: sentryDSN,
+      tracesSampleRate: 1.0 
+    });
+
     async function prepare() {
       try {
         await Font.loadAsync({ Poppins_400Regular, Poppins_600SemiBold });
