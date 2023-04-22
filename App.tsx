@@ -17,6 +17,15 @@ import { GestureHandlerRootView } from './App.styled';
 
 SplashScreen.preventAutoHideAsync();
 
+import * as Sentry from '@sentry/react-native';
+
+Sentry.init({
+  dsn: 'https://03f28b55faad46ef952217d1fa8af196@o4505053006069760.ingest.sentry.io/4505053013278720',
+  tracesSampleRate: 1.0,
+});
+
+throw new Error("My first Sentry error!");
+
 const App = () => {
   const [appIsReady, setAppIsReady] = useState(false);
 
