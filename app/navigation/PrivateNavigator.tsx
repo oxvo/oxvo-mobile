@@ -1,7 +1,5 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
 
-import ActivityIndicator from '@oxvo-mobile/components/ActivityIndicator/ActivityIndicator';
 import { PRIVATE_ROUTES, ROOT_ROUTES } from '@oxvo-mobile/constants/routes';
 import useMe from '@oxvo-mobile/domains/Me/queries/useMe';
 import BottomTabNavigator from '@oxvo-mobile/navigation/BottomTabNavigator';
@@ -9,6 +7,8 @@ import ProfileNavigator from '@oxvo-mobile/navigation/ProfileNavigator';
 import { PrivateStackParamList } from '@oxvo-mobile/navigation/types';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import { Colors, LoaderScreen, Text, View } from 'react-native-ui-lib';
 
 const PrivateStack = createNativeStackNavigator<PrivateStackParamList>();
 
@@ -28,7 +28,11 @@ const PrivateNavigator = (): React.ReactElement => {
   const { isLoading } = useMe();
 
   if (isLoading) {
-    return <ActivityIndicator />;
+    return (
+      <View flex bg-orange70 center>
+        <LoaderScreen message="Yükleniyor..." color={Colors.$backgroundDangerHeavy} />
+      </View>
+    );
   }
 
   return (
