@@ -18,7 +18,7 @@ export type PublicStackParamList = {
 export type RootStackParamList = {
   [ROOT_ROUTES.PRIVATE_STACK]: undefined;
   [ROOT_ROUTES.PUBLIC_STACK]: undefined;
-  [ROOT_ROUTES.TAB_STACK]: undefined;
+  [ROOT_ROUTES.BOTTOM_TAB_STACK]: undefined;
 };
 
 export type BottomTabParamList = {
@@ -30,18 +30,22 @@ export type BottomTabParamList = {
 
 export type PrivateStackParamList = {
   [PRIVATE_ROUTES.HOME]: undefined;
-  [PRIVATE_ROUTES.EVENTS]: undefined;
-  [PRIVATE_ROUTES.EVENT_DETAIL]: { eventId: string };
-  [PRIVATE_ROUTES.CREATE_EVENT]: undefined;
-  [PRIVATE_ROUTES.PROFILE]: undefined;
-  [PRIVATE_ROUTES.PROFILE_HOME]: undefined;
-  [PRIVATE_ROUTES.ACCOUNT_SETTINGS]: undefined;
-  [PRIVATE_ROUTES.CHANGE_PASSWORD]: undefined;
+
+  [PRIVATE_ROUTES.SESSIONS.SESSIONS_NAVIGATOR]: { screen?: keyof PrivateStackParamList };
+  [PRIVATE_ROUTES.SESSIONS.SESSIONS_HOME]: undefined;
+  [PRIVATE_ROUTES.SESSIONS.SESSION_DETAIL]: undefined;
+  [PRIVATE_ROUTES.SESSIONS.CREATE_SESSION]: undefined;
+
+  [PRIVATE_ROUTES.PROFILE.PROFILE_NAVIGATOR]: { screen?: keyof PrivateStackParamList };
+  [PRIVATE_ROUTES.PROFILE.PROFILE_HOME]: undefined;
+  [PRIVATE_ROUTES.PROFILE.ACCOUNT_SETTINGS]: undefined;
+  [PRIVATE_ROUTES.PROFILE.CHANGE_PASSWORD]: undefined;
+
   [PRIVATE_ROUTES.CALENDAR]: undefined;
   [PRIVATE_ROUTES.NOTIFICATIONS]: undefined;
   [PRIVATE_ROUTES.OVERVIEW]: undefined;
   [PRIVATE_ROUTES.ADD_SERVICE]: undefined;
-  [ROOT_ROUTES.TAB_STACK]: undefined;
+  [ROOT_ROUTES.BOTTOM_TAB_STACK]: undefined;
 };
 
 export type PublicStackNavigationProp = CompositeNavigationProp<

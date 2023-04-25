@@ -21,13 +21,13 @@ export const TitlesContainer = styled.ScrollView.attrs(() => ({
 }))`
   flex-direction: row;
   margin-bottom: 8px;
-  padding-horizontal: 24px;
+  padding-horizontal: 0px;
 `;
 
 export const ViewContainer = styled.View`
   display: flex;
   flex-direction: row;
-  padding-horizontal: 24px;
+  padding-horizontal: 0px;
   width: ${SCREEN_WIDTH}px;
 `;
 

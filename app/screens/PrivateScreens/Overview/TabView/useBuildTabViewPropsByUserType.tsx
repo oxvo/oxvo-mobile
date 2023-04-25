@@ -1,5 +1,6 @@
 import React from 'react';
 
+import TabViewKey from '@oxvo-mobile/components/TabView/TabViewKey.types';
 import { UserRoles } from '@oxvo-mobile/constants/oxvo';
 
 import MyClients from './MyNetwork/MyClients/MyClients';
@@ -8,7 +9,7 @@ import MyPackages from './MyUpdates/MyPackages/MyPackages';
 import MyServices from './MyUpdates/MyServices/MyServices';
 
 type TabViewItem = {
-  key: string;
+  key: TabViewKey;
   title: string;
   onPress?: () => void;
 };
@@ -22,20 +23,23 @@ type BuildTabViewPropsByUserTypeParams = {
   userType: UserRoles;
 };
 
-const buildTabViewPropsByUserType = ({
+const useBuildTabViewPropsByUserType = ({
   userType,
 }: BuildTabViewPropsByUserTypeParams): TabViewProps => {
   const CLIENT_ROUTES: TabViewItem[] = [
     {
-      key: 'my_packages',
+      key: TabViewKey.MY_PACKAGES,
       title: 'My Packages',
       onPress: () => {
         console.log('My Packages');
       },
     },
     {
-      key: 'my_staffs',
+      key: TabViewKey.MY_STAFFS,
       title: 'My Staffs',
+      onPress: () => {
+        console.log('My Staffs');
+      },
     },
   ];
 
@@ -43,15 +47,18 @@ const buildTabViewPropsByUserType = ({
 
   const STAFF_ROUTES: TabViewItem[] = [
     {
-      key: 'my_services',
+      key: TabViewKey.MY_SERVICES,
       title: 'My Services',
       onPress: () => {
-        console.log('My Packages');
+        console.log('My Services');
       },
     },
     {
-      key: 'my_clients',
+      key: TabViewKey.MY_CLIENTS,
       title: 'My Clients',
+      onPress: () => {
+        console.log('My Clients');
+      },
     },
   ];
 
@@ -76,4 +83,4 @@ const buildTabViewPropsByUserType = ({
   }
 };
 
-export default buildTabViewPropsByUserType;
+export default useBuildTabViewPropsByUserType;

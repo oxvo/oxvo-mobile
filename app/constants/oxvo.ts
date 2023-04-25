@@ -1,8 +1,6 @@
 enum UserRoles {
   STAFF = 'STAFF',
   CLIENT = 'CLIENT',
-  OWNER = 'OWNER',
-  ADMIN = 'ADMIN',
 }
 // TODO: we might think need move this to the session domain
 enum SessionStatusType {

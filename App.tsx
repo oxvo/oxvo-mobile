@@ -12,6 +12,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
+import { Colors, Spacings, Typography } from 'react-native-ui-lib';
 
 import { GestureHandlerRootView } from './App.styled';
 
@@ -25,8 +26,19 @@ const App = () => {
       try {
         await Font.loadAsync({ Poppins_400Regular, Poppins_600SemiBold });
 
-        // eslint-disable-next-line no-promise-executor-return
-        await new Promise((resolve) => setTimeout(resolve, 0));
+        Colors.loadColors({
+          pink: '#FF69B4',
+          gold: '#FFD700',
+        });
+
+        Typography.loadTypographies({
+          h1: { fontSize: 22, fontWeight: '300', lineHeight: 0 },
+          h2: { fontSize: 46, fontWeight: '300', lineHeight: 64 },
+        });
+
+        Spacings.loadSpacings({
+          // page: isSmallScreen ? 16 : 20,
+        });
       } catch (e) {
         console.warn('An error occurred while preparing the app:', e);
       } finally {

@@ -5,12 +5,12 @@ import { UserRoles } from '@oxvo-mobile/constants/oxvo';
 import useMe from '@oxvo-mobile/domains/Me/queries/useMe';
 import { MeResponse } from '@oxvo-mobile/domains/Me/services/fetchMe';
 
-import buildTabViewPropsByUserType from './TabView/buildTabViewPropsByUserType.helpers';
+import useBuildTabViewPropsByUserType from './TabView/useBuildTabViewPropsByUserType';
 
 const OverviewScreen = (): JSX.Element => {
   const { data } = useMe();
 
-  const tabViewProps = buildTabViewPropsByUserType({
+  const tabViewProps = useBuildTabViewPropsByUserType({
     userType: (data as MeResponse).role as UserRoles,
   });
 

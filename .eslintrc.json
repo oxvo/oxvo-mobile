@@ -57,10 +57,7 @@
     "react-native/no-color-literals": "off",
     "react-hooks/exhaustive-deps": "warn",
     "import/prefer-default-export": "off",
-    "import/no-extraneous-dependencies": [
-      "error",
-      { "devDependencies": ["**/*.test.{ts,tsx}", "**/*.stories.{ts,tsx}", "jest.setup.{ts,tsx}"] }
-    ],
+    "import/no-extraneous-dependencies": "off",
     "no-console": ["warn", { "allow": ["warn", "error"] }],
     "no-unused-vars": "off",
     "no-underscore-dangle": "off",

@@ -16,10 +16,16 @@ const AccountSettings = () => (
 const ProfileStack = createNativeStackNavigator();
 
 const ProfileNavigator = () => (
-  <ProfileStack.Navigator initialRouteName={PRIVATE_ROUTES.PROFILE_HOME}>
-    <ProfileStack.Screen name={PRIVATE_ROUTES.PROFILE_HOME} component={ProfileHomeScreen} />
-    <ProfileStack.Screen name={PRIVATE_ROUTES.CHANGE_PASSWORD} component={ChangePasswordScreen} />
-    <ProfileStack.Screen name={PRIVATE_ROUTES.ACCOUNT_SETTINGS} component={AccountSettings} />
+  <ProfileStack.Navigator initialRouteName={PRIVATE_ROUTES.PROFILE.PROFILE_HOME}>
+    <ProfileStack.Screen name={PRIVATE_ROUTES.PROFILE.PROFILE_HOME} component={ProfileHomeScreen} />
+    <ProfileStack.Screen
+      name={PRIVATE_ROUTES.PROFILE.CHANGE_PASSWORD}
+      component={ChangePasswordScreen}
+    />
+    <ProfileStack.Screen
+      name={PRIVATE_ROUTES.PROFILE.ACCOUNT_SETTINGS}
+      component={AccountSettings}
+    />
   </ProfileStack.Navigator>
 );
 

@@ -1,6 +1,10 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { ScrollView } from 'react-native';
 
+import useTabViewStore from '@oxvo-mobile/components/TabView/useTabViewStore';
+
+import { useIsFocused } from '@react-navigation/native';
+
 import Animated, {
   scrollTo,
   useAnimatedRef,
@@ -35,10 +39,11 @@ type Props<T extends Route> = {
 };
 
 const TabView = <T extends Route>({ routes = [], views = [], initialRoute }: Props<T>) => {
+  const { setCurrentTabViewKey } = useTabViewStore();
   const scrollViewRef = useRef<ScrollView>(null);
   const visibleRoutes = routes.filter((r) => !r.hide);
   const visibleViews = views.filter((_, index) => !routes[index].hide);
-
+  const isFocused = useIsFocused();
   const currentRoute = initialRoute || visibleRoutes?.[0] || null;
   const currentIndex = visibleRoutes.map((r) => r.key).indexOf(currentRoute?.key);
   const [activeRoute, setActiveRoute] = useState(currentRoute);
@@ -57,13 +62,30 @@ const TabView = <T extends Route>({ routes = [], views = [], initialRoute }: Pro
         const newIndex = visibleRoutes.map((r) => r.key).indexOf(route.key);
         activeRouteIndex.value = newIndex;
         setActiveRoute(route);
+        setCurrentTabViewKey(route.key);
         scroll.value = SCREEN_WIDTH * newIndex;
       }
     },
-    [activeRouteIndex, visibleRoutes, scroll]
+    [visibleRoutes, activeRouteIndex, setCurrentTabViewKey, scroll]
   );
 
   useEffect(() => {
+    if (isFocused) {
+      setCurrentTabViewKey(activeRoute?.key);
+    }
+    return () => {
+      if (isFocused) {
+        setCurrentTabViewKey(null);
+      }
+    };
+  }, [activeRoute?.key, isFocused, setCurrentTabViewKey]);
+
+  useEffect(() => {
+    setCurrentTabViewKey(activeRoute?.key);
+  }, [activeRoute, setCurrentTabViewKey]);
+
+  useEffect(() => {
+    // setCurrentTabViewKey(initialRoute?.key);
     if (initialRoute && initialRoute.key !== activeRoute.key) {
       handleSetTab(initialRoute);
     }
