@@ -28,6 +28,8 @@ export enum HeaderLeftActionType {
   PROFILE = 'profile',
 }
 
+// TODO: change component name to HeaderLeftAction
+
 type HeaderLeftActionProps = {
   action?: HeaderLeftActionType;
   // eslint-disable-next-line react/require-default-props
@@ -42,6 +44,7 @@ const HeaderProfile = ({ action, navigateRoute }: HeaderLeftActionProps) => {
   if (HeaderLeftActionType.GO_BACK === action) {
     return (
       <TouchableOpacity
+        hitSlop={{ top: 15, bottom: 15, left: 20, right: 20 }}
         onPress={() => {
           if (navigateRoute) {
             navigate(navigateRoute);
@@ -61,7 +64,7 @@ const HeaderProfile = ({ action, navigateRoute }: HeaderLeftActionProps) => {
   };
 
   return (
-    <TouchableOpacity onPress={handlePress}>
+    <TouchableOpacity hitSlop={{ top: 15, bottom: 15, left: 20, right: 20 }} onPress={handlePress}>
       <HeaderProfileContainer>
         <RoundedImage />
         <HeaderProfileText>Profile</HeaderProfileText>

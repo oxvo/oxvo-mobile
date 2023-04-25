@@ -21,7 +21,7 @@ const BottomTab = createBottomTabNavigator<BottomTabParamList & PrivateStackPara
 
 const BottomTabNavigator = (): React.ReactElement => {
   return (
-    <BottomTab.Navigator initialRouteName={BOTTOM_TAB_ROUTES.HOME}>
+    <BottomTab.Navigator backBehavior="history" initialRouteName={BOTTOM_TAB_ROUTES.HOME}>
       <BottomTab.Screen
         name={PRIVATE_ROUTES.SESSIONS.SESSIONS_NAVIGATOR}
         component={SessionsNavigator}

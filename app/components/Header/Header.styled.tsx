@@ -22,16 +22,37 @@ const Button = styled.Pressable`
   min-height: 28px;
 `;
 
+const LeftElement = styled.View`
+  flex: 1;
+  align-items: flex-start;
+  justify-content: center;
+`;
+
+const MiddleElement = styled.View`
+  flex: 1;
+  align-items: center;
+`;
+
+const RightElement = styled.View`
+  flex: 1;
+  align-items: flex-end;
+  justify-content: center;
+`;
+
 const HeaderContainer = styled((props) => {
   const { top } = useSafeAreaInsets();
   return <View {...props} style={[props.style, { paddingTop: top + SAFE_AREA_TOP_MARGIN }]} />;
 })`
   padding: 24px;
+
   padding-bottom: 8px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
+
+  justify-content: space-between;
+  height: 110px;
+
   z-index: 3;
   background-color: #fdfdfd;
   border-bottom-width: 1px;
@@ -89,4 +110,7 @@ export {
   HeaderContainer,
   HeaderImage,
   HeaderTitle,
+  RightElement,
+  LeftElement,
+  MiddleElement,
 };

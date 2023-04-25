@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { Text, View } from 'react-native';
 
-import { PRIVATE_ROUTES, ROOT_ROUTES } from '@oxvo-mobile/constants/routes';
-import BottomTabNavigator from '@oxvo-mobile/navigation/BottomTabNavigator';
+import Container from '@oxvo-mobile/components/Containers/Private/Container.styled';
+import { SessionsNavigatorHeader } from '@oxvo-mobile/components/Header/Header';
+import { PRIVATE_ROUTES } from '@oxvo-mobile/constants/routes';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -28,12 +29,18 @@ const ProfileStack = createNativeStackNavigator();
 
 const SessionsNavigator = () => (
   <ProfileStack.Navigator initialRouteName={PRIVATE_ROUTES.SESSIONS.SESSIONS_HOME}>
-    <ProfileStack.Screen name={ROOT_ROUTES.BOTTOM_TAB_STACK} component={BottomTabNavigator} />
-
     <ProfileStack.Screen
+      options={{
+        header: () => <SessionsNavigatorHeader route={PRIVATE_ROUTES.SESSIONS.SESSIONS_HOME} />,
+      }}
       name={PRIVATE_ROUTES.SESSIONS.SESSIONS_HOME}
-      component={SessionsHomeScreen}
-    />
+    >
+      {() => (
+        <Container>
+          <SessionsHomeScreen />
+        </Container>
+      )}
+    </ProfileStack.Screen>
     <ProfileStack.Screen
       name={PRIVATE_ROUTES.SESSIONS.CREATE_SESSION}
       component={CreateSessionScreen}

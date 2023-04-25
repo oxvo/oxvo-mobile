@@ -26,20 +26,19 @@ import { View } from 'react-native';
 
 import TabViewKey from '@oxvo-mobile/components/TabView/TabViewKey.types';
 import { UserRoles } from '@oxvo-mobile/constants/oxvo';
-import { BOTTOM_TAB_ROUTES, PRIVATE_ROUTES, PUBLIC_ROUTES } from '@oxvo-mobile/constants/routes';
+import { BOTTOM_TAB_ROUTES, PRIVATE_ROUTES } from '@oxvo-mobile/constants/routes';
 import useCurrentUserRole from '@oxvo-mobile/domains/Me/hooks/useCurrentUserRole';
-
-import styled from 'styled-components/native';
+import {
+  BottomTabParamList,
+  PrivateStackParamList,
+  PublicStackParamList,
+} from '@oxvo-mobile/navigation/types';
 
 import useTabViewStore from '../TabView/useTabViewStore';
-import { HeaderContainer } from './Header.styled';
+import { HeaderContainer, LeftElement, MiddleElement, RightElement } from './Header.styled';
 import HeaderCompanyInfo from './HeaderCompanyInfo';
 import HeaderProfile, { HeaderLeftActionType } from './HeaderProfile';
 import HeaderRightAction from './HeaderRightAction';
-
-const HeaderMiddleContainer = styled.View`
-  width: 49px;
-`;
 
 type HeaderProps = {
   leftComponent: React.ReactNode;
@@ -50,26 +49,21 @@ type HeaderProps = {
 const Header = memo<HeaderProps>(({ leftComponent, middleComponent, rightComponent }) => {
   return (
     <HeaderContainer>
-      {leftComponent}
-      <HeaderMiddleContainer>{middleComponent}</HeaderMiddleContainer>
-      {rightComponent}
+      <LeftElement>{leftComponent}</LeftElement>
+      <MiddleElement>{middleComponent}</MiddleElement>
+      <RightElement>{rightComponent}</RightElement>
     </HeaderContainer>
   );
 });
 
-type BottomTabRoutes = (typeof BOTTOM_TAB_ROUTES)[keyof typeof BOTTOM_TAB_ROUTES];
-type PrivateRoutes = (typeof PRIVATE_ROUTES)[keyof typeof PRIVATE_ROUTES];
-type PublicRoutes = (typeof PUBLIC_ROUTES)[keyof typeof PUBLIC_ROUTES];
+type BottomTabRoutes = keyof BottomTabParamList;
+type PrivateRoutes = keyof PrivateStackParamList;
+type PublicRoutes = keyof PublicStackParamList;
 
 const ServiceNavigatorHeader = memo(() => {
   // Routes: PRIVATE_ROUTES.ADD_SERVICE
   const HeaderLeft = useCallback(() => {
-    return (
-      <HeaderProfile
-        navigateRoute={BOTTOM_TAB_ROUTES.OVERVIEW}
-        action={HeaderLeftActionType.GO_BACK}
-      />
-    );
+    return <HeaderProfile action={HeaderLeftActionType.GO_BACK} />;
   }, []);
 
   const HeaderMiddle = useCallback(() => {
@@ -77,7 +71,7 @@ const ServiceNavigatorHeader = memo(() => {
   }, []);
 
   const HeaderRight = useCallback(() => {
-    return <View />;
+    return null;
   }, []);
 
   return (
@@ -129,26 +123,16 @@ const PublicNavigatorHeader = memo(({ route }: { route: PublicRoutes }) => {
 const ProfileNavigatorHeader = memo(({ route }: { route: PrivateRoutes }) => {
   // Routes: PRIVATE_ROUTES.PROFILE.PROFILE_HOME, PRIVATE_ROUTES.PROFILE.CHANGE_PASSWORD, PRIVATE_ROUTES.PROFILE.ACCOUNT_SETTINGS
   const HeaderLeft = useCallback(() => {
-    return <HeaderProfile />;
+    return <HeaderProfile action={HeaderLeftActionType.GO_BACK} />;
   }, []);
 
   const HeaderMiddle = useCallback(() => {
-    switch (route) {
-      // Routes: PRIVATE_ROUTES.PROFILE.PROFILE_HOME, PRIVATE_ROUTES.PROFILE.CHANGE_PASSWORD, PRIVATE_ROUTES.PROFILE.ACCOUNT_SETTINGS
-      // Configure components as needed
-      default:
-        return null;
-    }
-  }, [route]);
+    return <HeaderCompanyInfo />;
+  }, []);
 
   const HeaderRight = useCallback(() => {
-    switch (route) {
-      // Routes: PRIVATE_ROUTES.PROFILE.PROFILE_HOME, PRIVATE_ROUTES.PROFILE.CHANGE_PASSWORD, PRIVATE_ROUTES.PROFILE.ACCOUNT_SETTINGS
-      // Configure components as needed
-      default:
-        return null;
-    }
-  }, [route]);
+    return null;
+  }, []);
 
   return (
     <Header
@@ -160,10 +144,9 @@ const ProfileNavigatorHeader = memo(({ route }: { route: PrivateRoutes }) => {
 });
 
 const SessionsNavigatorHeader = memo(({ route }: { route: PrivateRoutes }) => {
+  // Routes: PRIVATE_ROUTES.SESSIONS.SESSIONS_HOME, PRIVATE_ROUTES.SESSIONS.CREATE_SESSION, PRIVATE_ROUTES.SESSIONS.SESSION_DETAIL
   const HeaderLeft = useCallback(() => {
     switch (route) {
-      // Routes: PRIVATE_ROUTES.SESSIONS.SESSIONS_HOME, PRIVATE_ROUTES.SESSIONS.CREATE_SESSION, PRIVATE_ROUTES.SESSIONS.SESSION_DETAIL
-      // Configure components as needed
       default:
         return null;
     }
@@ -217,6 +200,9 @@ const BottomTabNavigatorHeader = memo(({ route }: { route: BottomTabRoutes }) =>
     switch (route) {
       case BOTTOM_TAB_ROUTES.HOME:
       case BOTTOM_TAB_ROUTES.CALENDAR:
+        // if (currentUserRole === UserRoles.STAFF) {
+        //   return null;
+        // } // TODO: Uncomment this
         return (
           <HeaderRightAction
             title="Add Session"
