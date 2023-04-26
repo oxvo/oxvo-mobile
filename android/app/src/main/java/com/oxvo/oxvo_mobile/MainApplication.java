@@ -1,4 +1,4 @@
-package com.mert_qooper.oxvomobile;
+package com.oxvo.oxvo_mobile;
 
 import android.app.Application;
 import android.content.res.Configuration;

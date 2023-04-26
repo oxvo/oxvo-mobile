@@ -27,14 +27,16 @@ const HomeScreen = () => {
   if (isLoading)
     return (
       <View style={{ rowGap: 48 }}>
-        <SkeletonView showContent={isLoading} template={SkeletonView.templates.TEXT_CONTENT} />
-        <SkeletonView showContent={isLoading} template={SkeletonView.templates.TEXT_CONTENT} />
+        {/* <SkeletonView showContent={isLoading} template={SkeletonView.templates.TEXT_CONTENT} />
+        <SkeletonView showContent={isLoading} template={SkeletonView.templates.TEXT_CONTENT} /> */}
       </View>
     );
   if (isError) return <Text>Home Data has Error</Text>;
 
   const navigateToProfileScreen = () => {
-    navigate(PRIVATE_ROUTES.PROFILE.PROFILE_NAVIGATOR);
+    navigate(PRIVATE_ROUTES.PROFILE.PROFILE_NAVIGATOR, {
+      screen: PRIVATE_ROUTES.PROFILE.PROFILE_HOME,
+    });
   };
 
   const purgeCompanySettingsInStorage = () => {
@@ -43,10 +45,10 @@ const HomeScreen = () => {
 
   return (
     <>
-      <Text h1>Today's Sessions</Text>
       <Text h1>Last Counts</Text>
+      <Text text>Today's Sessions</Text>
       <Text>
-        Current User Role:
+        Currents User Role:
         {currentUserRole}
       </Text>
       <Button onPress={onLogout}>

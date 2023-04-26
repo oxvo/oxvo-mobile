@@ -31,12 +31,14 @@ export type BottomTabParamList = {
 export type PrivateStackParamList = {
   [PRIVATE_ROUTES.HOME]: undefined;
 
-  [PRIVATE_ROUTES.SESSIONS.SESSIONS_NAVIGATOR]: { screen?: keyof PrivateStackParamList };
+  [PRIVATE_ROUTES.SESSIONS.SESSIONS_NAVIGATOR]:
+    | undefined
+    | { screen?: keyof PrivateStackParamList };
   [PRIVATE_ROUTES.SESSIONS.SESSIONS_HOME]: undefined;
   [PRIVATE_ROUTES.SESSIONS.SESSION_DETAIL]: undefined;
   [PRIVATE_ROUTES.SESSIONS.CREATE_SESSION]: undefined;
 
-  [PRIVATE_ROUTES.PROFILE.PROFILE_NAVIGATOR]: { screen?: keyof PrivateStackParamList };
+  [PRIVATE_ROUTES.PROFILE.PROFILE_NAVIGATOR]: undefined | { screen?: keyof PrivateStackParamList };
   [PRIVATE_ROUTES.PROFILE.PROFILE_HOME]: undefined;
   [PRIVATE_ROUTES.PROFILE.ACCOUNT_SETTINGS]: undefined;
   [PRIVATE_ROUTES.PROFILE.CHANGE_PASSWORD]: undefined;

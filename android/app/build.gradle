@@ -113,9 +113,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace 'com.mert_qooper.oxvomobile'
+    namespace 'com.oxvo.oxvo_mobile'
     defaultConfig {
-        applicationId 'com.mert_qooper.oxvomobile'
+        applicationId 'com.oxvo.oxvo_mobile'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

@@ -22,7 +22,6 @@
  *      - BOTTOM_TAB_ROUTES.OVERVIEW
  */
 import React, { memo, useCallback } from 'react';
-import { View } from 'react-native';
 
 import TabViewKey from '@oxvo-mobile/components/TabView/TabViewKey.types';
 import { UserRoles } from '@oxvo-mobile/constants/oxvo';
@@ -46,11 +45,19 @@ type HeaderProps = {
   rightComponent: React.ReactElement;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Header = memo<HeaderProps>(({ leftComponent, middleComponent, rightComponent }) => {
+  const handleOnLayout = (event) => {
+    const { width, x } = event.nativeEvent.layout;
+    console.log('HeaderMiddle width:', width);
+    console.log('HeaderMiddle x position:', x);
+  };
   return (
     <HeaderContainer>
       <LeftElement>{leftComponent}</LeftElement>
-      <MiddleElement>{middleComponent}</MiddleElement>
+      <MiddleElement onLayout={handleOnLayout}>
+        <HeaderCompanyInfo />
+      </MiddleElement>
       <RightElement>{rightComponent}</RightElement>
     </HeaderContainer>
   );

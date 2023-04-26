@@ -1,4 +1,4 @@
-package com.mert_qooper.oxvomobile;
+package com.oxvo.oxvo_mobile;
 
 import android.os.Build;
 import android.os.Bundle;

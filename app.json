@@ -11,9 +11,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "oxvo-mobile"
@@ -23,7 +21,7 @@
         "foregroundImage": "./app/assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.mert_qooper.oxvomobile"
+      "package": "com.oxvo.oxvo_mobile"
     },
     "web": {
       "favicon": "./app/assets/favicon.png"

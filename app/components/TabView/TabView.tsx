@@ -85,7 +85,6 @@ const TabView = <T extends Route>({ routes = [], views = [], initialRoute }: Pro
   }, [activeRoute, setCurrentTabViewKey]);
 
   useEffect(() => {
-    // setCurrentTabViewKey(initialRoute?.key);
     if (initialRoute && initialRoute.key !== activeRoute.key) {
       handleSetTab(initialRoute);
     }

@@ -4,7 +4,7 @@
 // @ts-nocheck @ts-ignore
 // FIXME: @ts-ignore
 import React from 'react';
-import { Image, Text, View } from 'react-native';
+import { Dimensions, Image, Text, View } from 'react-native';
 
 import { SAFE_AREA_TOP_MARGIN } from '@oxvo-mobile/constants/ui';
 
@@ -12,6 +12,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styled from 'styled-components/native';
 
+const screenWidth = Dimensions.get('window').width;
 const Button = styled.Pressable`
   display: flex;
   flex-direction: row;
@@ -23,9 +24,9 @@ const Button = styled.Pressable`
 `;
 
 const LeftElement = styled.View`
-  flex: 1;
   align-items: flex-start;
   justify-content: center;
+  width: ${screenWidth / 3}px;
 `;
 
 const MiddleElement = styled.View`
@@ -34,14 +35,22 @@ const MiddleElement = styled.View`
 `;
 
 const RightElement = styled.View`
-  flex: 1;
   align-items: flex-end;
   justify-content: center;
+  width: ${screenWidth / 3}px;
 `;
 
 const HeaderContainer = styled((props) => {
   const { top } = useSafeAreaInsets();
-  return <View {...props} style={[props.style, { paddingTop: top + SAFE_AREA_TOP_MARGIN }]} />;
+  return (
+    <View
+      {...props}
+      style={[
+        props.style,
+        { paddingTop: top + SAFE_AREA_TOP_MARGIN, height: 50 + top + SAFE_AREA_TOP_MARGIN },
+      ]}
+    />
+  );
 })`
   padding: 24px;
 
@@ -51,7 +60,6 @@ const HeaderContainer = styled((props) => {
   align-items: center;
 
   justify-content: space-between;
-  height: 110px;
 
   z-index: 3;
   background-color: #fdfdfd;
