@@ -1,5 +1,8 @@
 import React from 'react';
 
+import Container from '@oxvo-mobile/components/Containers/Private/Container.styled';
+import Shimmer from '@oxvo-mobile/components/Shimmer/Shimmer';
+import { UserRoles } from '@oxvo-mobile/constants/oxvo';
 import { PRIVATE_ROUTES } from '@oxvo-mobile/constants/routes';
 import useAuthStore from '@oxvo-mobile/domains/Auth/store/useAuthStore';
 import useHome from '@oxvo-mobile/domains/Home/queries/useHome';
@@ -9,7 +12,7 @@ import { PrivateStackNavigationProp } from '@oxvo-mobile/navigation/types';
 
 import { useNavigation } from '@react-navigation/native';
 
-import { Button, Text, View } from 'react-native-ui-lib';
+import { Button, SkeletonView, Text, View } from 'react-native-ui-lib';
 
 const HomeScreen = () => {
   const { data: homeData, isLoading, isError } = useHome();
@@ -22,12 +25,31 @@ const HomeScreen = () => {
   const currentUserRole = useCurrentUserRole();
 
   if (isLogoutProcessing) return <Text>Logging out...</Text>;
-  if (isLoadingMe) return <Text>Me Data is Loading...</Text>;
-  if (isLoading) return <Text>Home Data is Loading...</Text>;
+  // if (isLoadingMe) return <SkeletonView />;
+  if (isLoading)
+    return (
+      <View style={{}}>
+        <Shimmer height={20} noBorderRadius />
+        <Shimmer height={16} width={279} noBorderRadius />
+        <Shimmer height={16} width={279} noBorderRadius />
+        <Shimmer height={16} width={279} noBorderRadius />
+        {UserRoles.CLIENT === currentUserRole && (
+          <View style={{ marginTop: 50 }}>
+            <Shimmer height={20} noBorderRadius />
+            <Shimmer height={16} width={279} noBorderRadius />
+            <Shimmer height={16} width={279} noBorderRadius />
+            <Shimmer height={16} width={279} noBorderRadius />
+          </View>
+        )}
+      </View>
+    );
+
   if (isError) return <Text>Home Data has Error</Text>;
 
   const navigateToProfileScreen = () => {
-    navigate(PRIVATE_ROUTES.PROFILE);
+    navigate(PRIVATE_ROUTES.PROFILE.PROFILE_NAVIGATOR, {
+      screen: PRIVATE_ROUTES.PROFILE.PROFILE_HOME,
+    });
   };
 
   const purgeCompanySettingsInStorage = () => {
@@ -35,9 +57,11 @@ const HomeScreen = () => {
   };
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <>
+      <Text h1>Last Counts</Text>
+      <Text text>Today's Sessions</Text>
       <Text>
-        Current User Role:
+        Currents User Role:
         {currentUserRole}
       </Text>
       <Button onPress={onLogout}>
@@ -61,7 +85,7 @@ const HomeScreen = () => {
       <Button onPress={navigateToProfileScreen}>
         <Text style={{ color: 'white' }}>navigateToProfileScreen</Text>
       </Button>
-    </View>
+    </>
   );
 };
 

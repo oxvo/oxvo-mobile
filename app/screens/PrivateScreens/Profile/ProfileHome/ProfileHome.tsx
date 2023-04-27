@@ -11,7 +11,7 @@ const ProfileHomeScreen = () => {
   const { navigate } = useNavigation<PrivateStackNavigationProp>();
 
   const navigateToChangePasswordScreen = () => {
-    navigate(PRIVATE_ROUTES.CHANGE_PASSWORD);
+    navigate(PRIVATE_ROUTES.PROFILE.CHANGE_PASSWORD);
   };
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
