@@ -19,7 +19,7 @@ CLIENTS:
       - Back Button | null | null
 - All Sessions
   - Profile | Company Logo | Add Event
-    - Add Session (Only CLIENT have admitted to ass session) | Session Detail:
+    - Create Session (Only CLIENT have admitted to ass session) | Session Detail:
       - Profile | Company Logo | null
 
 STAFF:

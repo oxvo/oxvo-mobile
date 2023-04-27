@@ -10,14 +10,14 @@ const SESSION_ENDPOINTS = {
   CREATE_SESSION: 'v1/sessions', // POST
 };
 
-enum FilteredSessionStatusType {
+export enum FilteredSessionStatusType {
   CANCELED = SessionStatusType.CANCELED,
   COMPLETED = SessionStatusType.COMPLETED,
   AWAITING = SessionStatusType.AWAITING,
 }
 
 type UpdateSessionReplyType = {
-  sessionId: string;
+  sessionId: number;
   sessionReply: SessionStatusType;
 };
 
@@ -33,8 +33,8 @@ const sessionEndpointFunctions = {
 
     return `${path}?${queryParams}`;
   },
-  updateSession: (sessionId: string) => `${SESSION_ENDPOINTS.UPDATE_SESSION}/${sessionId}`,
-  filterableSessions: (status?: FilteredSessionStatusType) => {
+  updateSession: (sessionId: number) => `${SESSION_ENDPOINTS.UPDATE_SESSION}/${sessionId}`,
+  fetchFilterableSessions: (status?: FilteredSessionStatusType) => {
     /**
      * @example
      * GET /v1/sessions
@@ -50,7 +50,7 @@ const sessionEndpointFunctions = {
 
     return path;
   },
-  sessionDetail: (sessionId: string) => `${SESSION_ENDPOINTS.SESSION_DETAIL}/${sessionId}`,
+  fetchSessionDetail: (sessionId: number) => `${SESSION_ENDPOINTS.SESSION_DETAIL}/${sessionId}`,
 };
 
 const SessionEndpoints = {
