@@ -1,6 +1,8 @@
 import React from 'react';
 
 import Container from '@oxvo-mobile/components/Containers/Private/Container.styled';
+import Shimmer from '@oxvo-mobile/components/Shimmer/Shimmer';
+import { UserRoles } from '@oxvo-mobile/constants/oxvo';
 import { PRIVATE_ROUTES } from '@oxvo-mobile/constants/routes';
 import useAuthStore from '@oxvo-mobile/domains/Auth/store/useAuthStore';
 import useHome from '@oxvo-mobile/domains/Home/queries/useHome';
@@ -23,14 +25,25 @@ const HomeScreen = () => {
   const currentUserRole = useCurrentUserRole();
 
   if (isLogoutProcessing) return <Text>Logging out...</Text>;
-  if (isLoadingMe) return <SkeletonView />;
+  // if (isLoadingMe) return <SkeletonView />;
   if (isLoading)
     return (
-      <View style={{ rowGap: 48 }}>
-        {/* <SkeletonView showContent={isLoading} template={SkeletonView.templates.TEXT_CONTENT} />
-        <SkeletonView showContent={isLoading} template={SkeletonView.templates.TEXT_CONTENT} /> */}
+      <View style={{}}>
+        <Shimmer height={20} noBorderRadius />
+        <Shimmer height={16} width={279} noBorderRadius />
+        <Shimmer height={16} width={279} noBorderRadius />
+        <Shimmer height={16} width={279} noBorderRadius />
+        {UserRoles.CLIENT === currentUserRole && (
+          <View style={{ marginTop: 50 }}>
+            <Shimmer height={20} noBorderRadius />
+            <Shimmer height={16} width={279} noBorderRadius />
+            <Shimmer height={16} width={279} noBorderRadius />
+            <Shimmer height={16} width={279} noBorderRadius />
+          </View>
+        )}
       </View>
     );
+
   if (isError) return <Text>Home Data has Error</Text>;
 
   const navigateToProfileScreen = () => {

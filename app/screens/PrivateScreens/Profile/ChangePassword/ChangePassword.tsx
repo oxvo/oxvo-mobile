@@ -53,7 +53,7 @@ const ChangePasswordScreen = () => {
   };
 
   return (
-    <View flex paddingH-30 paddingV-50 bg-white>
+    <View>
       <Text marginB-30 text40BO green20>
         Change Password
       </Text>

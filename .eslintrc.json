@@ -41,6 +41,7 @@
     "@typescript-eslint/no-unsafe-call": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-floating-promises": "off",
+    "react/require-default-props": "off",
     "react/function-component-definition": ["error", { "namedComponents": "arrow-function" }],
     "no-promise-executor-return": "off",
     "react/no-unstable-nested-components": ["warn", { "allowAsProps": true }],
