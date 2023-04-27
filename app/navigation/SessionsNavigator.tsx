@@ -17,7 +17,7 @@ const SessionsNavigator = () => (
   <ProfileStack.Navigator initialRouteName={PRIVATE_ROUTES.SESSIONS.SESSIONS_HOME}>
     <ProfileStack.Screen
       options={{
-        header: () => <SessionsNavigatorHeader route={PRIVATE_ROUTES.SESSIONS.SESSIONS_HOME} />,
+        header: () => <SessionsNavigatorHeader />,
       }}
       name={PRIVATE_ROUTES.SESSIONS.SESSIONS_HOME}
     >
@@ -29,7 +29,7 @@ const SessionsNavigator = () => (
     </ProfileStack.Screen>
     <ProfileStack.Screen
       options={{
-        header: () => <SessionsNavigatorHeader route={PRIVATE_ROUTES.SESSIONS.CREATE_SESSION} />,
+        header: () => <SessionsNavigatorHeader />,
       }}
       name={PRIVATE_ROUTES.SESSIONS.CREATE_SESSION}
     >
@@ -41,7 +41,7 @@ const SessionsNavigator = () => (
     </ProfileStack.Screen>
     <ProfileStack.Screen
       options={{
-        header: () => <SessionsNavigatorHeader route={PRIVATE_ROUTES.SESSIONS.SESSION_DETAIL} />,
+        header: () => <SessionsNavigatorHeader />,
       }}
       name={PRIVATE_ROUTES.SESSIONS.SESSION_DETAIL}
     >
