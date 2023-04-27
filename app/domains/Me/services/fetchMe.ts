@@ -1,5 +1,7 @@
-import { UserRoles } from '@oxvo-mobile/constants/oxvo';
 import ME_ENDPOINTS from '@oxvo-mobile/domains/Me/constants/endpoints';
+
+import { UserRoles } from '@oxvo-mobile/constants/oxvo';
+
 import apiRequest from '@oxvo-mobile/libs/apiRequest';
 
 import { z } from 'zod';

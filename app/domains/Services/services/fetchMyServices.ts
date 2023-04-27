@@ -1,5 +1,7 @@
-import { CompanyServiceType } from '@oxvo-mobile/constants/oxvo';
 import ServicesEndpoints from '@oxvo-mobile/domains/Services/constants/endpoints';
+
+import { CompanyServiceType } from '@oxvo-mobile/constants/oxvo';
+
 import apiRequest from '@oxvo-mobile/libs/apiRequest';
 
 import { z } from 'zod';

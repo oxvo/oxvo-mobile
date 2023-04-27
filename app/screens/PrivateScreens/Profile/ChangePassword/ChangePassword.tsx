@@ -1,12 +1,13 @@
 import React from 'react';
-
-import { PASSWORD_SETTINGS } from '@oxvo-mobile/domains/Auth/constants/auth';
-import useChangePassword from '@oxvo-mobile/domains/Me/queries/useChangePassword';
-
-import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
 import toast from 'react-native-toast-message';
 import { Button, Text, TextField, View } from 'react-native-ui-lib';
+
+import { PASSWORD_SETTINGS } from '@oxvo-mobile/domains/Auth/constants/auth';
+
+import useChangePassword from '@oxvo-mobile/domains/Me/queries/useChangePassword';
+
+import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 
 const formSchema = z.object({

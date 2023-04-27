@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import useAuthStore from '@oxvo-mobile/domains/Auth/store/useAuthStore';
+
 import changePassword, {
   ChangePasswordPayload,
 } from '@oxvo-mobile/domains/Me/services/changePassword';
@@ -6,7 +8,7 @@ import changePassword, {
 import { useMutation } from '@tanstack/react-query';
 
 const useChangePassword = () => {
-  const { onLogout } = useAuthStore((state) => state);
+  const onLogout = useAuthStore((state) => state.onLogout);
   return useMutation({
     mutationFn: async (payload: ChangePasswordPayload) => {
       const { message } = await changePassword(payload);

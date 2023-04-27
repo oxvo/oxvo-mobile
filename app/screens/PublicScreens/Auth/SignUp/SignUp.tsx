@@ -1,16 +1,17 @@
 import React from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import { Button, Text, TextField, View } from 'react-native-ui-lib';
 
 import { PASSWORD_SETTINGS } from '@oxvo-mobile/domains/Auth/constants/auth';
 import useSignUp from '@oxvo-mobile/domains/Auth/queries/useSignUp';
 import { InviteCodeResponse } from '@oxvo-mobile/domains/Auth/services/inviteCode';
 import useAuthStore from '@oxvo-mobile/domains/Auth/store/useAuthStore';
+
 import { PublicStackNavigationProp } from '@oxvo-mobile/navigation/types';
 
 import { useNavigation } from '@react-navigation/native';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Controller, useForm } from 'react-hook-form';
-import { Button, Text, TextField, View } from 'react-native-ui-lib';
 import * as z from 'zod';
 
 const schema = z

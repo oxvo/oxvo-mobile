@@ -1,6 +1,7 @@
+import { Svg as SvgComp } from 'react-native-svg';
+
 import colors from '@oxvo-mobile/assets/colors.json';
 
-import { Svg as SvgComp } from 'react-native-svg';
 import styled from 'styled-components/native';
 
 // FIXME

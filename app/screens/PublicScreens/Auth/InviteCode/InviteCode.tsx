@@ -1,4 +1,6 @@
 import React, { useCallback } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import { Button, Text, TextField, View } from 'react-native-ui-lib';
 
 import { INVITE_CODE_SETTINGS } from '@oxvo-mobile/domains/Auth/constants/auth';
 import useInviteCode from '@oxvo-mobile/domains/Auth/queries/useInviteCode';
@@ -7,8 +9,6 @@ import useAuthStore from '@oxvo-mobile/domains/Auth/store/useAuthStore';
 import { useFocusEffect } from '@react-navigation/native';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Controller, useForm } from 'react-hook-form';
-import { Button, Text, TextField, View } from 'react-native-ui-lib';
 import * as z from 'zod';
 
 const inviteCodeSchema = z.object({
@@ -27,8 +27,8 @@ const InviteCodeScreen = () => {
     formState: { errors },
   } = useForm<FormData>({ resolver: zodResolver(inviteCodeSchema) });
 
-  const { resetCompanySettings, companySettings } = useAuthStore((state) => state);
-
+  const resetCompanySettings = useAuthStore((state) => state.resetCompanySettings);
+  const companySettings = useAuthStore((state) => state.companySettings);
   const { mutateAsync, isLoading } = useInviteCode();
 
   useFocusEffect(

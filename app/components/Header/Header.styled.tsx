@@ -5,11 +5,11 @@
 // FIXME: @ts-ignore
 import React from 'react';
 import { Dimensions, Image, Text, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { SAFE_AREA_TOP_MARGIN } from '@oxvo-mobile/constants/ui';
 
 import { AntDesign } from '@expo/vector-icons';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styled from 'styled-components/native';
 
 const screenWidth = Dimensions.get('window').width;

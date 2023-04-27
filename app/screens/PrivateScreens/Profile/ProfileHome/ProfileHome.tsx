@@ -1,11 +1,11 @@
 import React from 'react';
+import { Button, Text, View } from 'react-native-ui-lib';
 
-import { PRIVATE_ROUTES } from '@oxvo-mobile/constants/routes';
 import { PrivateStackNavigationProp } from '@oxvo-mobile/navigation/types';
 
-import { useNavigation } from '@react-navigation/native';
+import { PRIVATE_ROUTES } from '@oxvo-mobile/constants/routes';
 
-import { Button, Text, View } from 'react-native-ui-lib';
+import { useNavigation } from '@react-navigation/native';
 
 const ProfileHomeScreen = () => {
   const { navigate } = useNavigation<PrivateStackNavigationProp>();

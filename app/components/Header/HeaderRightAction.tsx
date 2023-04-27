@@ -1,11 +1,11 @@
 import React, { memo } from 'react';
+import { Text, TouchableOpacity } from 'react-native-ui-lib';
 
 import { PrivateStackNavigationProp, PrivateStackParamList } from '@oxvo-mobile/navigation/types';
 
 import { useNavigation } from '@react-navigation/native';
 
 import { AntDesign } from '@expo/vector-icons';
-import { Text, TouchableOpacity } from 'react-native-ui-lib';
 import styled from 'styled-components/native';
 
 const HeaderRightActionContainer = styled.View`

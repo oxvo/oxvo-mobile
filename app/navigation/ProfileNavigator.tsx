@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { Text, View } from 'react-native';
 
-import Container from '@oxvo-mobile/components/Containers/Private/Container.styled';
-import { ProfileNavigatorHeader } from '@oxvo-mobile/components/Header/Header';
-import { PRIVATE_ROUTES } from '@oxvo-mobile/constants/routes';
 import ChangePasswordScreen from '@oxvo-mobile/screens/PrivateScreens/Profile/ChangePassword/ChangePassword';
 import ProfileHomeScreen from '@oxvo-mobile/screens/PrivateScreens/Profile/ProfileHome/ProfileHome';
+
+import Container from '@oxvo-mobile/components/Containers/Private/Container.styled';
+import { ProfileNavigatorHeader } from '@oxvo-mobile/components/Header/Header';
+
+import { PRIVATE_ROUTES } from '@oxvo-mobile/constants/routes';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 

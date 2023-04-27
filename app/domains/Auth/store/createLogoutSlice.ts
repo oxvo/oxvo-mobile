@@ -1,9 +1,11 @@
 // Reference @link: https://github.com/pmndrs/zustand/issues/1242#issuecomment-1299322491
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import { CompanySettingsSlice } from '@oxvo-mobile/domains/Auth/store/createCompanySettingsSlice';
 import { TokensSlice } from '@oxvo-mobile/domains/Auth/store/createTokensSlice';
+
 import { ME_STORAGE_KEYS } from '@oxvo-mobile/domains/Me/constants/global';
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StateCreator } from 'zustand';
 
 type LogoutState = {

@@ -1,18 +1,22 @@
 import React from 'react';
+import { Button, SkeletonView, Text, View } from 'react-native-ui-lib';
+
+import useAuthStore from '@oxvo-mobile/domains/Auth/store/useAuthStore';
+
+import useHome from '@oxvo-mobile/domains/Home/queries/useHome';
+
+import useCurrentUserRole from '@oxvo-mobile/domains/Me/hooks/useCurrentUserRole';
+import useMe from '@oxvo-mobile/domains/Me/queries/useMe';
 
 import Container from '@oxvo-mobile/components/Containers/Private/Container.styled';
 import Shimmer from '@oxvo-mobile/components/Shimmer/Shimmer';
-import { UserRoles } from '@oxvo-mobile/constants/oxvo';
-import { PRIVATE_ROUTES } from '@oxvo-mobile/constants/routes';
-import useAuthStore from '@oxvo-mobile/domains/Auth/store/useAuthStore';
-import useHome from '@oxvo-mobile/domains/Home/queries/useHome';
-import useCurrentUserRole from '@oxvo-mobile/domains/Me/hooks/useCurrentUserRole';
-import useMe from '@oxvo-mobile/domains/Me/queries/useMe';
+
 import { PrivateStackNavigationProp } from '@oxvo-mobile/navigation/types';
 
-import { useNavigation } from '@react-navigation/native';
+import { UserRoles } from '@oxvo-mobile/constants/oxvo';
+import { PRIVATE_ROUTES } from '@oxvo-mobile/constants/routes';
 
-import { Button, SkeletonView, Text, View } from 'react-native-ui-lib';
+import { useNavigation } from '@react-navigation/native';
 
 const HomeScreen = () => {
   const { data: homeData, isLoading, isError } = useHome();
@@ -20,7 +24,9 @@ const HomeScreen = () => {
 
   const { navigate } = useNavigation<PrivateStackNavigationProp>();
 
-  const { companySettings, isLogoutProcessing, onLogout } = useAuthStore((state) => state);
+  const companySettings = useAuthStore((state) => state.companySettings);
+  const isLogoutProcessing = useAuthStore((state) => state.isLogoutProcessing);
+  const onLogout = useAuthStore((state) => state.onLogout);
 
   const currentUserRole = useCurrentUserRole();
 

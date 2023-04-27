@@ -1,9 +1,9 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect } from 'react';
 
 import { ME_QUERY_KEYS, ME_STORAGE_KEYS } from '@oxvo-mobile/domains/Me/constants/global';
 import fetchMe, { MeResponse } from '@oxvo-mobile/domains/Me/services/fetchMe';
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 async function saveSelectedQueryToStorage(data: object) {

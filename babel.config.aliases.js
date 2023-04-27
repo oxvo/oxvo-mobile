@@ -9,6 +9,5 @@ module.exports = {
   '@oxvo-mobile/mocks': './app/mocks',
   '@oxvo-mobile/navigation': './app/navigation',
   '@oxvo-mobile/screens': './app/screens',
-  '@oxvo-mobile/store': './app/store',
   '@oxvo-mobile/utils': './app/utils',
 };

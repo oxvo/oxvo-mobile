@@ -1,10 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { ScrollView } from 'react-native';
-
-import useTabViewStore from '@oxvo-mobile/components/TabView/useTabViewStore';
-
-import { useIsFocused } from '@react-navigation/native';
-
 import Animated, {
   scrollTo,
   useAnimatedRef,
@@ -12,6 +7,10 @@ import Animated, {
   useSharedValue,
 } from 'react-native-reanimated';
 import { Text } from 'react-native-ui-lib';
+
+import useTabViewStore from '@oxvo-mobile/components/TabView/useTabViewStore';
+
+import { useIsFocused } from '@react-navigation/native';
 
 import {
   Container,
@@ -39,7 +38,7 @@ type Props<T extends Route> = {
 };
 
 const TabView = <T extends Route>({ routes = [], views = [], initialRoute }: Props<T>) => {
-  const { setCurrentTabViewKey } = useTabViewStore();
+  const setCurrentTabViewKey = useTabViewStore((state) => state.setCurrentTabViewKey);
   const scrollViewRef = useRef<ScrollView>(null);
   const visibleRoutes = routes.filter((r) => !r.hide);
   const visibleViews = views.filter((_, index) => !routes[index].hide);

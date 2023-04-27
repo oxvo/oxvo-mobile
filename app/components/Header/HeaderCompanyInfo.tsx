@@ -1,16 +1,11 @@
 import React, { memo } from 'react';
 import { Image } from 'react-native';
 
-import useAuthStore from '@oxvo-mobile/domains/Auth/store/useAuthStore';
-
-import { Text } from 'react-native-ui-lib';
 import styled from 'styled-components/native';
 
 const HeaderCompanyLogoContainer = styled.View``;
 
 const HeaderCompanyInfo = () => {
-  const { companySettings } = useAuthStore((state) => state);
-
   return (
     <HeaderCompanyLogoContainer>
       <Image

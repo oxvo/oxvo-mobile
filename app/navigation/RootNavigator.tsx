@@ -1,10 +1,12 @@
 import * as React from 'react';
 
-import { ROOT_ROUTES } from '@oxvo-mobile/constants/routes';
 import useAuth from '@oxvo-mobile/domains/Auth/hooks/useAuth';
+
 import PrivateNavigator from '@oxvo-mobile/navigation/PrivateNavigator';
 import PublicNavigator from '@oxvo-mobile/navigation/PublicNavigator';
 import { RootStackParamList } from '@oxvo-mobile/navigation/types';
+
+import { ROOT_ROUTES } from '@oxvo-mobile/constants/routes';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';

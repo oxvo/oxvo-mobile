@@ -1,13 +1,14 @@
 import * as React from 'react';
+import { Colors, LoaderScreen, View } from 'react-native-ui-lib';
 
-import { ROOT_ROUTES } from '@oxvo-mobile/constants/routes';
 import useMe from '@oxvo-mobile/domains/Me/queries/useMe';
+
 import BottomTabNavigator from '@oxvo-mobile/navigation/BottomTabNavigator';
 import { PrivateStackParamList } from '@oxvo-mobile/navigation/types';
 
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { ROOT_ROUTES } from '@oxvo-mobile/constants/routes';
 
-import { Colors, LoaderScreen, View } from 'react-native-ui-lib';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const PrivateStack = createNativeStackNavigator<PrivateStackParamList>();
 

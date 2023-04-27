@@ -3,6 +3,7 @@ import { Text, View } from 'react-native';
 
 import Container from '@oxvo-mobile/components/Containers/Private/Container.styled';
 import { SessionsNavigatorHeader } from '@oxvo-mobile/components/Header/Header';
+
 import { PRIVATE_ROUTES } from '@oxvo-mobile/constants/routes';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';

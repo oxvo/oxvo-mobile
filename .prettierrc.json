@@ -12,12 +12,29 @@
   "trailingComma": "es5",
   "importOrder": [
     "react-native-gesture-handler",
-    "^(react|react-native|react-native-paper)$",
-    "^@oxvo-mobile/(.*)$",
+    "^react|react-native|react-native-paper|react-native-ui-lib$",
+    "^styled-components$",
+    "^@oxvo-mobile/([^/]*?/)*?domains/Auth",
+    "^@oxvo-mobile/([^/]*?/)*?domains/Calendar",
+    "^@oxvo-mobile/([^/]*?/)*?domains/Home",
+    "^@oxvo-mobile/([^/]*?/)*?domains/Me",
+    "^@oxvo-mobile/([^/]*?/)*?domains/Notification",
+    "^@oxvo-mobile/([^/]*?/)*?domains/Packages",
+    "^@oxvo-mobile/([^/]*?/)*?domains/Services",
+    "^@oxvo-mobile/([^/]*?/)*?domains/Sessions",
+    "^@oxvo-mobile/([^/]*?/)*?screens/PrivateScreens",
+    "^@oxvo-mobile/([^/]*?/)*?screens/PublicScreens",
+    "^@oxvo-mobile/([^/]*?/)*?components",
+    "^@oxvo-mobile/([^/]*?/)*?navigation",
+    "^@oxvo-mobile/([^/]*?/)*?hooks",
+    "^@oxvo-mobile/([^/]*?/)*?assets",
+    "^@oxvo-mobile/([^/]*?/)*?constants",
+    "^@oxvo-mobile/([^/]*?/)*?libs",
     "^@react-navigation/(.*)$",
     "<THIRD_PARTY_MODULES>",
     "^[./]"
   ],
+
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true
 }

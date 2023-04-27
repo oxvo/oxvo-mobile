@@ -1,14 +1,16 @@
 import React, { memo } from 'react';
+import { Text, TouchableOpacity } from 'react-native-ui-lib';
 
 import RoundedImage from '@oxvo-mobile/components/RoundedImage/RoundedImage';
-import { PRIVATE_ROUTES } from '@oxvo-mobile/constants/routes';
+
 import { PrivateStackNavigationProp } from '@oxvo-mobile/navigation/types';
+
+import { PRIVATE_ROUTES } from '@oxvo-mobile/constants/routes';
 
 import { BottomTabBarButtonProps } from '@react-navigation/bottom-tabs';
 import { useNavigation } from '@react-navigation/native';
 
 import { Ionicons } from '@expo/vector-icons';
-import { Text, TouchableOpacity } from 'react-native-ui-lib';
 import styled from 'styled-components/native';
 
 const HeaderProfileContainer = styled.View`

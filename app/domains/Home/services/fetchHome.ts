@@ -1,5 +1,7 @@
-import { CompanyServiceType, SessionStatusType } from '@oxvo-mobile/constants/oxvo';
 import HOME_ENDPOINTS from '@oxvo-mobile/domains/Home/constants/endpoints';
+
+import { CompanyServiceType, SessionStatusType } from '@oxvo-mobile/constants/oxvo';
+
 import apiRequest from '@oxvo-mobile/libs/apiRequest';
 
 import { z } from 'zod';

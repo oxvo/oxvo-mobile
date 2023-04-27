@@ -1,7 +1,4 @@
 import React, { CSSProperties } from 'react';
-
-import colors from '@oxvo-mobile/assets/colors.json';
-
 // FIXME
 import Animated, {
   useAnimatedStyle,
@@ -11,6 +8,8 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { LinearGradient, Rect, Stop } from 'react-native-svg';
+
+import colors from '@oxvo-mobile/assets/colors.json';
 
 import { Container, Svg, Wrapper } from './Shimmer.styled';
 

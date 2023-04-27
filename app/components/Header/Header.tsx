@@ -23,21 +23,28 @@
  */
 import React, { memo, useCallback } from 'react';
 
-import TabViewKey from '@oxvo-mobile/components/TabView/TabViewKey.types';
-import { UserRoles } from '@oxvo-mobile/constants/oxvo';
-import { BOTTOM_TAB_ROUTES, PRIVATE_ROUTES } from '@oxvo-mobile/constants/routes';
 import useCurrentUserRole from '@oxvo-mobile/domains/Me/hooks/useCurrentUserRole';
+
+import {
+  HeaderContainer,
+  LeftElement,
+  MiddleElement,
+  RightElement,
+} from '@oxvo-mobile/components/Header/Header.styled';
+import HeaderCompanyInfo from '@oxvo-mobile/components/Header/HeaderCompanyInfo';
+import HeaderProfile, { HeaderLeftActionType } from '@oxvo-mobile/components/Header/HeaderProfile';
+import HeaderRightAction from '@oxvo-mobile/components/Header/HeaderRightAction';
+import TabViewKey from '@oxvo-mobile/components/TabView/TabViewKey.types';
+import useTabViewStore from '@oxvo-mobile/components/TabView/useTabViewStore';
+
 import {
   BottomTabParamList,
   PrivateStackParamList,
   PublicStackParamList,
 } from '@oxvo-mobile/navigation/types';
 
-import useTabViewStore from '../TabView/useTabViewStore';
-import { HeaderContainer, LeftElement, MiddleElement, RightElement } from './Header.styled';
-import HeaderCompanyInfo from './HeaderCompanyInfo';
-import HeaderProfile, { HeaderLeftActionType } from './HeaderProfile';
-import HeaderRightAction from './HeaderRightAction';
+import { UserRoles } from '@oxvo-mobile/constants/oxvo';
+import { BOTTOM_TAB_ROUTES, PRIVATE_ROUTES } from '@oxvo-mobile/constants/routes';
 
 type HeaderProps = {
   leftComponent: React.ReactNode;
@@ -187,7 +194,7 @@ const SessionsNavigatorHeader = memo(({ route }: { route: PrivateRoutes }) => {
 });
 
 const BottomTabNavigatorHeader = memo(({ route }: { route: BottomTabRoutes }) => {
-  const { currentTabViewKey } = useTabViewStore((state) => state);
+  const currentTabViewKey = useTabViewStore((state) => state.currentTabViewKey);
   const currentUserRole = useCurrentUserRole();
 
   const HeaderLeft = useCallback(() => {

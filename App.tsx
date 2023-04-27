@@ -1,18 +1,19 @@
 import 'react-native-gesture-handler';
 
 import React, { useCallback, useEffect, useState } from 'react';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import Toast from 'react-native-toast-message';
+import { Colors, Spacings, Typography } from 'react-native-ui-lib';
+
+import RootNavigator from '@oxvo-mobile/navigation/RootNavigator';
 
 import queryClient from '@oxvo-mobile/libs/queryClient';
-import RootNavigator from '@oxvo-mobile/navigation/RootNavigator';
 
 import { Poppins_400Regular, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
 import { QueryClientProvider } from '@tanstack/react-query';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import Toast from 'react-native-toast-message';
-import { Colors, Spacings, Typography } from 'react-native-ui-lib';
 
 import { GestureHandlerRootView } from './App.styled';
 

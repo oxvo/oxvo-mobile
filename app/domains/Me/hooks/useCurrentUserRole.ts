@@ -1,6 +1,7 @@
-import { UserRoles } from '@oxvo-mobile/constants/oxvo';
 import { ME_QUERY_KEYS } from '@oxvo-mobile/domains/Me/constants/global';
 import { MeResponse } from '@oxvo-mobile/domains/Me/services/fetchMe';
+
+import { UserRoles } from '@oxvo-mobile/constants/oxvo';
 
 import { useQueryClient } from '@tanstack/react-query';
 

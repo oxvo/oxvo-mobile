@@ -1,11 +1,10 @@
 import * as React from 'react';
+import { Button, Text } from 'react-native-ui-lib';
 
 import useAuthStore from '@oxvo-mobile/domains/Auth/store/useAuthStore';
 
-import { Button, Text } from 'react-native-ui-lib';
-
 const MyPackagesScreen: React.FC = () => {
-  const { onLogout } = useAuthStore((state) => state);
+  const onLogout = useAuthStore((state) => state.onLogout);
   return (
     <Button onPress={onLogout}>
       <Text style={{ color: 'white' }}>Logout</Text>
