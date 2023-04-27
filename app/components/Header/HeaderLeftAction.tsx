@@ -13,13 +13,13 @@ import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import styled from 'styled-components/native';
 
-const HeaderProfileContainer = styled.View`
+const HeaderLeftActionContainer = styled.View`
   align-items: center;
   flex-direction: column;
   justify-content: center;
 `;
 
-const HeaderProfileText = styled(({ ...props }) => {
+const HeaderLeftActionText = styled(({ ...props }) => {
   return <Text {...props} />;
 })`
   margin-top: 4px;
@@ -38,7 +38,7 @@ type HeaderLeftActionProps = {
   navigateRoute?: any; // FIXME: any is not good here
 };
 
-const HeaderProfile = ({ action, navigateRoute }: HeaderLeftActionProps) => {
+const HeaderLeftAction = ({ action, navigateRoute }: HeaderLeftActionProps) => {
   const { goBack, canGoBack, navigate } = useNavigation<
     PrivateStackNavigationProp & BottomTabBarButtonProps
   >();
@@ -67,16 +67,16 @@ const HeaderProfile = ({ action, navigateRoute }: HeaderLeftActionProps) => {
 
   return (
     <TouchableOpacity hitSlop={{ top: 15, bottom: 15, left: 20, right: 20 }} onPress={handlePress}>
-      <HeaderProfileContainer>
+      <HeaderLeftActionContainer>
         <RoundedImage />
-        <HeaderProfileText>Profile</HeaderProfileText>
-      </HeaderProfileContainer>
+        <HeaderLeftActionText>Profile</HeaderLeftActionText>
+      </HeaderLeftActionContainer>
     </TouchableOpacity>
   );
 };
 
-HeaderProfile.defaultProps = {
+HeaderLeftAction.defaultProps = {
   action: HeaderLeftActionType.PROFILE,
 };
 
-export default memo(HeaderProfile);
+export default memo(HeaderLeftAction);

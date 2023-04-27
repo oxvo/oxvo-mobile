@@ -24,8 +24,8 @@ CLIENTS:
 
 STAFF:
 
-- Events
-  - Profile | Company Logo | Add Event
+- Home
+  - Profile | Company Logo | Add Event (Only CLIENT have admitted to ass session)
 - Calendar
   - Profile | Company Logo | Add Event
 - Notifications

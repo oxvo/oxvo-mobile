@@ -32,7 +32,9 @@ import {
   RightElement,
 } from '@oxvo-mobile/components/Header/Header.styled';
 import HeaderCompanyInfo from '@oxvo-mobile/components/Header/HeaderCompanyInfo';
-import HeaderProfile, { HeaderLeftActionType } from '@oxvo-mobile/components/Header/HeaderProfile';
+import HeaderLeftAction, {
+  HeaderLeftActionType,
+} from '@oxvo-mobile/components/Header/HeaderLeftAction';
 import HeaderRightAction from '@oxvo-mobile/components/Header/HeaderRightAction';
 import TabViewKey from '@oxvo-mobile/components/TabView/TabViewKey.types';
 import useTabViewStore from '@oxvo-mobile/components/TabView/useTabViewStore';
@@ -54,15 +56,10 @@ type HeaderProps = {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Header = memo<HeaderProps>(({ leftComponent, middleComponent, rightComponent }) => {
-  const handleOnLayout = (event) => {
-    const { width, x } = event.nativeEvent.layout;
-    console.log('HeaderMiddle width:', width);
-    console.log('HeaderMiddle x position:', x);
-  };
   return (
     <HeaderContainer>
       <LeftElement>{leftComponent}</LeftElement>
-      <MiddleElement onLayout={handleOnLayout}>
+      <MiddleElement>
         <HeaderCompanyInfo />
       </MiddleElement>
       <RightElement>{rightComponent}</RightElement>
@@ -71,13 +68,14 @@ const Header = memo<HeaderProps>(({ leftComponent, middleComponent, rightCompone
 });
 
 type BottomTabRoutes = keyof BottomTabParamList;
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 type PrivateRoutes = keyof PrivateStackParamList;
 type PublicRoutes = keyof PublicStackParamList;
 
 const ServiceNavigatorHeader = memo(() => {
   // Routes: PRIVATE_ROUTES.ADD_SERVICE
   const HeaderLeft = useCallback(() => {
-    return <HeaderProfile action={HeaderLeftActionType.GO_BACK} />;
+    return <HeaderLeftAction action={HeaderLeftActionType.GO_BACK} />;
   }, []);
 
   const HeaderMiddle = useCallback(() => {
@@ -98,10 +96,9 @@ const ServiceNavigatorHeader = memo(() => {
 });
 
 const PublicNavigatorHeader = memo(({ route }: { route: PublicRoutes }) => {
+  // Routes: PUBLIC_ROUTES.FORGOT_PASSWORD, PUBLIC_ROUTES.INVITE_CODE, PUBLIC_ROUTES.SIGN_IN, PUBLIC_ROUTES.SIGN_UP
   const HeaderLeft = useCallback(() => {
     switch (route) {
-      // Routes: PUBLIC_ROUTES.FORGOT_PASSWORD, PUBLIC_ROUTES.INVITE_CODE, PUBLIC_ROUTES.SIGN_IN, PUBLIC_ROUTES.SIGN_UP
-      // Configure components as needed
       default:
         return null;
     }
@@ -109,8 +106,6 @@ const PublicNavigatorHeader = memo(({ route }: { route: PublicRoutes }) => {
 
   const HeaderMiddle = useCallback(() => {
     switch (route) {
-      // Routes: PUBLIC_ROUTES.FORGOT_PASSWORD, PUBLIC_ROUTES.INVITE_CODE, PUBLIC_ROUTES.SIGN_IN, PUBLIC_ROUTES.SIGN_UP
-      // Configure components as needed
       default:
         return null;
     }
@@ -118,8 +113,6 @@ const PublicNavigatorHeader = memo(({ route }: { route: PublicRoutes }) => {
 
   const HeaderRight = useCallback(() => {
     switch (route) {
-      // Routes: PUBLIC_ROUTES.FORGOT_PASSWORD, PUBLIC_ROUTES.INVITE_CODE, PUBLIC_ROUTES.SIGN_IN, PUBLIC_ROUTES.SIGN_UP
-      // Configure components as needed
       default:
         return null;
     }
@@ -134,10 +127,10 @@ const PublicNavigatorHeader = memo(({ route }: { route: PublicRoutes }) => {
   );
 });
 
-const ProfileNavigatorHeader = memo(({ route }: { route: PrivateRoutes }) => {
+const ProfileNavigatorHeader = memo(() => {
   // Routes: PRIVATE_ROUTES.PROFILE.PROFILE_HOME, PRIVATE_ROUTES.PROFILE.CHANGE_PASSWORD, PRIVATE_ROUTES.PROFILE.ACCOUNT_SETTINGS
   const HeaderLeft = useCallback(() => {
-    return <HeaderProfile action={HeaderLeftActionType.GO_BACK} />;
+    return <HeaderLeftAction action={HeaderLeftActionType.GO_BACK} />;
   }, []);
 
   const HeaderMiddle = useCallback(() => {
@@ -157,32 +150,24 @@ const ProfileNavigatorHeader = memo(({ route }: { route: PrivateRoutes }) => {
   );
 });
 
-const SessionsNavigatorHeader = memo(({ route }: { route: PrivateRoutes }) => {
+const SessionsNavigatorHeader = memo(() => {
   // Routes: PRIVATE_ROUTES.SESSIONS.SESSIONS_HOME, PRIVATE_ROUTES.SESSIONS.CREATE_SESSION, PRIVATE_ROUTES.SESSIONS.SESSION_DETAIL
   const HeaderLeft = useCallback(() => {
-    switch (route) {
-      default:
-        return null;
-    }
-  }, [route]);
+    return <HeaderLeftAction action={HeaderLeftActionType.GO_BACK} />;
+  }, []);
 
   const HeaderMiddle = useCallback(() => {
-    switch (route) {
-      // Routes: PRIVATE_ROUTES.SESSIONS.SESSIONS_HOME, PRIVATE_ROUTES.SESSIONS.CREATE_SESSION, PRIVATE_ROUTES.SESSIONS.SESSION_DETAIL
-      // Configure components as needed
-      default:
-        return null;
-    }
-  }, [route]);
+    return <HeaderCompanyInfo />;
+  }, []);
 
   const HeaderRight = useCallback(() => {
-    switch (route) {
-      // Routes: PRIVATE_ROUTES.SESSIONS.SESSIONS_HOME, PRIVATE_ROUTES.SESSIONS.CREATE_SESSION, PRIVATE_ROUTES.SESSIONS.SESSION_DETAIL
-      // Configure components as needed
-      default:
-        return null;
-    }
-  }, [route]);
+    return (
+      <HeaderRightAction
+        title="Create Session"
+        navigateRoute={PRIVATE_ROUTES.SESSIONS.CREATE_SESSION}
+      />
+    );
+  }, []);
 
   return (
     <Header
@@ -198,7 +183,7 @@ const BottomTabNavigatorHeader = memo(({ route }: { route: BottomTabRoutes }) =>
   const currentUserRole = useCurrentUserRole();
 
   const HeaderLeft = useCallback(() => {
-    return <HeaderProfile />;
+    return <HeaderLeftAction />;
   }, []);
 
   const HeaderMiddle = useCallback(() => {
@@ -219,7 +204,7 @@ const BottomTabNavigatorHeader = memo(({ route }: { route: BottomTabRoutes }) =>
         // } // TODO: Uncomment this
         return (
           <HeaderRightAction
-            title="Add Session"
+            title="Create Session"
             navigateRoute={PRIVATE_ROUTES.SESSIONS.SESSIONS_NAVIGATOR}
           />
         );

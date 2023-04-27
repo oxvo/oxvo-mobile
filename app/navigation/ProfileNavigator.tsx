@@ -26,8 +26,13 @@ const ProfileNavigator = () => (
         header: () => <ProfileNavigatorHeader route={PRIVATE_ROUTES.PROFILE.PROFILE_HOME} />,
       }}
       name={PRIVATE_ROUTES.PROFILE.PROFILE_HOME}
-      component={ProfileHomeScreen}
-    />
+    >
+      {() => (
+        <Container>
+          <ProfileHomeScreen />
+        </Container>
+      )}
+    </ProfileStack.Screen>
     <ProfileStack.Screen
       options={{
         header: () => <ProfileNavigatorHeader route={PRIVATE_ROUTES.PROFILE.CHANGE_PASSWORD} />,
@@ -41,9 +46,17 @@ const ProfileNavigator = () => (
       )}
     </ProfileStack.Screen>
     <ProfileStack.Screen
+      options={{
+        header: () => <ProfileNavigatorHeader route={PRIVATE_ROUTES.PROFILE.ACCOUNT_SETTINGS} />,
+      }}
       name={PRIVATE_ROUTES.PROFILE.ACCOUNT_SETTINGS}
-      component={AccountSettings}
-    />
+    >
+      {() => (
+        <Container>
+          <AccountSettings />
+        </Container>
+      )}
+    </ProfileStack.Screen>
   </ProfileStack.Navigator>
 );
 

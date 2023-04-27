@@ -10,7 +10,7 @@ const HeaderCompanyInfo = () => {
     <HeaderCompanyLogoContainer>
       <Image
         source={{
-          uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/2560px-Google_2015_logo.svg.png',
+          uri: 'https://static.wixstatic.com/media/bf9454_c222e363f86341e5a860514e2c811331.png/v1/fill/w_440,h_212,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/bf9454_c222e363f86341e5a860514e2c811331.png',
         }}
         style={{ width: 80, height: 80 }}
         resizeMode="contain"

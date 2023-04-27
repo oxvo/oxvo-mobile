@@ -10,14 +10,22 @@ import { useNavigation } from '@react-navigation/native';
 const ProfileHomeScreen = () => {
   const { navigate } = useNavigation<PrivateStackNavigationProp>();
 
-  const navigateToChangePasswordScreen = () => {
+  const navigateChangePasswordScreen = () => {
     navigate(PRIVATE_ROUTES.PROFILE.CHANGE_PASSWORD);
   };
+
+  const navigateAccountSettingsScreen = () => {
+    navigate(PRIVATE_ROUTES.PROFILE.ACCOUNT_SETTINGS);
+  };
+
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View>
       <Text>Profile Screen</Text>
-      <Button onPress={navigateToChangePasswordScreen}>
-        <Text style={{ color: 'white' }}>navigateToChangePasswordScreen</Text>
+      <Button onPress={navigateChangePasswordScreen}>
+        <Text style={{ color: 'white' }}>Go to Change Password screen!</Text>
+      </Button>
+      <Button onPress={navigateAccountSettingsScreen}>
+        <Text style={{ color: 'white' }}>Go to Account Settings screen!</Text>
       </Button>
     </View>
   );

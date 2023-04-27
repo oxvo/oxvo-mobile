@@ -52,9 +52,9 @@ const HomeScreen = () => {
 
   if (isError) return <Text>Home Data has Error</Text>;
 
-  const navigateToProfileScreen = () => {
-    navigate(PRIVATE_ROUTES.PROFILE.PROFILE_NAVIGATOR, {
-      screen: PRIVATE_ROUTES.PROFILE.PROFILE_HOME,
+  const navigateSessionsHomeScreen = () => {
+    navigate(PRIVATE_ROUTES.SESSIONS.SESSIONS_NAVIGATOR, {
+      screen: PRIVATE_ROUTES.SESSIONS.SESSIONS_HOME,
     });
   };
 
@@ -88,8 +88,8 @@ const HomeScreen = () => {
         Home Data: Sessions Length: {homeData?.sessions?.length}, Packages Length:{' '}
         {homeData?.packages?.length || 0}
       </Text>
-      <Button onPress={navigateToProfileScreen}>
-        <Text style={{ color: 'white' }}>navigateToProfileScreen</Text>
+      <Button onPress={navigateSessionsHomeScreen}>
+        <Text style={{ color: 'white' }}>Go to Sessions Home Screen</Text>
       </Button>
     </>
   );
