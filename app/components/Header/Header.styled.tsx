@@ -1,11 +1,8 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-
-/* eslint-disable @typescript-eslint/no-unused-vars */
-// @ts-nocheck @ts-ignore
-// FIXME: @ts-ignore
 import React from 'react';
-import { Dimensions, Image, Text, View } from 'react-native';
+import { Dimensions, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import colors from '@oxvo-mobile/assets/colors.json';
 
 import { SAFE_AREA_TOP_MARGIN } from '@oxvo-mobile/constants/ui';
 
@@ -43,18 +40,15 @@ const HeaderContainer = styled((props) => {
   );
 })`
   padding: 24px;
-
   padding-bottom: 8px;
   display: flex;
   flex-direction: row;
   align-items: center;
-
   justify-content: space-between;
-
   z-index: 3;
-  background-color: #fdfdfd;
+  background-color: ${colors.base.white};
   border-bottom-width: 1px;
-  border-bottom-color: #eeeeee;
+  border-bottom-color: ${colors.base.lightGray};
 `;
 
 export { HeaderContainer, RightElement, LeftElement, MiddleElement };

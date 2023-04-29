@@ -1,4 +1,16 @@
 {
+  "base": {
+    "white": "#fff",
+    "beige": "#FFF1DC",
+    "blue": "#3A98B9",
+    "lightBeige": "#E8D5C4",
+    "lightGray": "#EEEEEE"
+  },
+  "supports": {
+    "green": "#A4D0A4",
+    "yellow": "#F7D060",
+    "red": "#CE5959"
+  },
   "grays": {
     "gray": "#A0A1B4",
     "gray02": "#FAFAFA",

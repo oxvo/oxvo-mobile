@@ -17,17 +17,10 @@ enum CompanyType {
   EDUCATION = 'EDUCATION',
 }
 
-enum Currency {
-  USD = 'USD',
-  EUR = 'EUR',
-  GBP = 'GBP',
-  TRY = 'TRY',
-}
-
 enum CompanyServiceType {
   WORKOUT = 'WORKOUT',
   MEETING = 'MEETING',
   ONLINE = 'ONLINE',
 }
 
-export { Currency, CompanyType, UserRoles, SessionStatusType, CompanyServiceType };
+export { CompanyType, UserRoles, SessionStatusType, CompanyServiceType };
