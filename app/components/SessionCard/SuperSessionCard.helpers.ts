@@ -116,54 +116,57 @@ const getSessionStatusText = ({
   counterPartUserReply,
   userFullName,
   counterPartUserFullName,
-}: GetSessionStatusTextProps): string => {
+}: GetSessionStatusTextProps): any => {
+  let userSessionStatusText;
+  let counterPartUserSessionStatusText;
+
   if (userReply === SessionStatusType.JOIN) {
-    return `${userFullName}, bu oturuma katılacağını onayladı.`;
+    userSessionStatusText = `${userFullName}, bu oturuma katılacağını onayladı.`;
   }
 
   if (counterPartUserReply === SessionStatusType.JOIN) {
-    return `${counterPartUserFullName}, bu oturuma katılacağını onayladı.`;
+    counterPartUserSessionStatusText = `${counterPartUserFullName}, bu oturuma katılacağını onayladı.`;
   }
 
   if (userReply === SessionStatusType.AWAITING) {
-    return `${userFullName}, henüz oturuma katılım hakkında bilgi sağlamadı.`;
+    userSessionStatusText = `${userFullName}, henüz oturuma katılım hakkında bilgi sağlamadı.`;
   }
 
   if (counterPartUserReply === SessionStatusType.AWAITING) {
-    return `${counterPartUserFullName}, henüz oturuma katılım hakkında bilgi sağlamadı.`;
+    counterPartUserSessionStatusText = `${counterPartUserFullName}, henüz oturuma katılım hakkında bilgi sağlamadı.`;
   }
 
   if (userReply === SessionStatusType.CANCELED) {
-    return `${userFullName}, bu oturumu iptal etti.`;
+    userSessionStatusText = `${userFullName}, bu oturumu iptal etti.`;
   }
 
   if (counterPartUserReply === SessionStatusType.CANCELED) {
-    return `${counterPartUserFullName}, bu oturumu iptal etti.`;
+    counterPartUserSessionStatusText = `${counterPartUserFullName}, bu oturumu iptal etti.`;
   }
 
   if (
     userReply === SessionStatusType.STAFF_NOT_ATTEND ||
     userReply === SessionStatusType.CLIENT_NOT_ATTEND
   ) {
-    return `${userFullName}, bu oturumu ${counterPartUserFullName} katılmadı olarak işaretledi`;
+    userSessionStatusText = `${userFullName}, bu oturumu ${counterPartUserFullName} katılmadı olarak işaretledi`;
   }
 
   if (
     counterPartUserReply === SessionStatusType.STAFF_NOT_ATTEND ||
     counterPartUserReply === SessionStatusType.CLIENT_NOT_ATTEND
   ) {
-    return `${counterPartUserFullName}, bu oturumu ${userFullName} katılmadı olarak işaretledi`;
+    counterPartUserSessionStatusText = `${counterPartUserFullName}, bu oturumu ${userFullName} katılmadı olarak işaretledi`;
   }
 
   if (userReply === SessionStatusType.COMPLETED) {
-    return `${userFullName}, bu oturumu tamamlandı olarak işaretledi.`;
+    userSessionStatusText = `${userFullName}, bu oturumu tamamlandı olarak işaretledi.`;
   }
 
   if (counterPartUserReply === SessionStatusType.COMPLETED) {
-    return `${counterPartUserFullName}, bu oturumu tamamlandı olarak işaretledi.`;
+    counterPartUserSessionStatusText = `${counterPartUserFullName}, bu oturumu tamamlandı olarak işaretledi.`;
   }
 
-  return '';
+  return { userSessionStatusText, counterPartUserSessionStatusText };
 };
 
 export {

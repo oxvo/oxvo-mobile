@@ -9,7 +9,7 @@ import {
   getSessionStatusText,
   getSessionTimeRange,
   getUserColor,
-} from '@oxvo-mobile/components/SessionCard/helpers';
+} from '@oxvo-mobile/components/SessionCard/SuperSessionCard.helpers';
 
 type SuperSessionCardProps = {
   counterPartUserFullName: string;
@@ -34,7 +34,7 @@ const SuperSessionCard = ({
   const backgroundColor = getBackgroundColor(userReply, counterPartUserReply, isSessionExpired);
   const borderColor = getBorderColor(userReply, counterPartUserReply, isSessionExpired);
   const formattedStartDate = getFormattedStartDate(startDate);
-  const sessionStatusText = getSessionStatusText({
+  const { counterPartUserSessionStatusText, userSessionStatusText } = getSessionStatusText({
     userFullName,
     counterPartUserFullName,
     userReply,
@@ -51,7 +51,8 @@ const SuperSessionCard = ({
     'formattedStartDate ->',
     formattedStartDate,
     'sessionStatusText ->',
-    sessionStatusText,
+    counterPartUserSessionStatusText,
+    userSessionStatusText,
     'sessionTimeRange ->',
     sessionTimeRange,
     'companyServiceName ->',
