@@ -8,8 +8,9 @@ type IconProps = {
 
 type SettingsItemProps = {
   Icon?: React.ReactElement<IconProps>;
-  text: any;
+  text: string;
   idx: number;
   color: string;
+  alignIcon: string;
 };
 export { SettingsItemProps };

@@ -4,6 +4,7 @@ import { Text, View } from 'react-native';
 const Calendar = () => (
   <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
     <Text>Calendar Screen</Text>
+    {/* <Settings /> */}
   </View>
 );
 
