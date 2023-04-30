@@ -5,6 +5,7 @@ import { Button, Checkbox, Text, TextField, View } from 'react-native-ui-lib';
 import { PASSWORD_SETTINGS } from '@oxvo-mobile/domains/Auth/constants/auth';
 import useSignIn from '@oxvo-mobile/domains/Auth/queries/useSignIn';
 
+import { Ionicons } from '@expo/vector-icons';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 
@@ -18,8 +19,13 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>;
 
+function Test() {
+  return <Text>SignIn</Text>;
+}
+
 const SignInScreen = () => {
   const [rememberMe, setRememberMe] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const {
     control,
     handleSubmit,
@@ -38,6 +44,9 @@ const SignInScreen = () => {
 
   const handleRememberMe = () => {
     setRememberMe(!rememberMe);
+  };
+  const handleViewPassword = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -79,10 +88,28 @@ const SignInScreen = () => {
               textContentType="password"
               autoCapitalize="none"
               floatingPlaceholder
+              marginB-20
+              trailingAccessory={
+                showPassword ? (
+                  <Ionicons
+                    name="eye-off-outline"
+                    size={24}
+                    color="black"
+                    onPress={handleViewPassword}
+                  />
+                ) : (
+                  <Ionicons
+                    name="md-eye-outline"
+                    size={24}
+                    color="black"
+                    onPress={handleViewPassword}
+                  />
+                )
+              }
               placeholder="Password"
               value={field.value}
               onChangeText={field.onChange}
-              secureTextEntry
+              secureTextEntry={showPassword}
               validationMessage={errors.password?.message}
               enableErrors
               containerStyle={{ marginBottom: 15 }}
