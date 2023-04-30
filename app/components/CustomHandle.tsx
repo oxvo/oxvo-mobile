@@ -117,13 +117,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
 
     backgroundColor: '#fff',
+
     paddingVertical: 14,
-    borderBottomWidth: 1,
-    borderBottomColor: '#fff',
+    // borderBottomWidth: 1,
+    // borderTopWidth: 1,
+    // borderLeftWidth: 1,
+    // borderRightWidth: 1,
+    // borderTopColor: '#f3f3f3',
+    // borderBottomColor: '#fff',
+    // borderLeftColor: '#f3f3f3',
+    // borderRightColor: '#f3f3f3',
   },
   title: {
     alignSelf: 'flex-start',
-    paddingLeft: 4,
+    // paddingLeft: 4,
     marginTop: 26,
     fontSize: 20,
     lineHeight: 20,
