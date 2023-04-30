@@ -41,7 +41,7 @@ const PublicNavigator = (): React.ReactElement | null => {
     return null;
   }
 
-  const initialRouteName = !hasInviteCode ? PUBLIC_ROUTES.SIGN_IN : PUBLIC_ROUTES.INVITE_CODE;
+  const initialRouteName = hasInviteCode ? PUBLIC_ROUTES.SIGN_IN : PUBLIC_ROUTES.INVITE_CODE;
 
   return (
     <PublicStack.Navigator
