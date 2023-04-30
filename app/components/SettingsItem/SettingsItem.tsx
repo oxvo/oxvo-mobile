@@ -24,8 +24,8 @@ const SettingsItem = ({
   ) : (
     <View style={styles.container}>
       <View style={[styles.textContainer, idx ? styles.divider : null]}>
+        <AntDesign name="left" size={12} color="#A2B5BB" style={{ alignSelf: 'center' }} />
         <Text style={[styles.textStyle, { color: color }]}>{text}</Text>
-        <AntDesign name="right" size={12} color="#A2B5BB" style={{ alignSelf: 'center' }} />
       </View>
       <View style={styles.iconContainer}>{Icon && React.cloneElement(Icon, { color: color })}</View>
     </View>
