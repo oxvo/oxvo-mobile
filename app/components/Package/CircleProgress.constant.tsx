@@ -1,0 +1,7 @@
+const SIZE = 48;
+const STROKE_WIDTH = 4;
+const CENTER = SIZE / 2;
+const RADIUS = SIZE / 2 - STROKE_WIDTH / 2;
+const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
+
+export { CIRCUMFERENCE, CENTER, RADIUS, SIZE, STROKE_WIDTH };
