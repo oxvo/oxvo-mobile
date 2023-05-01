@@ -18,7 +18,6 @@ import HomeSkeleton from '@oxvo-mobile/screens/PrivateScreens/Home/Home.skeleton
 
 import Container from '@oxvo-mobile/components/Containers/Private/Container.styled';
 import CustomHandle from '@oxvo-mobile/components/CustomHandle';
-import SessionCard from '@oxvo-mobile/components/SessionCard/SessionCard';
 import SuperSessionCard from '@oxvo-mobile/components/SessionCard/SuperSessionCard';
 
 import { PrivateStackNavigationProp } from '@oxvo-mobile/navigation/types';
@@ -67,7 +66,6 @@ const HomeScreen = () => {
   }, []);
 
   // render
-  const renderItem = useCallback(({ item }) => <SessionCard />, []);
   const renderCustomHandle = useCallback(
     (props) => <CustomHandle title="Last Counts" {...props} />,
     []
