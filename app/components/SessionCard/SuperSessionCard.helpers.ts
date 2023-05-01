@@ -1,3 +1,5 @@
+import colors from '@oxvo-mobile/assets/colors.json';
+
 import { SessionStatusType } from '@oxvo-mobile/constants/oxvo';
 
 const checkSessionExpiration = (endDate: string): boolean => {
@@ -34,16 +36,18 @@ const getSessionTimeRange = (startDate: string, endDate: string): string => {
 const getUserColor = (status: string): string => {
   switch (status) {
     case SessionStatusType.JOIN:
-      return 'green';
+      return colors.base.blue;
     case SessionStatusType.AWAITING:
-      return 'yellow';
+      return colors.supports.yellow;
     case SessionStatusType.CANCELED:
-      return 'red';
+      return colors.supports.red;
+    case SessionStatusType.COMPLETED:
+      return colors.supports.green;
     case SessionStatusType.STAFF_NOT_ATTEND:
     case SessionStatusType.CLIENT_NOT_ATTEND:
-      return 'gray';
+      return 'black';
     default:
-      return 'gray';
+      return colors.grays.gray;
   }
 };
 
@@ -53,7 +57,7 @@ const getBackgroundColor = (
   isSessionExpired: boolean
 ): string => {
   if (!isSessionExpired) {
-    return 'white';
+    return colors.base.white;
   }
 
   if (
@@ -62,16 +66,16 @@ const getBackgroundColor = (
     userReply === SessionStatusType.CLIENT_NOT_ATTEND ||
     counterPartUserReply === SessionStatusType.CLIENT_NOT_ATTEND
   ) {
-    return 'gray';
+    return colors.base.white;
   }
   if (
     userReply === SessionStatusType.COMPLETED &&
     counterPartUserReply === SessionStatusType.COMPLETED
   ) {
-    return 'green';
+    // return colors.supports.green;
   }
 
-  return 'gray';
+  return colors.base.white;
 };
 
 const getBorderColor = (
@@ -80,25 +84,32 @@ const getBorderColor = (
   isSessionExpired: boolean
 ): string | null => {
   if (isSessionExpired) {
-    return null;
+    // return 'black';
   }
 
   if (
-    userReply === SessionStatusType.CANCELED ||
+    userReply === SessionStatusType.CANCELED &&
     counterPartUserReply === SessionStatusType.CANCELED
   ) {
-    return 'red';
+    return colors.supports.red;
   }
 
   if (
-    userReply === SessionStatusType.AWAITING ||
+    userReply === SessionStatusType.AWAITING &&
     counterPartUserReply === SessionStatusType.AWAITING
   ) {
-    return 'yellow';
+    return colors.supports.yellow;
   }
 
   if (userReply === SessionStatusType.JOIN && counterPartUserReply === SessionStatusType.JOIN) {
-    return 'green';
+    return colors.supports.green;
+  }
+
+  if (
+    userReply === SessionStatusType.COMPLETED &&
+    counterPartUserReply === SessionStatusType.COMPLETED
+  ) {
+    return colors.base.blue;
   }
 
   return null;
@@ -116,7 +127,7 @@ const getSessionStatusText = ({
   counterPartUserReply,
   userFullName,
   counterPartUserFullName,
-}: GetSessionStatusTextProps): any => {
+}: GetSessionStatusTextProps) => {
   let userSessionStatusText;
   let counterPartUserSessionStatusText;
 
@@ -169,7 +180,12 @@ const getSessionStatusText = ({
   return { userSessionStatusText, counterPartUserSessionStatusText };
 };
 
+const getUserImageUrl = (fullName: string): string => {
+  return `https://ui-avatars.com/api/?name=${fullName}`;
+};
+
 export {
+  getUserImageUrl,
   getSessionStatusText,
   getBorderColor,
   getBackgroundColor,

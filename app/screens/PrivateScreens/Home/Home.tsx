@@ -31,6 +31,7 @@ import { PRIVATE_ROUTES } from '@oxvo-mobile/constants/routes';
 import { useNavigation } from '@react-navigation/native';
 
 import BottomSheet, { BottomSheetFlatList } from '@gorhom/bottom-sheet';
+import styled from 'styled-components/native';
 
 const HomeScreen = () => {
   const navigateSessionsHomeScreen = () => {
@@ -52,7 +53,7 @@ const HomeScreen = () => {
         .map((_, index) => `index-${index}`),
     []
   );
-  const snapPoints = useMemo(() => ['25%', '50%', '93%'], []);
+  const snapPoints = useMemo(() => ['15%', '50%', '93%'], []);
 
   // callbacks
   const handleSheetChange = useCallback((index) => {
@@ -91,131 +92,48 @@ const HomeScreen = () => {
 
   if (isError) return <Text>Home Data has Error</Text>;
   const { width, height } = Dimensions.get('window');
-  const paddingBottomValue = height * 0.24;
+  const paddingBottomValue = height * 0.17;
   console.log(homeData.sessions?.length);
+  const Container = styled.View`
+    margin: 8px 0px;
+    row-gap: 8px;
+  `;
   return (
-    <View style={styles.container}>
-      {/* <Button onPress={onLogout}>
-        <Text style={{ color: 'white' }}>Logout</Text>
-      </Button> */}
-      <View style={[styles.contentWrapper, { paddingBottom: paddingBottomValue }]}>
-        <Text style={styles.title}>Today's Sessions</Text>
-        <ScrollView
-          style={styles.scrollView}
-          refreshControl={
-            <RefreshControl
-              refreshing={isFetching}
-              onRefresh={async () => {
-                await refetch();
-              }}
-            />
-          }
-        >
-          <View style={{ rowGap: 12 }}>
-            {homeData.sessions?.map((session) => {
-              const { userFullName, counterPartUserFullName } = getFullNameByUserRole(
-                session,
-                currentUserRole
-              );
-              const { userReply, counterPartUserReply } = getReplyByUserRole(
-                session,
-                currentUserRole
-              );
-              return (
-                <SuperSessionCard
-                  key={session.id}
-                  userFullName={userFullName}
-                  counterPartUserFullName={counterPartUserFullName}
-                  startDate={session.startDate}
-                  endDate={session.endDate}
-                  companyServiceName={session.companyService.name}
-                  userReply={userReply}
-                  counterPartUserReply={counterPartUserReply}
-                />
-              );
-            })}
-          </View>
-        </ScrollView>
-      </View>
-      {/* 
-      <Button title="Snap To 90%" onPress={() => handleSnapPress(2)} />
-      <Button title="Snap To 50%" onPress={() => handleSnapPress(1)} />
-      <Button title="Snap To 25%" onPress={() => handleSnapPress(0)} />
-      <Button title="Close" onPress={() => handleClosePress()} /> */}
-
-      <BottomSheet
-        backgroundStyle={{ backgroundColor: colors.base.white }}
-        handleComponent={renderCustomHandle}
-        ref={sheetRef}
-        index={homeData.sessions?.length || 0 < 5 ? 0 : 0}
-        snapPoints={snapPoints}
-        onChange={handleSheetChange}
-      >
-        <BottomSheetFlatList
+    <ScrollView
+      refreshControl={
+        <RefreshControl
           refreshing={isFetching}
           onRefresh={async () => {
             await refetch();
           }}
-          data={data}
-          keyExtractor={(i) => i}
-          // renderItem={renderItem}
-          contentContainerStyle={styles.contentContainer}
         />
-      </BottomSheet>
-      {/* <Button onPress={onLogout}>
-        <Text style={{ color: 'white' }}>Logout</Text>
-      </Button> */}
-      {/* <Text h1>{t('screens.privateScreens.home.lastCounts')}</Text>
-      <Text text>Today's Sessions</Text>
-      <Text>
-        Currents User Role:
-        {currentUserRole}
-      </Text>
-
-      <Button onPress={purgeCompanySettingsInStorage}>
-        <Text style={{ color: 'white' }}>Logout and clear all data</Text>
-      </Button>
-      <Text>
-        Company Settings:
-        {JSON.stringify(companySettings)}
-      </Text>
-      <Text>
-        Me Data:
-        {JSON.stringify(meData)}
-      </Text>
-      <Text>
-        Home Data: Sessions Length: {homeData?.sessions?.length}, Packages Length:{' '}
-        {homeData?.packages?.length || 0}
-      </Text>
-      <Button onPress={navigateSessionsHomeScreen}>
-        <Text style={{ color: 'white' }}>Go to Sessions Home Screen</Text>
-      </Button> */}
-    </View>
+      }
+    >
+      {/* <View style={{ rowGap: 12 }}> */}
+      <Container>
+        {homeData.sessions?.map((session) => {
+          const { userFullName, counterPartUserFullName } = getFullNameByUserRole(
+            session,
+            currentUserRole
+          );
+          const { userReply, counterPartUserReply } = getReplyByUserRole(session, currentUserRole);
+          return (
+            <SuperSessionCard
+              key={session.id}
+              userFullName={userFullName}
+              counterPartUserFullName={counterPartUserFullName}
+              startDate={session.startDate}
+              endDate={session.endDate}
+              companyServiceName={session.companyService.name}
+              userReply={userReply}
+              counterPartUserReply={counterPartUserReply}
+            />
+          );
+        })}
+      </Container>
+      {/* </View> */}
+    </ScrollView>
   );
 };
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  contentWrapper: {},
-  scrollView: {},
-  contentContainer: {
-    rowGap: 12,
 
-    backgroundColor: '#fff',
-  },
-  itemContainer: {
-    backgroundColor: 'red',
-    padding: 6,
-    margin: 6,
-  },
-  title: {
-    alignSelf: 'flex-start',
-    fontSize: 20,
-    marginBottom: 12,
-    lineHeight: 20,
-    textAlign: 'center',
-    fontWeight: 'bold',
-  },
-});
 export default HomeScreen;

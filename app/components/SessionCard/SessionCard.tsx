@@ -12,16 +12,7 @@ const Container = styled.View`
   border-radius: 8px;
   width: 100%;
   height: 84px;
-  background-color: ${({ status }) => {
-    switch (status) {
-      case 'completed':
-        return 'green';
-      case 'notAttend':
-        return 'gray';
-      default:
-        return '#fff';
-    }
-  }};
+  background-color: black;
   border: 1px solid #f6f6f6;
   overflow: hidden;
   flex: 1;

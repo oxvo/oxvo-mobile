@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { Image, Platform, Text } from 'react-native';
+import { TouchableOpacity } from 'react-native-ui-lib';
 
 import {
   checkSessionExpiration,
@@ -9,7 +10,12 @@ import {
   getSessionStatusText,
   getSessionTimeRange,
   getUserColor,
+  getUserImageUrl,
 } from '@oxvo-mobile/components/SessionCard/SuperSessionCard.helpers';
+
+import colors from '@oxvo-mobile/assets/colors.json';
+
+import styled from 'styled-components/native';
 
 type SuperSessionCardProps = {
   counterPartUserFullName: string;
@@ -20,6 +26,51 @@ type SuperSessionCardProps = {
   userReply: string;
   counterPartUserReply: string;
 };
+
+const Container = styled.View`
+  overflow: hidden;
+  padding: 12px 24px;
+  background-color: ${(props) => props.backgroundColor};
+`;
+
+const RoundedImage = styled.Image`
+  width: 34px;
+  height: 34px;
+  border-radius: 24px;
+  border: 2px solid ${(props) => props.borderColor};
+`;
+
+const Content = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+const LeftContent = styled.View`
+  //   flex-direction: column;
+  //   justify-content: center;
+  //   height: 100%;
+  width: 180px;
+  row-gap: 12px;
+`;
+
+const RightContent = styled.View`
+  //   flex-direction: column;
+  //   align-items: flex-end;
+  //   row-gap: 8px;
+  //   width: 100px;
+`;
+
+const SessionStatusTextContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  column-gap: 8px;
+`;
+
+const TextWrapper = styled.View`
+  width: 100px;
+  row-gap: 8px;
+  align-items: flex-end;
+`;
 
 const SuperSessionCard = ({
   userFullName,
@@ -43,28 +94,41 @@ const SuperSessionCard = ({
   const sessionTimeRange = getSessionTimeRange(startDate, endDate);
   const userColor = getUserColor(userReply);
   const counterPartUserColor = getUserColor(counterPartUserReply);
-  console.log(
-    'backgroundColor ->',
-    backgroundColor,
-    'borderColor ->',
-    borderColor,
-    'formattedStartDate ->',
-    formattedStartDate,
-    'sessionStatusText ->',
-    counterPartUserSessionStatusText,
-    userSessionStatusText,
-    'sessionTimeRange ->',
-    sessionTimeRange,
-    'companyServiceName ->',
-    companyServiceName,
-    'userColor ->',
-    userColor,
-    'counterPartUserColor ->',
-    counterPartUserColor,
-    'isSessionExpired ->',
-    isSessionExpired
+  const userImageUrl = getUserImageUrl(userFullName);
+  const counterPartUserImageUrl = getUserImageUrl(counterPartUserFullName);
+
+  return (
+    <TouchableOpacity>
+      <Container borderColor={borderColor} backgroundColor={backgroundColor}>
+        <Content>
+          <LeftContent>
+            <SessionStatusTextContainer>
+              <RoundedImage borderColor={userColor} source={{ uri: userImageUrl }} />
+              <Text style={{ fontSize: 10, fontWeight: 300, lineHeight: 16 }}>
+                {userSessionStatusText}
+              </Text>
+            </SessionStatusTextContainer>
+            <SessionStatusTextContainer>
+              <RoundedImage
+                borderColor={counterPartUserColor}
+                source={{ uri: counterPartUserImageUrl }}
+              />
+              <Text style={{ fontSize: 10, fontWeight: 300, lineHeight: 16 }}>
+                {counterPartUserSessionStatusText}
+              </Text>
+            </SessionStatusTextContainer>
+          </LeftContent>
+          <RightContent>
+            <TextWrapper>
+              <Text style={{ fontSize: 10, fontWeight: 300 }}>{sessionTimeRange}</Text>
+              <Text style={{ fontSize: 10, fontWeight: 300 }}>{formattedStartDate}</Text>
+              <Text style={{ fontSize: 10, fontWeight: 300 }}>{companyServiceName}</Text>
+            </TextWrapper>
+          </RightContent>
+        </Content>
+      </Container>
+    </TouchableOpacity>
   );
-  return <Text>SuperSessionCard</Text>;
 };
 
 export default memo(SuperSessionCard);

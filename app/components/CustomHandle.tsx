@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { StyleProp, StyleSheet, Text, ViewStyle } from 'react-native';
+import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 import Animated, {
   Extrapolate,
   interpolate,
@@ -7,6 +7,7 @@ import Animated, {
   useDerivedValue,
 } from 'react-native-reanimated';
 import { toRad } from 'react-native-redash';
+import { Text } from 'react-native-ui-lib';
 
 import colors from '@oxvo-mobile/assets/colors.json';
 
@@ -104,7 +105,9 @@ const Handle: React.FC<HandleProps> = ({ style, title, animatedIndex }) => {
     <Animated.View style={[containerStyle, containerAnimatedStyle]} renderToHardwareTextureAndroid>
       <Animated.View style={[leftIndicatorStyle, leftIndicatorAnimatedStyle]} />
       <Animated.View style={[rightIndicatorStyle, rightIndicatorAnimatedStyle]} />
-      <Text style={styles.title}>{title}</Text>
+      <Text text60BO marginT-24 style={styles.title}>
+        {title}
+      </Text>
     </Animated.View>
   );
 };
@@ -116,9 +119,9 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     alignItems: 'center',
 
-    backgroundColor: '#fff',
+    backgroundColor: 'blue',
 
-    paddingVertical: 14,
+    paddingVertical: 12,
     // borderBottomWidth: 1,
     // borderTopWidth: 1,
     // borderLeftWidth: 1,
@@ -129,13 +132,13 @@ const styles = StyleSheet.create({
     // borderRightColor: '#f3f3f3',
   },
   title: {
-    alignSelf: 'flex-start',
-    // paddingLeft: 4,
-    marginTop: 26,
-    fontSize: 20,
-    lineHeight: 20,
-    textAlign: 'center',
-    fontWeight: 'bold',
+    // alignSelf: 'flex-start',
+    // // paddingLeft: 4,
+    // marginTop: 26,
+    // fontSize: 20,
+    // lineHeight: 20,
+    // textAlign: 'center',
+    // fontWeight: 'bold',
   },
   indicator: {
     position: 'absolute',

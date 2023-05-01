@@ -5,9 +5,9 @@ import styled from 'styled-components/native';
 const Container = styled.View`
   flex: 1;
   position: relative;
-  padding: 16px;
+  // padding: 0 16px;
   color: 'red';
-  background-color: #fff;
+  background-color: ${colors.grays.gray02};
 `;
 
 export default Container;
