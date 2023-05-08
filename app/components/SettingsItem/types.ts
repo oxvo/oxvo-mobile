@@ -12,5 +12,6 @@ type SettingsItemProps = {
   idx: number;
   color: string;
   alignIcon: string;
+  onPress: undefined;
 };
 export { SettingsItemProps };

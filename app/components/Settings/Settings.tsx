@@ -23,25 +23,21 @@ const settings = [
   },
 ];
 const Settings = () => (
-  console.log(settings.length - 1),
-  (
-    <View style={{ flex: 1 }}>
-      <Text style={styles.subTitle}>Account</Text>
+  <View style={{ flex: 1 }}>
+    <Text style={styles.subTitle}>Account</Text>
 
-      {settings.map((item, index) => {
-        console.log(index);
-        return (
-          <SettingsItem
-            Icon={item.icon}
-            text={item.text}
-            key={index}
-            color={item.color}
-            idx={index + 1 !== settings.length ? index + 1 : null}
-          />
-        );
-      })}
-    </View>
-  )
+    {settings.map((item, index) => {
+      return (
+        <SettingsItem
+          Icon={item.icon}
+          text={item.text}
+          key={index}
+          color={item.color}
+          idx={index + 1 !== settings.length ? index + 1 : null}
+        />
+      );
+    })}
+  </View>
 );
 
 export default Settings;
