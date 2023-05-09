@@ -19,7 +19,6 @@ export default function MoreButton({ top = true }) {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#F5F3F5',
       }}
     >
       <View style={{ alignItems: 'center' }}>
@@ -29,14 +28,15 @@ export default function MoreButton({ top = true }) {
               from={{ opacity: 0, translateY: 0 }}
               animate={{
                 opacity: 1,
-                translateY: top ? settings.length * 40 + 10 : -settings.length * 5 - 40,
+                translateY: settings.length * 40 + 10,
               }}
               exit={{ opacity: 0, translateY: 10 }}
               style={{
                 backgroundColor: '#fff',
                 borderRadius: 20,
                 width: 250,
-
+                borderColor: '#cccccc',
+                borderWidth: 1,
                 padding: 10,
                 position: 'absolute',
                 bottom: 0,
@@ -57,22 +57,18 @@ export default function MoreButton({ top = true }) {
           )}
         </AnimatePresence>
         <TouchableOpacity onPress={() => setActive((active) => !active)} activeOpacity={1}>
-          <MView
-            animate={{
-              backgroundColor: !active ? '#FCD259' : '#dfdfdf',
-              rotate: active ? '90deg' : '0deg',
-            }}
+          <View
             style={{
               width: 50,
               height: 50,
               borderRadius: 50,
-              backgroundColor: '#FCD259',
+
               alignItems: 'center',
               justifyContent: 'center',
             }}
           >
             <Ionicons name="ellipsis-vertical" size={24} color="black" />
-          </MView>
+          </View>
         </TouchableOpacity>
       </View>
     </View>
