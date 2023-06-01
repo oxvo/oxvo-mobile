@@ -12,7 +12,7 @@ const SignInPayloadSchema = z.object({
 
 const SignInResponseSchema = z.object({
   accessToken: z.string(),
-  accessTokenExpiresAt: z.string(),
+  accessTokenExpiresAt: z.null(),
   refreshToken: z.string(),
   refreshTokenExpiresAt: z.null(),
 });

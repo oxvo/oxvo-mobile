@@ -10,7 +10,7 @@ const RefreshTokenPayloadSchema = z.object({
 
 const RefreshTokenResponseSchema = z.object({
   accessToken: z.string(),
-  accessTokenExpiresAt: z.string(),
+  accessTokenExpiresAt: z.null(),
   refreshToken: z.string(),
   refreshTokenExpiresAt: z.null(),
 });
