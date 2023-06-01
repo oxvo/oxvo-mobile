@@ -34,7 +34,6 @@ const SignInScreen = () => {
   const signInMutation = useSignIn();
 
   const handleSignIn = async (data: FormData) => {
-    console.log(data);
     await signInMutation.mutateAsync(data);
   };
 
