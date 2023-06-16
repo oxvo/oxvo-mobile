@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unstable-nested-components */
+
 /**
  * @example:
  * PublicNavigator
@@ -41,12 +43,15 @@ import useTabViewStore from '@oxvo-mobile/components/TabView/useTabViewStore';
 
 import {
   BottomTabParamList,
+  PrivateStackNavigationProp,
   PrivateStackParamList,
   PublicStackParamList,
 } from '@oxvo-mobile/navigation/types';
 
 import { UserRoles } from '@oxvo-mobile/constants/oxvo';
 import { BOTTOM_TAB_ROUTES, PRIVATE_ROUTES } from '@oxvo-mobile/constants/routes';
+
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 type HeaderProps = {
   leftComponent: React.ReactNode;
@@ -55,7 +60,7 @@ type HeaderProps = {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Header = memo<HeaderProps>(({ leftComponent, middleComponent, rightComponent }) => {
+const Header = ({ leftComponent, middleComponent, rightComponent }) => {
   return (
     <HeaderContainer>
       <LeftElement>{leftComponent}</LeftElement>
@@ -65,7 +70,7 @@ const Header = memo<HeaderProps>(({ leftComponent, middleComponent, rightCompone
       <RightElement>{rightComponent}</RightElement>
     </HeaderContainer>
   );
-});
+};
 
 type BottomTabRoutes = keyof BottomTabParamList;
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -150,24 +155,32 @@ const ProfileNavigatorHeader = memo(() => {
   );
 });
 
-const SessionsNavigatorHeader = memo(() => {
+const SessionsNavigatorHeader = ({ route }: { route: PrivateRoutes }) => {
+  const { navigate, getState } = useNavigation<PrivateStackNavigationProp>();
+  const routex = useRoute();
+  const currentNavigationState = getState();
+  const previousRoute = currentNavigationState.routes[currentNavigationState.index - 1];
   // Routes: PRIVATE_ROUTES.SESSIONS.SESSIONS_HOME, PRIVATE_ROUTES.SESSIONS.CREATE_SESSION, PRIVATE_ROUTES.SESSIONS.SESSION_DETAIL
-  const HeaderLeft = useCallback(() => {
-    return <HeaderLeftAction action={HeaderLeftActionType.GO_BACK} />;
-  }, []);
+  const HeaderLeft = () => {
+    return <HeaderLeftAction routex={previousRoute} action={HeaderLeftActionType.GO_BACK} />;
+  };
 
-  const HeaderMiddle = useCallback(() => {
+  const HeaderMiddle = () => {
     return <HeaderCompanyInfo />;
-  }, []);
+  };
 
-  const HeaderRight = useCallback(() => {
-    return (
-      <HeaderRightAction
-        title="Create Session"
-        navigateRoute={PRIVATE_ROUTES.SESSIONS.CREATE_SESSION}
-      />
-    );
-  }, []);
+  const HeaderRight = () => {
+    // return (
+    //   <HeaderRightAction
+    //     title="Create Session in Session Screens"
+    //     onNavigate={() => {
+    //       navigate(PRIVATE_ROUTES.SESSIONS.SESSIONS_NAVIGATOR, {
+    //         screen: PRIVATE_ROUTES.SESSIONS.CREATE_SESSION,
+    //       });
+    //     }}
+    //   />
+    // );
+  };
 
   return (
     <Header
@@ -176,26 +189,27 @@ const SessionsNavigatorHeader = memo(() => {
       rightComponent={<HeaderRight />}
     />
   );
-});
+};
 
-const BottomTabNavigatorHeader = memo(({ route }: { route: BottomTabRoutes }) => {
+const BottomTabNavigatorHeader = ({ route }: { route: BottomTabRoutes }) => {
   const currentTabViewKey = useTabViewStore((state) => state.currentTabViewKey);
   const currentUserRole = useCurrentUserRole();
+  const { navigate } = useNavigation<PrivateStackNavigationProp>();
 
-  const HeaderLeft = useCallback(() => {
+  const HeaderLeft = () => {
     return <HeaderLeftAction />;
-  }, []);
+  };
 
-  const HeaderMiddle = useCallback(() => {
+  const HeaderMiddle = () => {
     switch (route) {
       case BOTTOM_TAB_ROUTES.HOME:
         return <HeaderCompanyInfo />;
       default:
         return null;
     }
-  }, [route]);
+  };
 
-  const HeaderRight = useCallback(() => {
+  const HeaderRight = () => {
     switch (route) {
       case BOTTOM_TAB_ROUTES.HOME:
       case BOTTOM_TAB_ROUTES.CALENDAR:
@@ -205,7 +219,12 @@ const BottomTabNavigatorHeader = memo(({ route }: { route: BottomTabRoutes }) =>
         return (
           <HeaderRightAction
             title="Create Session"
-            navigateRoute={PRIVATE_ROUTES.SESSIONS.SESSIONS_NAVIGATOR}
+            onNavigate={() => {
+              navigate(PRIVATE_ROUTES.SESSIONS.SESSIONS_NAVIGATOR, {
+                screen: PRIVATE_ROUTES.SESSIONS.CREATE_SESSION,
+                params: { from: BOTTOM_TAB_ROUTES.HOME },
+              });
+            }}
           />
         );
       case BOTTOM_TAB_ROUTES.NOTIFICATIONS:
@@ -231,7 +250,7 @@ const BottomTabNavigatorHeader = memo(({ route }: { route: BottomTabRoutes }) =>
       default:
         return null;
     }
-  }, [currentTabViewKey, currentUserRole, route]);
+  };
 
   return (
     <Header
@@ -240,7 +259,7 @@ const BottomTabNavigatorHeader = memo(({ route }: { route: BottomTabRoutes }) =>
       rightComponent={<HeaderRight />}
     />
   );
-});
+};
 
 export {
   PublicNavigatorHeader,

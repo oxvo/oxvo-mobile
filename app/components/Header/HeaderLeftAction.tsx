@@ -8,18 +8,18 @@ import { PrivateStackNavigationProp } from '@oxvo-mobile/navigation/types';
 import { PRIVATE_ROUTES } from '@oxvo-mobile/constants/routes';
 
 import { BottomTabBarButtonProps } from '@react-navigation/bottom-tabs';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { Ionicons } from '@expo/vector-icons';
 import styled from 'styled-components/native';
 
-const HeaderLeftActionContainer = styled.View`
+const HeaderProfileContainer = styled.View`
   align-items: center;
   flex-direction: column;
   justify-content: center;
 `;
 
-const HeaderLeftActionText = styled(({ ...props }) => {
+const HeaderProfileText = styled(({ ...props }) => {
   return <Text {...props} />;
 })`
   margin-top: 4px;
@@ -38,11 +38,12 @@ type HeaderLeftActionProps = {
   navigateRoute?: any; // FIXME: any is not good here
 };
 
-const HeaderLeftAction = ({ action, navigateRoute }: HeaderLeftActionProps) => {
-  const { goBack, canGoBack, navigate } = useNavigation<
+const HeaderProfile = ({ action, navigateRoute, routex }: HeaderLeftActionProps) => {
+  const { goBack, reset, canGoBack, navigate } = useNavigation<
     PrivateStackNavigationProp & BottomTabBarButtonProps
   >();
-
+  const route = useRoute();
+  console.log('header routex', routex);
   if (HeaderLeftActionType.GO_BACK === action) {
     return (
       <TouchableOpacity
@@ -51,7 +52,16 @@ const HeaderLeftAction = ({ action, navigateRoute }: HeaderLeftActionProps) => {
           if (navigateRoute) {
             navigate(navigateRoute);
           } else if (canGoBack()) {
-            goBack();
+            if (route?.params?.from) {
+              reset({
+                index: 0,
+                routes: [{ name: route.params.from }],
+              });
+              navigate(route.params.from);
+            }
+            // goBack();
+
+            console.log('header profile', route);
           }
         }}
       >
@@ -67,16 +77,16 @@ const HeaderLeftAction = ({ action, navigateRoute }: HeaderLeftActionProps) => {
 
   return (
     <TouchableOpacity hitSlop={{ top: 15, bottom: 15, left: 20, right: 20 }} onPress={handlePress}>
-      <HeaderLeftActionContainer>
+      <HeaderProfileContainer>
         <RoundedImage />
-        <HeaderLeftActionText>Profile</HeaderLeftActionText>
-      </HeaderLeftActionContainer>
+        <HeaderProfileText>Profile</HeaderProfileText>
+      </HeaderProfileContainer>
     </TouchableOpacity>
   );
 };
 
-HeaderLeftAction.defaultProps = {
+HeaderProfile.defaultProps = {
   action: HeaderLeftActionType.PROFILE,
 };
 
-export default memo(HeaderLeftAction);
+export default HeaderProfile;

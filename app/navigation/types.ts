@@ -33,7 +33,7 @@ export type PrivateStackParamList = {
 
   [PRIVATE_ROUTES.SESSIONS.SESSIONS_NAVIGATOR]:
     | undefined
-    | { screen?: keyof PrivateStackParamList };
+    | { screen?: keyof PrivateStackParamList; params?: any };
   [PRIVATE_ROUTES.SESSIONS.SESSIONS_HOME]: undefined;
   [PRIVATE_ROUTES.SESSIONS.SESSION_DETAIL]: undefined;
   [PRIVATE_ROUTES.SESSIONS.CREATE_SESSION]: undefined;

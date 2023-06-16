@@ -53,13 +53,14 @@ const BottomTabNavigator = (): React.ReactElement => {
         options={{
           header: () => <BottomTabNavigatorHeader route={BOTTOM_TAB_ROUTES.HOME} />,
         }}
-      >
-        {() => (
+        component={HomeScreen}
+      />
+      {/* {(props) => (
           <Container>
-            <HomeScreen />
+            <HomeScreen {...props} />
           </Container>
         )}
-      </BottomTab.Screen>
+      </BottomTab.Screen> */}
       <BottomTab.Screen
         name={BOTTOM_TAB_ROUTES.CALENDAR}
         options={{

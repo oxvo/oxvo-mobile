@@ -8,16 +8,17 @@ import { RootStackParamList } from '@oxvo-mobile/navigation/types';
 
 import { ROOT_ROUTES } from '@oxvo-mobile/constants/routes';
 
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 const RootNavigator = (): React.ReactElement => {
   const { isAuthenticated } = useAuth();
-  console.log('isAuthenticated ----------->', isAuthenticated);
+  const navigationRef = useNavigationContainerRef(); // You can also use a regular ref with `React.useRef()`
+  console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ->', navigationRef.getRootState());
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <RootStack.Navigator screenOptions={{ headerShown: false }}>
         {isAuthenticated ? (
           <RootStack.Screen

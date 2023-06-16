@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { Image, Platform, Text } from 'react-native';
+import { Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-ui-lib';
 
 import {
@@ -13,8 +13,6 @@ import {
   getUserImageUrl,
 } from '@oxvo-mobile/components/SessionCard/SuperSessionCard.helpers';
 
-import colors from '@oxvo-mobile/assets/colors.json';
-
 import styled from 'styled-components/native';
 
 type SuperSessionCardProps = {
@@ -25,6 +23,7 @@ type SuperSessionCardProps = {
   companyServiceName: string;
   userReply: string;
   counterPartUserReply: string;
+  onPress: () => void;
 };
 
 const Container = styled.View`
@@ -46,19 +45,11 @@ const Content = styled.View`
 `;
 
 const LeftContent = styled.View`
-  //   flex-direction: column;
-  //   justify-content: center;
-  //   height: 100%;
   width: 180px;
   row-gap: 12px;
 `;
 
-const RightContent = styled.View`
-  //   flex-direction: column;
-  //   align-items: flex-end;
-  //   row-gap: 8px;
-  //   width: 100px;
-`;
+const RightContent = styled.View``;
 
 const SessionStatusTextContainer = styled.View`
   flex-direction: row;
@@ -79,6 +70,7 @@ const SuperSessionCard = ({
   endDate,
   companyServiceName,
   userReply,
+  onPress,
   counterPartUserReply,
 }: SuperSessionCardProps) => {
   const isSessionExpired = checkSessionExpiration(endDate);
@@ -98,7 +90,7 @@ const SuperSessionCard = ({
   const counterPartUserImageUrl = getUserImageUrl(counterPartUserFullName);
 
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={onPress}>
       <Container borderColor={borderColor} backgroundColor={backgroundColor}>
         <Content>
           <LeftContent>

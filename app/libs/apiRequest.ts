@@ -7,12 +7,11 @@ interface ApiResponse<T> {
   data: T;
 }
 
-const apiBaseUrl = 'https://staging-api.oxvo.app';
+const apiBaseUrl = 'https://production-api.oxvo.app';
 
 const apiRequest = async <T>(axiosConfig: AxiosRequestConfig): Promise<T> => {
   const axiosInstance = axios.create({
     baseURL: apiBaseUrl,
-    timeout: 5000,
   });
 
   // Add request interceptor
