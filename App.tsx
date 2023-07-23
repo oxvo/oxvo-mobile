@@ -1,6 +1,7 @@
 import 'react-native-gesture-handler';
 
 import React, { useCallback, useEffect, useState } from 'react';
+import { I18nextProvider } from 'react-i18next';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
 import { Colors, Spacings, Typography } from 'react-native-ui-lib';
@@ -16,6 +17,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 
 import { GestureHandlerRootView } from './App.styled';
+import i18n from './i18n';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -63,17 +65,17 @@ const App = () => {
   }
 
   return (
-    <GestureHandlerRootView onLayout={onLayoutRootView}>
-      <SafeAreaProvider>
-        {/* eslint-disable react/style-prop-object */}
-        <StatusBar style="auto" />
-        {/* eslint-enable react/style-prop-object */}
-        <QueryClientProvider client={queryClient}>
-          <RootNavigator />
-          <Toast />
-        </QueryClientProvider>
-      </SafeAreaProvider>
-    </GestureHandlerRootView>
+    <I18nextProvider i18n={i18n}>
+      <GestureHandlerRootView onLayout={onLayoutRootView}>
+        <SafeAreaProvider>
+          <StatusBar style="auto" />
+          <QueryClientProvider client={queryClient}>
+            <RootNavigator />
+            <Toast />
+          </QueryClientProvider>
+        </SafeAreaProvider>
+      </GestureHandlerRootView>
+    </I18nextProvider>
   );
 };
 

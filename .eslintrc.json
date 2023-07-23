@@ -44,6 +44,7 @@
     "react/require-default-props": "off",
     "react/function-component-definition": ["error", { "namedComponents": "arrow-function" }],
     "no-promise-executor-return": "off",
+    "react/style-prop-object": "off",
     "react/no-unstable-nested-components": ["warn", { "allowAsProps": true }],
     "eol-last": "off",
     "@typescript-eslint/comma-dangle": "off",

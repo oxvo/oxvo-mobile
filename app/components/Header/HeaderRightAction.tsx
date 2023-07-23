@@ -1,10 +1,6 @@
 import React, { memo } from 'react';
 import { Text, TouchableOpacity } from 'react-native-ui-lib';
 
-import { PrivateStackNavigationProp, PrivateStackParamList } from '@oxvo-mobile/navigation/types';
-
-import { useNavigation } from '@react-navigation/native';
-
 import { AntDesign } from '@expo/vector-icons';
 import styled from 'styled-components/native';
 
@@ -22,18 +18,14 @@ const HeaderRightActionText = styled(({ ...props }) => {
 
 const HeaderRightAction = ({
   title,
-  navigateRoute,
+
+  onNavigate,
 }: {
   title: string;
-  navigateRoute: keyof PrivateStackParamList | any; // FIXME: any is not good here
+  onNavigate?: () => void;
 }) => {
-  const { navigate } = useNavigation<PrivateStackNavigationProp>();
-
   const handlePress = () => {
-    console.log('navigateRoute', navigateRoute);
-    if (navigateRoute) {
-      navigate(navigateRoute);
-    }
+    onNavigate?.();
   };
 
   return (
@@ -46,4 +38,4 @@ const HeaderRightAction = ({
   );
 };
 
-export default memo(HeaderRightAction);
+export default HeaderRightAction;

@@ -20,6 +20,7 @@ const SessionHome = () => {
 
   return (
     <View>
+      <Text>SESSION HOME</Text>
       <Button onPress={navigateCreateSessionScreen}>
         <Text style={{ color: 'white' }}>Go to Create Session screen!</Text>
       </Button>

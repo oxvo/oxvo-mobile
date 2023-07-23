@@ -11,11 +11,11 @@ import { PRIVATE_ROUTES } from '@oxvo-mobile/constants/routes';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const ProfileStack = createNativeStackNavigator();
+const SessionStack = createNativeStackNavigator();
 
 const SessionsNavigator = () => (
-  <ProfileStack.Navigator initialRouteName={PRIVATE_ROUTES.SESSIONS.SESSIONS_HOME}>
-    <ProfileStack.Screen
+  <SessionStack.Navigator initialRouteName={PRIVATE_ROUTES.SESSIONS.SESSIONS_HOME}>
+    <SessionStack.Screen
       options={{
         header: () => <SessionsNavigatorHeader />,
       }}
@@ -26,32 +26,22 @@ const SessionsNavigator = () => (
           <SessionsHomeScreen />
         </Container>
       )}
-    </ProfileStack.Screen>
-    <ProfileStack.Screen
+    </SessionStack.Screen>
+    <SessionStack.Screen
       options={{
         header: () => <SessionsNavigatorHeader />,
       }}
       name={PRIVATE_ROUTES.SESSIONS.CREATE_SESSION}
-    >
-      {() => (
-        <Container>
-          <CreateSessionScreen />
-        </Container>
-      )}
-    </ProfileStack.Screen>
-    <ProfileStack.Screen
+      component={CreateSessionScreen}
+    />
+    <SessionStack.Screen
       options={{
         header: () => <SessionsNavigatorHeader />,
       }}
       name={PRIVATE_ROUTES.SESSIONS.SESSION_DETAIL}
-    >
-      {() => (
-        <Container>
-          <SessionDetailScreen />
-        </Container>
-      )}
-    </ProfileStack.Screen>
-  </ProfileStack.Navigator>
+      component={SessionDetailScreen}
+    />
+  </SessionStack.Navigator>
 );
 
 export default SessionsNavigator;

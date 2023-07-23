@@ -21,7 +21,7 @@ const SignUpPayloadSchema = z
 
 const SignUpResponseSchema = z.object({
   accessToken: z.string(),
-  accessTokenExpiresAt: z.string(),
+  accessTokenExpiresAt: z.string().nullable(),
   refreshToken: z.string(),
   refreshTokenExpiresAt: z.null(),
 });
